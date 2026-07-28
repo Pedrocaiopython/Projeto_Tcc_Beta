@@ -12,7 +12,7 @@
 
         </video>
     </div>
-    logo
+    
 
     <div class="local-perguntas-alternativas">
         <img src="img/img-q.matematico/local-perguntas-alternativas.png" alt="">
@@ -43,8 +43,10 @@
 
                     <div id="alternativas"></div>
                 </div>
-
+                <div class="resposta-djogo">
+                    <img src="img/img-q.matematico/informacao-jogo.png" id="imagem-C-E">
                     <p id="mensagem"></p>
+                </div>
 
             `;
 
@@ -120,7 +122,6 @@
                     <button onclick="verificarResposta(${opcoes[i]})">
                         ${opcoes[i]}
                     </button>
-                    <br><br>
                 `;
             }
 
@@ -134,15 +135,16 @@
                 acertos++;
 
                 document.getElementById("mensagem").innerHTML =
-                    "Resposta correta!";
+                    "Resposta correta<br>" +
+                    "parabens";
             }
             else {
 
                 vidas--;
 
                 document.getElementById("mensagem").innerHTML =
-                    "Resposta errada!" +
-                    "A correta era: " +
+                    "Resposta incorreta<br>" +
+                    "correta era: " +
                     respostaCorreta;
             }
 
@@ -154,7 +156,7 @@
 
                 gerarPergunta();
 
-            }, 500000000000000);
+            }, 1500);
         }
 
         function fimDeJogo() {
