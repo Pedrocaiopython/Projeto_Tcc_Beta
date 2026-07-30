@@ -5,6 +5,8 @@ body{
     background-repeat: no-repeat;
     min-height: 100vh;
     font-family: Centaur Now Caption;
+    overflow-x: hidden;
+    position: relative;
 }
 
 header{
@@ -81,4 +83,208 @@ input{
     border-radius: 9px;
     font-size: 20px;
     font-family: Centaur Now Caption;
+}
+
+.pet-wrapper {
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+    width: 360px;
+    height: 360px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 9999;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.pet {
+    position: relative;
+    width: 280px;
+    height: 260px;
+    transform: translateY(18px);
+    transition: transform 0.7s ease;
+    display: block;
+}
+
+.pet-wrapper.active .pet {
+    transform: translateY(0);
+}
+
+.pet-body {
+    position: absolute;
+    left: 58px;
+    bottom: 40px;
+    width: 170px;
+    height: 130px;
+    background: linear-gradient(135deg, #2f9e44, #1b5e20);
+    border-radius: 50% 50% 45% 45%;
+    box-shadow: inset -8px -10px 0 rgba(0,0,0,0.12), 0 12px 24px rgba(0,0,0,0.25);
+}
+
+.pet-tail {
+    position: absolute;
+    left: 8px;
+    bottom: 64px;
+    width: 70px;
+    height: 34px;
+    background: linear-gradient(135deg, #2f9e44, #1b5e20);
+    border-radius: 50% 0 0 50%;
+    transform: rotate(20deg);
+}
+
+.pet-head {
+    position: absolute;
+    left: 120px;
+    bottom: 110px;
+    width: 92px;
+    height: 86px;
+    background: linear-gradient(135deg, #43b65b, #2d7a3b);
+    border-radius: 45% 55% 50% 50%;
+    box-shadow: inset -6px -8px 0 rgba(0,0,0,0.12);
+}
+
+.pet-spike {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #1b5e20;
+}
+
+.pet-eye {
+    position: absolute;
+    top: 32px;
+    width: 10px;
+    height: 10px;
+    background: #111;
+    border-radius: 50%;
+}
+
+.eye-left { left: 24px; }
+.eye-right { left: 52px; }
+
+.pet-mouth {
+    position: absolute;
+    left: 30px;
+    bottom: 18px;
+    width: 30px;
+    height: 10px;
+    border-bottom: 3px solid #0b2d0f;
+    border-radius: 0 0 20px 20px;
+}
+
+.pet-arm,
+.pet-leg {
+    position: absolute;
+    background: linear-gradient(135deg, #43b65b, #2d7a3b);
+    border-radius: 999px;
+    box-shadow: inset -4px -5px 0 rgba(0,0,0,0.12);
+    transition: transform 0.7s ease;
+}
+
+.pet-arm {
+    width: 58px;
+    height: 16px;
+    bottom: 88px;
+}
+
+.arm-left {
+    left: 46px;
+    transform: rotate(-20deg);
+    transform-origin: 10px 8px;
+}
+
+.arm-right {
+    left: 136px;
+    transform: rotate(20deg);
+    transform-origin: 48px 8px;
+}
+
+.pet-wrapper.active .arm-left {
+    transform: rotate(-65deg) translateX(-10px);
+}
+
+.pet-wrapper.active .arm-right {
+    transform: rotate(65deg) translateX(10px);
+}
+
+.pet-leg {
+    width: 16px;
+    height: 58px;
+    bottom: 18px;
+}
+
+.leg-left { left: 84px; }
+.leg-right { left: 140px; }
+
+.pet-earth {
+    position: absolute;
+    left: 50%;
+    bottom: 128px;
+    width: 92px;
+    height: 92px;
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0;
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.7);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    background:
+        radial-gradient(circle at 28% 28%, #7dd3fc 0 6%, transparent 7%),
+        radial-gradient(circle at 70% 30%, #7dd3fc 0 6%, transparent 7%),
+        radial-gradient(circle at 20% 62%, #34d399 0 14%, transparent 15%),
+        radial-gradient(circle at 56% 60%, #16a34a 0 12%, transparent 13%),
+        radial-gradient(circle at 72% 70%, #4ade80 0 16%, transparent 17%),
+        linear-gradient(135deg, #1d4ed8 0%, #2563eb 55%, #0f172a 100%);
+    transition: all 0.7s ease;
+}
+
+.pet-wrapper.active .pet-earth {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) rotate(360deg);
+    animation: girarTerra 6s linear infinite;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+    padding: 10px 14px;
+    background: white;
+    color: #123;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+    font-size: 17px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: all 0.35s ease;
+    z-index: 2;
+}
+
+.speech-bubble.show {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.speech-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: white;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+@keyframes girarTerra {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
 }

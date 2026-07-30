@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Geografia</title>
+
+    <link rel="stylesheet" href="css/css/style.css">
+    <link rel="stylesheet" href="css/css/geografia.css">
+</head>
+
+<body>
+    <header>
+        <a href="index.html">← Menu principal</a>
+
+        <h1>Geografia</h1>
+    </header>
+
+    <main>
+        <!-- Tela de escolha do nível -->
+        <section id="tela-niveis">
+            <h2>Escolha sua série</h2>
+
+            <div class="niveis">
+                <button onclick="iniciarJogo('7ano')">7º ano</button>
+                <button onclick="iniciarJogo('8ano')">8º ano</button>
+                <button onclick="iniciarJogo('9ano')">9º ano</button>
+                <button onclick="iniciarJogo('1medio')">1º Ensino Médio</button>
+                <button onclick="iniciarJogo('2medio')">2º Ensino Médio</button>
+                <button onclick="iniciarJogo('3medio')">3º Ensino Médio</button>
+            </div>
+        </section>
+
+        <!-- Tela das perguntas -->
+        <section id="tela-jogo" class="escondido">
+            <p id="contador"></p>
+
+            <div class="barra">
+                <div id="progresso"></div>
+            </div>
+
+            <h2 id="pergunta"></h2>
+
+            <div id="alternativas"></div>
+
+            <div id="feedback" class="escondido">
+                <h3 id="mensagem-feedback"></h3>
+
+                <p id="explicacao"></p>
+
+                <button onclick="proximaPergunta()">
+                    Continuar
+                </button>
+            </div>
+        </section>
+
+        <!-- Tela de resultado -->
+        <section id="tela-resultado" class="escondido">
+            <h2>Atividade concluída!</h2>
+
+            <p id="resultado"></p>
+
+            <button onclick="voltarParaNiveis()">
+                Escolher outro nível
+            </button>
+
+            <a href="index.html" class="botao-link">
+                Voltar ao menu
+            </a>
+        </section>
+    </main>
+
+    <script src="css/js/perguntas.js"></script>
+    <script src="css/js/geografia.js"></script>
+</body>
+</html>

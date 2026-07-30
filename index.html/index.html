@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head id="Nome_site">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮Aprendendo🎮</title>
+    <link rel="stylesheet" href="css/css/style.css">
+</head>
+<body>
+    <header>
+        <a href="geografia.html">
+            <button class="logo">
+                <img src="../img/logo_site.png" alt="logo_site">
+            </button>
+        </a>
+    </header>
+
+    <main class="menu">
+        <h1>Plataforma Educacional</h1>
+        <p>Escolha uma matéria para começar e aprenda de forma divertida.</p>
+        <a href="geografia.html" class="botao-materia">🌍 Geografia</a>
+    </main>
+
+    <div class="pet-wrapper" id="petWrapper">
+        <div class="speech-bubble show" id="speechBubble">Olá!</div>
+
+        <div class="pet" id="petMascot">
+            <div class="back-spikes">
+                <span class="spike-1"></span>
+                <span class="spike-2"></span>
+                <span class="spike-3"></span>
+                <span class="spike-4"></span>
+                <span class="spike-5"></span>
+            </div>
+            <div class="body-shape"></div>
+            <div class="belly"></div>
+            <div class="marking mark-1"></div>
+            <div class="marking mark-2"></div>
+            <div class="marking mark-3"></div>
+            <div class="tail"></div>
+            <div class="head">
+                <div class="head-spike head-spike-1"></div>
+                <div class="head-spike head-spike-2"></div>
+                <div class="head-spike head-spike-3"></div>
+                <div class="head-spike head-spike-4"></div>
+                <div class="head-spike head-spike-5"></div>
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="arm arm-left"></div>
+            <div class="arm arm-right"></div>
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+            <div class="earth" id="petEarth"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.getElementById('petWrapper');
+            const bubble = document.getElementById('speechBubble');
+            let started = false;
+
+            const showBubble = (text) => {
+                bubble.textContent = text;
+                bubble.classList.add('show');
+            };
+
+            const hideBubble = () => {
+                bubble.classList.remove('show');
+            };
+
+            const activatePet = () => {
+                if (started) return;
+                started = true;
+                wrapper.classList.add('active');
+                hideBubble();
+
+                setTimeout(() => {
+                    showBubble('Seja bem-vindo!');
+                }, 250);
+
+                setTimeout(() => {
+                    showBubble('Agora está em suas mãos');
+                }, 1800);
+            };
+
+            window.addEventListener('click', activatePet);
+
+            setTimeout(() => {
+                showBubble('Olá!');
+            }, 600);
+        });
+    </script>
+</body>
+</html>

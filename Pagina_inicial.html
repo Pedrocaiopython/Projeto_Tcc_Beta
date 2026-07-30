@@ -37,5 +37,67 @@
         
    </div>
 
+   <div class="pet-wrapper" id="petWrapper">
+        <div class="speech-bubble show" id="speechBubble">Olá!</div>
+
+        <div class="pet" id="petMascot">
+            <div class="pet-tail"></div>
+            <div class="pet-body">
+                <div class="pet-arm arm-left"></div>
+                <div class="pet-arm arm-right"></div>
+                <div class="pet-leg leg-left"></div>
+                <div class="pet-leg leg-right"></div>
+
+                <div class="pet-head">
+                    <div class="pet-spike"></div>
+                    <div class="pet-eye eye-left"></div>
+                    <div class="pet-eye eye-right"></div>
+                    <div class="pet-mouth"></div>
+                </div>
+            </div>
+
+            <div class="pet-earth" id="petEarth"></div>
+        </div>
+   </div>
+
+   <script>
+       document.addEventListener('DOMContentLoaded', () => {
+           const wrapper = document.getElementById('petWrapper');
+           const bubble = document.getElementById('speechBubble');
+           let started = false;
+
+           const showBubble = (text) => {
+               bubble.textContent = text;
+               bubble.classList.add('show');
+           };
+
+           const hideBubble = () => {
+               bubble.classList.remove('show');
+           };
+
+           const activatePet = () => {
+               if (started) return;
+
+               started = true;
+               wrapper.classList.add('active');
+               hideBubble();
+
+               setTimeout(() => {
+                   showBubble('Seja bem-vindo!');
+               }, 250);
+
+               setTimeout(() => {
+                   showBubble('Agora está em suas mãos');
+               }, 1800);
+           };
+
+           window.addEventListener('click', activatePet);
+
+           setTimeout(() => {
+               showBubble('Olá!');
+           }, 600);
+       });
+   </script>
+
 </body>
 </html>
