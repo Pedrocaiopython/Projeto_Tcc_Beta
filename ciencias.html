@@ -3,45 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Matemático</title>
+    <title>Ciências</title>
     <link rel="stylesheet" href="index.html/css/css/style.css">
     <link rel="stylesheet" href="index.html/css/css/geografia.css">
     <style>
         body {
             background:
-                radial-gradient(circle at top, rgba(255, 91, 91, 0.24), transparent 30%),
-                linear-gradient(135deg, #15050a, #32070f 50%, #0c0305);
-            color: #fff4f4;
+                radial-gradient(circle at top, rgba(78, 255, 154, 0.22), transparent 35%),
+                linear-gradient(135deg, #02170a, #07391f 45%, #071d11);
+            color: #f2fff4;
         }
 
         header {
-            border-bottom: 1px solid rgba(255, 95, 95, 0.5);
+            border-bottom: 1px solid rgba(119, 255, 163, 0.5);
+        }
+
+        .hero-gif {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 12px;
+            filter: drop-shadow(0 0 18px rgba(101, 255, 178, 0.7));
+        }
+
+        .hero-title {
+            text-align: center;
+            font-size: 2.4rem;
+            margin: 0;
+            color: #9effb5;
+            text-shadow: 0 0 12px rgba(121, 255, 171, 0.6);
         }
 
         .niveis button,
         #alternativas button {
-            background: linear-gradient(135deg, #4a0b14, #b12032);
-            color: #fff;
-            border: 1px solid rgba(255, 170, 170, 0.45);
+            background: linear-gradient(135deg, #152b18, #1e5731);
+            color: #eefdf1;
+            border: 1px solid rgba(170, 255, 196, 0.45);
         }
 
         #progresso {
-            background: linear-gradient(90deg, #ff5a70, #ffb77b);
+            background: linear-gradient(90deg, #47d96d, #79ff9f);
         }
 
-        .correto { background: rgba(15, 197, 31, 0.92); }
-        .incorreto { background: rgba(121, 19, 19, 0.92); }
+        .correto { background: rgba(20, 93, 46, 0.92); }
+        .incorreto { background: rgba(139, 35, 35, 0.92); }
     </style>
 </head>
 <body>
     <header>
         <a href="index.html/index.html">← Menu principal</a>
-        <h1>Matemática</h1>
+        <h1 class="hero-title">Ciências</h1>
+        <img
+            class="hero-gif"
+            src="https://cdn.pixabay.com/animation/2021/08/21/02/17/02-17-38-842_512.gif"
+            alt="Moleculas em formação"
+        >
     </header>
 
     <main>
         <section id="tela-niveis">
             <h2>Escolha sua série</h2>
+
             <div class="niveis">
                 <button onclick="iniciarJogo('7ano')">7º ano</button>
                 <button onclick="iniciarJogo('8ano')">8º ano</button>
@@ -73,9 +96,9 @@
         </section>
     </main>
 
-    <script src="index.html/css/js/perguntas-matematica.js"></script>
+    <script src="index.html/css/js/perguntas-ciencias.js"></script>
     <script>
-        window.perguntas = perguntasMatematica;
+        const perguntas = perguntasCiencias;
     </script>
     <script src="index.html/css/js/geografia.js"></script>
 </body>

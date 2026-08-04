@@ -3,45 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Matemático</title>
+    <title>Português</title>
     <link rel="stylesheet" href="index.html/css/css/style.css">
     <link rel="stylesheet" href="index.html/css/css/geografia.css">
     <style>
         body {
             background:
-                radial-gradient(circle at top, rgba(255, 91, 91, 0.24), transparent 30%),
-                linear-gradient(135deg, #15050a, #32070f 50%, #0c0305);
-            color: #fff4f4;
+                radial-gradient(circle at top, rgba(96, 199, 255, 0.24), transparent 35%),
+                linear-gradient(135deg, #06111f, #0f3269 50%, #041729);
+            color: #eff8ff;
         }
 
         header {
-            border-bottom: 1px solid rgba(255, 95, 95, 0.5);
+            border-bottom: 1px solid rgba(105, 175, 255, 0.45);
         }
 
         .niveis button,
         #alternativas button {
-            background: linear-gradient(135deg, #4a0b14, #b12032);
-            color: #fff;
-            border: 1px solid rgba(255, 170, 170, 0.45);
+            background: linear-gradient(135deg, #174e8f, #2b78c5);
+            color: #f3f9ff;
+            border: 1px solid rgba(143, 204, 255, 0.45);
         }
 
         #progresso {
-            background: linear-gradient(90deg, #ff5a70, #ffb77b);
+            background: linear-gradient(90deg, #60b9ff, #93d8ff);
         }
 
-        .correto { background: rgba(15, 197, 31, 0.92); }
-        .incorreto { background: rgba(121, 19, 19, 0.92); }
+        .correto { background: rgba(14, 88, 148, 0.92); }
+        .incorreto { background: rgba(127, 39, 39, 0.92); }
     </style>
 </head>
 <body>
     <header>
         <a href="index.html/index.html">← Menu principal</a>
-        <h1>Matemática</h1>
+        <h1>Português</h1>
     </header>
 
     <main>
         <section id="tela-niveis">
             <h2>Escolha sua série</h2>
+
             <div class="niveis">
                 <button onclick="iniciarJogo('7ano')">7º ano</button>
                 <button onclick="iniciarJogo('8ano')">8º ano</button>
@@ -73,9 +74,9 @@
         </section>
     </main>
 
-    <script src="index.html/css/js/perguntas-matematica.js"></script>
+    <script src="index.html/css/js/perguntas-portugues.js"></script>
     <script>
-        window.perguntas = perguntasMatematica;
+        const perguntas = perguntasPortugues;
     </script>
     <script src="index.html/css/js/geografia.js"></script>
 </body>

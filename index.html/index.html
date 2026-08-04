@@ -1,97 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head id="Nome_site">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮Aprendendo🎮</title>
+    <title>Aperfeiçoando o conhecimento</title>
     <link rel="stylesheet" href="css/css/style.css">
+    <link rel="stylesheet" href="css/css/menu.css">
+    <link rel="stylesheet" href="css/css/fundo.css">
+    <link rel="stylesheet" href="css/css/temas.css">
 </head>
 <body>
-    <header>
-        <a href="geografia.html">
-            <button class="logo">
-                <img src="../img/logo_site.png" alt="logo_site">
-            </button>
-        </a>
-    </header>
+    <canvas id="fundo-canvas" aria-hidden="true"></canvas>
+    <div class="menu-transition" id="menuTransition" aria-hidden="true"></div>
 
-    <main class="menu">
-        <h1>Plataforma Educacional</h1>
-        <p>Escolha uma matéria para começar e aprenda de forma divertida.</p>
-        <a href="geografia.html" class="botao-materia">🌍 Geografia</a>
+    <main class="menu-principal">
+        <div class="menu-topbar">
+            <div class="menu-badges">
+                <span>🏆</span>
+                <span>⚡</span>
+                <span>🎖️</span>
+            </div>
+
+            <div class="menu-utils">
+                <span class="mini-chip">Escolha seu tema:</span>
+                <button type="button" class="tema-visor tema-visor-1" aria-label="Tema 1"></button>
+                <button type="button" class="tema-visor tema-visor-2" aria-label="Tema 2"></button>
+                <button type="button" class="tema-visor tema-visor-3" aria-label="Tema 3"></button>
+                <button type="button" class="botao-configuracoes" id="botaoConfiguracoes">⚙</button>
+            </div>
+        </div>
+
+        <div class="menu-banner">
+            <div class="menu-status-card">
+                <span>Nível 1</span>
+                <strong>0 / 1000 XP</strong>
+            </div>
+
+            <div class="menu-header">
+                <div class="menu-linha">═══════════════════════════════════════════════</div>
+                <h1>Aperfeiçoando o conhecimento</h1>
+                <p class="subtitulo">O conhecimento te leva mais longe.</p>
+                <div class="globo">
+                    <img
+                        src="https://cdn.pixabay.com/animation/2026/02/03/12/55/12-55-46-250_512.gif"
+                        alt="Globo girando"
+                        class="globo-gif"
+                    >
+                </div>
+                <div class="menu-linha">═══════════════════════════════════════════════</div>
+            </div>
+
+            <div class="menu-quote">
+                <div class="quote-icon">◎</div>
+                <p>"Grandes conquistas começam com pequenas vitórias."</p>
+            </div>
+        </div>
+
+        <section class="menu-area">
+            <h2>Escolha uma Matéria</h2>
+
+            <nav class="menu-lista" aria-label="Menu principal">
+                <a href="geografia.html" class="botao-materia" data-target="geografia.html">🌍 Geografia</a>
+                <a href="../ingles.html" class="botao-materia" data-target="../ingles.html">🇺🇸 Inglês</a>
+                <a href="../portugues.html" class="botao-materia" data-target="../portugues.html">📚 Português</a>
+                <a href="../quiz-matematico.html" class="botao-materia" data-target="../quiz-matematico.html">➗ Matemática</a>
+                <a href="../sla.html" class="botao-materia" data-target="../sla.html">🏛 História</a>
+                <a href="../ciencias.html" class="botao-materia" data-target="../ciencias.html">🔬 Ciências</a>
+            </nav>
+        </section>
+
+        <div class="menu-footer-row">
+            <div class="menu-progress-card">
+                <span>Seu Progresso</span>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+
+            <button type="button" class="menu-start-button">▶ Começar</button>
+
+            <div class="menu-challenge-card">
+                <span>Desafie-se!</span>
+                <p>Mais conhecimento,<br>mais poder!</p>
+            </div>
+        </div>
     </main>
 
-    <div class="pet-wrapper" id="petWrapper">
-        <div class="speech-bubble show" id="speechBubble">Olá!</div>
-
-        <div class="pet" id="petMascot">
-            <div class="back-spikes">
-                <span class="spike-1"></span>
-                <span class="spike-2"></span>
-                <span class="spike-3"></span>
-                <span class="spike-4"></span>
-                <span class="spike-5"></span>
-            </div>
-            <div class="body-shape"></div>
-            <div class="belly"></div>
-            <div class="marking mark-1"></div>
-            <div class="marking mark-2"></div>
-            <div class="marking mark-3"></div>
-            <div class="tail"></div>
-            <div class="head">
-                <div class="head-spike head-spike-1"></div>
-                <div class="head-spike head-spike-2"></div>
-                <div class="head-spike head-spike-3"></div>
-                <div class="head-spike head-spike-4"></div>
-                <div class="head-spike head-spike-5"></div>
-                <div class="eye eye-left"></div>
-                <div class="eye eye-right"></div>
-                <div class="mouth"></div>
-            </div>
-            <div class="arm arm-left"></div>
-            <div class="arm arm-right"></div>
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
-            <div class="earth" id="petEarth"></div>
+    <aside class="config-panel hidden" id="configPanel" aria-hidden="true">
+        <h2>Configurações</h2>
+        <div class="config-grupo">
+            <p>Tema</p>
+            <button class="tema-botao" data-theme="cyber">Cyber Blue</button>
+            <button class="tema-botao" data-theme="golden">Golden Dark</button>
+            <button class="tema-botao" data-theme="crimson">Crimson</button>
         </div>
-    </div>
+    </aside>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const wrapper = document.getElementById('petWrapper');
-            const bubble = document.getElementById('speechBubble');
-            let started = false;
-
-            const showBubble = (text) => {
-                bubble.textContent = text;
-                bubble.classList.add('show');
-            };
-
-            const hideBubble = () => {
-                bubble.classList.remove('show');
-            };
-
-            const activatePet = () => {
-                if (started) return;
-                started = true;
-                wrapper.classList.add('active');
-                hideBubble();
-
-                setTimeout(() => {
-                    showBubble('Seja bem-vindo!');
-                }, 250);
-
-                setTimeout(() => {
-                    showBubble('Agora está em suas mãos');
-                }, 1800);
-            };
-
-            window.addEventListener('click', activatePet);
-
-            setTimeout(() => {
-                showBubble('Olá!');
-            }, 600);
-        });
-    </script>
+    <script src="css/js/menu.js"></script>
+    <script src="css/js/fundo.js"></script>
+    <script src="css/js/temas.js"></script>
 </body>
 </html>

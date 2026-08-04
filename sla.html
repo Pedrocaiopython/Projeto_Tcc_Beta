@@ -1,1 +1,92 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Quiz de História</title> </head> <body> <h1>Quiz de História</h1> <p><strong>Tentativas restantes:</strong> <span id="tentativas">3</span></p> <p><strong>Pontuação:</strong> <span id="pontuacao">0</span></p> <hr> <div id="quiz"> <h2 id="pergunta"></h2> <div id="alternativas"></div> <br> <button id="proxima" onclick="proximaPergunta()" disabled>Próxima Pergunta</button> <h3 id="mensagem"></h3> </div> <script> const perguntas = [ { pergunta:"Qual civilização construiu as pirâmides de Gizé?", alternativas:["Romanos","Gregos","Egípcios","Persas"], correta:2 }, { pergunta:"Em que ano ocorreu a Independência do Brasil?", alternativas:["1500","1822","1888","1889"], correta:1 }, { pergunta:"Quem proclamou a Independência do Brasil?", alternativas:["Tiradentes","Dom Pedro II","Dom Pedro I","Getúlio Vargas"], correta:2 }, { pergunta:"Qual lei aboliu a escravidão no Brasil?", alternativas:["Lei do Ventre Livre","Lei Áurea","Constituição de 1824","Lei Eusébio de Queirós"], correta:1 }, { pergunta:"Quem proclamou a República do Brasil?", alternativas:["Dom Pedro II","Marechal Deodoro da Fonseca","Getúlio Vargas","Tiradentes"], correta:1 }, { pergunta:"Qual povo criou a democracia?", alternativas:["Romanos","Egípcios","Gregos","Fenícios"], correta:2 }, { pergunta:"A Segunda Guerra Mundial ocorreu entre:", alternativas:["1914 e 1918","1920 e 1924","1939 e 1945","1950 e 1955"], correta:2 }, { pergunta:"Quem foi conhecido como o Pai da Aviação?", alternativas:["Bartolomeu de Gusmão","Santos Dumont","Marechal Rondon","Alberto Torres"], correta:1 }, { pergunta:"Qual foi a principal atividade econômica do Brasil Colonial?", alternativas:["Café","Borracha","Mineração","Cana-de-açúcar"], correta:3 }, { pergunta:"Em que ano foi proclamada a República no Brasil?", alternativas:["1822","1888","1889","1930"], correta:2 }, { pergunta:"Quem chegou ao Brasil em 1500?", alternativas:["Cristóvão Colombo","Pedro Álvares Cabral","Vasco da Gama","Fernão de Magalhães"], correta:1 }, { pergunta:"Complete: A Independência do Brasil aconteceu no ano de...", alternativas:["1500","1822","1889","1930"], correta:1 }, { pergunta:"Tiradentes foi líder de qual movimento?", alternativas:["Revolução Farroupilha","Inconfidência Mineira","Guerra dos Farrapos","Revolta da Vacina"], correta:1 }, { pergunta:"O povo que criou a democracia foi o povo...", alternativas:["Egípcio","Romano","Grego","Persa"], correta:2 }, { pergunta:"A Segunda Guerra Mundial ocorreu entre os anos de:", alternativas:["1914-1918","1939-1945","1945-1950","1950-1955"], correta:1 } ]; let perguntasSorteadas = []; let indice = 0; let pontuacao = 0; let tentativas = 3; let respondida = false; function embaralhar(lista){ let copia = [...lista]; for(let i=copia.length-1;i>0;i--){ let j = Math.floor(Math.random()*(i+1)); [copia[i],copia[j]]=[copia[j],copia[i]]; } return copia; } perguntasSorteadas = embaralhar(perguntas); mostrarPergunta(); function mostrarPergunta(){ respondida = false; document.getElementById("mensagem").innerHTML=""; document.getElementById("proxima").disabled=true; if(indice>=perguntasSorteadas.length){ encerrarQuiz(); return; } const atual = perguntasSorteadas[indice]; document.getElementById("pergunta").innerHTML=(indice+1)+". "+atual.pergunta; let html=""; atual.alternativas.forEach((opcao,i)=>{ html+= <button onclick="verificarResposta(${i})">${opcao}</button> <br><br> ; }); document.getElementById("alternativas").innerHTML=html; } function verificarResposta(escolha){ if(respondida) return; respondida=true; const atual = perguntasSorteadas[indice]; const botoes=document.querySelectorAll("#alternativas button"); botoes.forEach(botao=>botao.disabled=true); if(escolha===atual.correta){ pontuacao++; document.getElementById("pontuacao").innerHTML=pontuacao; document.getElementById("mensagem").innerHTML="✅ Resposta Correta!"; }else{ tentativas--; document.getElementById("tentativas").innerHTML=tentativas; document.getElementById("mensagem").innerHTML= "❌ Resposta Incorreta!"; if(tentativas<=0){ encerrarQuiz(); return; } } document.getElementById("proxima").disabled=false; } function proximaPergunta(){ indice++; mostrarPergunta(); } function encerrarQuiz(){ document.getElementById("quiz").innerHTML= <h2>Fim do Jogo!</h2> <p><strong>Pontuação:</strong> ${pontuacao} de ${indice + (tentativas>0 ? 1 : 0)}</p> <p><strong>Tentativas restantes:</strong> ${tentativas}</p> <button onclick="location.reload()">Jogar Novamente</button> ; } </script> </body> </html>
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História</title>
+    <link rel="stylesheet" href="index.html/css/css/style.css">
+    <link rel="stylesheet" href="index.html/css/css/geografia.css">
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top, rgba(255, 213, 91, 0.22), transparent 32%),
+                linear-gradient(135deg, #231400, #4e3401 48%, #1b1000);
+            color: #fff8db;
+        }
+
+        header {
+            border-bottom: 1px solid rgba(255, 214, 86, 0.55);
+        }
+
+        .pyramid-visual {
+            font-size: 3rem;
+            display: block;
+            text-align: center;
+            margin: 6px 0 0;
+            filter: drop-shadow(0 0 14px rgba(255, 214, 86, 0.5));
+        }
+
+        .niveis button,
+        #alternativas button {
+            background: linear-gradient(135deg, #6c4800, #c08c0f);
+            color: #fff9df;
+            border: 1px solid rgba(255, 224, 132, 0.45);
+        }
+
+        #progresso {
+            background: linear-gradient(90deg, #ffbe1f, #ffd96e);
+        }
+
+        .correto { background: rgba(149, 102, 12, 0.92); }
+        .incorreto { background: rgba(123, 30, 30, 0.92); }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html/index.html">← Menu principal</a>
+        <h1>História</h1>
+        <span class="pyramid-visual">🏜️ ⛩️ 🏺</span>
+    </header>
+
+    <main>
+        <section id="tela-niveis">
+            <h2>Escolha sua série</h2>
+
+            <div class="niveis">
+                <button onclick="iniciarJogo('7ano')">7º ano</button>
+                <button onclick="iniciarJogo('8ano')">8º ano</button>
+                <button onclick="iniciarJogo('9ano')">9º ano</button>
+                <button onclick="iniciarJogo('1medio')">1º Ensino Médio</button>
+                <button onclick="iniciarJogo('2medio')">2º Ensino Médio</button>
+                <button onclick="iniciarJogo('3medio')">3º Ensino Médio</button>
+            </div>
+        </section>
+
+        <section id="tela-jogo" class="escondido">
+            <p id="contador"></p>
+            <div class="barra"><div id="progresso"></div></div>
+            <h2 id="pergunta"></h2>
+            <div id="alternativas"></div>
+
+            <div id="feedback" class="escondido">
+                <h3 id="mensagem-feedback"></h3>
+                <p id="explicacao"></p>
+                <button onclick="proximaPergunta()">Continuar</button>
+            </div>
+        </section>
+
+        <section id="tela-resultado" class="escondido">
+            <h2>Atividade concluída!</h2>
+            <p id="resultado"></p>
+            <button onclick="voltarParaNiveis()">Escolher outro nível</button>
+            <a href="index.html/index.html" class="botao-link">Voltar ao menu</a>
+        </section>
+    </main>
+
+    <script src="index.html/css/js/perguntas-historia.js"></script>
+    <script>
+        const perguntas = perguntasHistoria;
+    </script>
+    <script src="index.html/css/js/geografia.js"></script>
+</body>
+</html>
