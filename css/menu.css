@@ -1,7 +1,7 @@
 .menu-principal {
     position: relative;
     z-index: 2;
-    width: min(92%, 1180px);
+    width: min(92%, 700L0px);
     margin: 20px auto;
     padding: 22px;
     text-align: center;
@@ -11,6 +11,7 @@
     box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 24px 60px rgba(0,0,0,0.45);
 }
 
+
 .menu-topbar {
     display: flex;
     align-items: center;
@@ -19,8 +20,7 @@
     margin-bottom: 16px;
 }
 
-.menu-badges,
-.menu-utils {
+.menu-badges {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -129,8 +129,8 @@
 }
 
 .globo-gif {
-    width: 88px;
-    height: 88px;
+    width: 250px;
+    height: auto;
     object-fit: contain;
     display: block;
     filter: drop-shadow(0 0 12px var(--cor-glow));
