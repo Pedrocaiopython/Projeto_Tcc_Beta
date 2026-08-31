@@ -3,95 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aperfeiçoando o conhecimento</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/menu.css">
+    <title>Painel de Controle - Arena de Quizes</title>
     <link rel="stylesheet" href="css/fundo.css">
-    <link rel="stylesheet" href="css/temas.css">
+    <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-    <canvas id="fundo-canvas" aria-hidden="true"></canvas>
-    <div class="menu-transition" id="menuTransition" aria-hidden="true"></div>
 
-    <main class="menu-principal">
-        <div class="menu-topbar">
-            <div class="menu-badges">
-                <span>🏆</span>
-                <span>⚡</span>
-                <span>🎖️</span>
+    <!-- HUD DA BARRA SUPERIOR MINIMALISTA -->
+    <header class="barra-superior-status">
+        <div class="perfil-usuario-bloco">
+            <div class="moldura-avatar">
+                <span class="iniciais-avatar">P</span>
+                <div class="emblema-nivel" id="nivelUsuario">1</div>
             </div>
-
-
-        </div>
-
-        <div class="menu-banner">
-            <div class="menu-status-card">
-                <span>Nível 1</span>
-                <strong>0 / 1000 XP</strong>
-            </div>
-
-            <div class="menu-header">
-                <div class="menu-linha">═══════════════════════════════════════════════</div>
-                <h1>Aperfeiçoando o conhecimento</h1>
-                <p class="subtitulo">O conhecimento te leva mais longe.</p>
-                <div class="globo">
-                    <img
-                        src="https://cdn.pixabay.com/animation/2026/02/03/12/55/12-55-46-250_512.gif"
-                        alt="Globo girando"
-                        class="globo-gif"
-                    >
+            <div class="informacoes-perfil">
+                <div class="nome-usuario">Jogador TCC</div>
+                <div class="barra-xp-recipiente">
+                    <div class="barra-xp-preenchimento" id="preenchimentoBarraXp"></div>
                 </div>
-                <div class="menu-linha">═══════════════════════════════════════════════</div>
-            </div>
-
-            <div class="menu-quote">
-                <div class="quote-icon">◎</div>
-                <p>"Grandes conquistas começam com pequenas vitórias."</p>
+                <span class="texto-xp" id="textoXp">0 / 100 XP</span>
             </div>
         </div>
 
-        <section class="menu-area">
-            <h2>Escolha uma Matéria</h2>
+        <div class="moedas-container">
+            <span class="icone-moeda">🪙</span>
+            <span id="saldoPontos">0</span> <small>Pontos</small>
+        </div>
 
-            <nav class="menu-lista" aria-label="Menu principal">
-                <a href="geografia.html" class="botao-materia" data-target="geografia.html">🌍 Geografia</a>
-                <a href="ingles.html" class="botao-materia" data-target="../ingles.html">🇺🇸 Inglês</a>
-                <a href="portugues.html" class="botao-materia" data-target="../portugues.html">📚 Português</a>
-                <a href="matematico.html" class="botao-materia" data-target="../quiz-matematico.html">➗ Matemática</a>
-                <a href="historia.html" class="botao-materia" data-target="../sla.html">🏛 História</a>
-                <a href="ciencias.html" class="botao-materia" data-target="../ciencias.html">🔬 Ciências</a>
-            </nav>
-        </section>
+        <div class="controles-direita">
+            <button class="botao-abrir-loja" id="btnAbrirLoja">🛒 Customizar Loja</button>
+            <button class="botao-alternar-audio" id="botaoAlternarAudio" title="Alternar som">
+                <span id="iconeAudio">🔊</span> <span id="textoStatusAudio">Música</span>
+            </button>
+        </div>
+    </header>
 
-        <div class="menu-footer-row">
-            <div class="menu-progress-card">
-                <span>Seu Progresso</span>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+    <!-- CARROSSEL DE PORTAIS CONCEITUAIS (INSPIRADO NA IMAGEM 3) -->
+    <main class="tela-lobby-premium">
+        <div class="carrossel-container-portais">
+            
+            <button class="seta-navegacao seta-esquerda" id="botaoAnterior">&#10216;</button>
+
+            <!-- Moldura Circular Principal com Efeito Holográfico de Fundo da Matéria -->
+            <div class="recipiente-portal-moldura" id="recipienteMapa">
+                <div class="circulo-portal-interno" id="plataformaMapa">
+                    <!-- Efeitos Temáticos Visuais em Camadas -->
+                    <div class="overlay-particulas-materia" id="particulasMateria"></div>
+                    <div class="simbolo-central-materia" id="simboloMateria">⚛️</div>
                 </div>
             </div>
 
+            <button class="seta-navegacao seta-direita" id="botaoProximo">&#10217;</button>
+        </div>
 
-
-            <div class="menu-challenge-card">
-                <span>Desafie-se!</span>
-                <p>Mais conhecimento,<br>mais poder!</p>
-            </div>
+        <!-- Painel de Controle e Chamada para o Jogo -->
+        <div class="painel-selecao-inferior">
+            <div class="distintivo-materia" id="distintivoMateria">MÓDULO</div>
+            <h1 class="titulo-materia-ativa" id="tituloMateria">Carregando...</h1>
+            <button class="botao-jogar-rank" id="botaoJogarRank">INICIAR
+            
+            </button>
         </div>
     </main>
 
-    <aside class="config-panel hidden" id="configPanel" aria-hidden="true">
-        <h2>Configurações</h2>
-        <div class="config-grupo">
-            <p>Tema</p>
-            <button class="tema-botao" data-theme="cyber">Cyber Blue</button>
-            <button class="tema-botao" data-theme="golden">Golden Dark</button>
-            <button class="tema-botao" data-theme="crimson">Crimson</button>
+    <!-- POPUP DO CATÁLOGO DE CUSTOMIZAÇÃO -->
+    <div class="janela-modal-loja" id="modalLoja">
+        <div class="conteudo-modal-loja">
+            <div class="cabecalho-loja">
+                <h2>Customização e Temas</h2>
+                <button class="fechar-loja-btn" id="btnFecharLoja">&times;</button>
+            </div>
+            <div class="abas-loja-categorias">
+                <button class="aba-item ativa" onclick="mudarCategoriaLoja('corpo')">Avatares</button>
+                <button class="aba-item" onclick="mudarCategoriaLoja('cabeca')">Acessórios</button>
+            </div>
+            <div class="grade-itens-loja" id="gradeItensLoja"></div>
         </div>
-    </aside>
+    </div>
 
-    <script src="css/js/menu.js"></script>
-    <script src="css/js/fundo.js"></script>
-    <script src="css/js/temas.js"></script>
+    <!-- Música Oficial do TCC -->
+    <audio id="musicaFundo" loop src="https://soundhelix.com"></audio>
+    <script src="js/menu.js"></script>
 </body>
 </html>
