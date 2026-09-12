@@ -8,22 +8,36 @@ const { db, getUserByEmail, getUserById, getProfile, getLevelSummary, createUser
 const app = express();
 const PORT = process.env.PORT || 3000;
 const rootDir = path.join(__dirname, '../..');
+const isProduction = process.env.NODE_ENV === 'production';
+const sessionSecret = process.env.SESSION_SECRET;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+if (isProduction && !sessionSecret) {
+  throw new Error('SESSION_SECRET precisa ser configurado em produção.');
+}
+
+app.disable('x-powered-by');
+app.use(express.json({ limit: '16kb' }));
+app.use(express.urlencoded({ extended: false, limit: '16kb' }));
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'tcc-dev-secret',
+    secret: sessionSecret || 'tcc-dev-secret-local',
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
       sameSite: 'lax',
-      secure: false,
+      secure: isProduction,
       maxAge: 1000 * 60 * 60 * 24 * 7
     }
   })
 );
+
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'same-origin');
+  next();
+});
 
 function requireAuth(req, res, next) {
   if (!req.session || !req.session.userId) {
@@ -50,6 +64,15 @@ function getSubjectIdBySlug(slug) {
   return subject.id;
 }
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function parsePositiveInteger(value) {
+  const parsed = Number(value);
+  return Number.isInteger(parsed) && parsed >= 1 ? parsed : null;
+}
+
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, message: 'Servidor online' });
 });
@@ -61,15 +84,21 @@ app.post('/api/auth/register', async (req, res) => {
     return res.status(400).json({ message: 'Nome, e-mail e senha são obrigatórios.' });
   }
 
-  if (String(name).trim().length < 2) {
-    return res.status(400).json({ message: 'O nome deve ter pelo menos 2 caracteres.' });
+  const normalizedName = String(name).trim();
+  const normalizedEmail = String(email).trim().toLowerCase();
+
+  if (normalizedName.length < 2 || normalizedName.length > 80) {
+    return res.status(400).json({ message: 'O nome deve ter entre 2 e 80 caracteres.' });
   }
 
   if (String(password).length < 6) {
     return res.status(400).json({ message: 'A senha deve ter pelo menos 6 caracteres.' });
   }
 
-  const normalizedEmail = String(email).trim().toLowerCase();
+  if (normalizedEmail.length > 160 || !isValidEmail(normalizedEmail)) {
+    return res.status(400).json({ message: 'Informe um e-mail válido.' });
+  }
+
   if (getUserByEmail(normalizedEmail)) {
     return res.status(409).json({ message: 'Já existe uma conta com este e-mail.' });
   }
@@ -77,7 +106,7 @@ app.post('/api/auth/register', async (req, res) => {
   try {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = createUser({
-      name: String(name).trim(),
+      name: normalizedName,
       email: normalizedEmail,
       passwordHash
     });
@@ -103,6 +132,9 @@ app.post('/api/auth/login', async (req, res) => {
   }
 
   const normalizedEmail = String(email).trim().toLowerCase();
+  if (normalizedEmail.length > 160 || !isValidEmail(normalizedEmail)) {
+    return res.status(400).json({ message: 'Informe um e-mail válido.' });
+  }
   const user = getUserByEmail(normalizedEmail);
 
   if (!user) {
@@ -175,7 +207,12 @@ app.get('/api/shop', requireAuth, (req, res) => {
 app.post('/api/shop/purchase', requireAuth, (req, res) => {
   const { itemId } = req.body || {};
   const userId = req.session.userId;
-  const item = db.prepare('SELECT * FROM shop_items WHERE id = ? AND status = ?').get(Number(itemId), 'active');
+  const parsedItemId = parsePositiveInteger(itemId);
+  if (!parsedItemId) {
+    return res.status(400).json({ message: 'Item inválido.' });
+  }
+
+  const item = db.prepare('SELECT * FROM shop_items WHERE id = ? AND status = ?').get(parsedItemId, 'active');
 
   if (!item) {
     return res.status(404).json({ message: 'Item não encontrado.' });
@@ -205,7 +242,12 @@ app.post('/api/shop/purchase', requireAuth, (req, res) => {
 app.post('/api/shop/equip', requireAuth, (req, res) => {
   const { itemId } = req.body || {};
   const userId = req.session.userId;
-  const item = db.prepare('SELECT * FROM shop_items WHERE id = ?').get(Number(itemId));
+  const parsedItemId = parsePositiveInteger(itemId);
+  if (!parsedItemId) {
+    return res.status(400).json({ message: 'Item inválido.' });
+  }
+
+  const item = db.prepare('SELECT * FROM shop_items WHERE id = ?').get(parsedItemId);
 
   if (!item) {
     return res.status(404).json({ message: 'Item não encontrado.' });
@@ -238,9 +280,20 @@ app.post('/api/quizzes/submit', requireAuth, (req, res) => {
     return res.status(400).json({ message: 'Dados da atividade inválidos.' });
   }
 
-  const subjectId = getSubjectIdBySlug(String(subject).trim().toLowerCase());
-  const correct = Math.max(0, Number(correctAnswers));
-  const total = Math.max(1, Number(totalQuestions));
+  const subjectSlug = String(subject).trim().toLowerCase();
+  let subjectId;
+  try {
+    subjectId = getSubjectIdBySlug(subjectSlug);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+
+  const correct = Number(correctAnswers);
+  const total = Number(totalQuestions);
+  if (!Number.isInteger(correct) || !Number.isInteger(total) || total < 1 || total > 100 || correct < 0 || correct > total) {
+    return res.status(400).json({ message: 'Quantidade de respostas inválida.' });
+  }
+
   const accuracy = Math.round((correct / total) * 100);
   const xpAward = Math.max(15, Math.round((correct / total) * 80) + 20);
   const pointsAward = Math.max(10, Math.round((correct / total) * 60) + 8);
@@ -253,8 +306,8 @@ app.post('/api/quizzes/submit', requireAuth, (req, res) => {
     const levelSummary = getLevelSummary(updatedXp);
 
     db.prepare('UPDATE user_profiles SET xp_total = ?, level = ?, points = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?').run(updatedXp, levelSummary.level, updatedPoints, userId);
-    db.prepare('INSERT INTO xp_history (user_id, source, amount) VALUES (?, ?, ?)').run(userId, `quiz:${subject}`, xpAward);
-    db.prepare('INSERT INTO points_history (user_id, source, amount) VALUES (?, ?, ?)').run(userId, `quiz:${subject}`, pointsAward);
+    db.prepare('INSERT INTO xp_history (user_id, source, amount) VALUES (?, ?, ?)').run(userId, `quiz:${subjectSlug}`, xpAward);
+    db.prepare('INSERT INTO points_history (user_id, source, amount) VALUES (?, ?, ?)').run(userId, `quiz:${subjectSlug}`, pointsAward);
 
     const existing = db.prepare('SELECT * FROM subject_progress WHERE user_id = ? AND subject_id = ?').get(userId, subjectId);
     if (existing) {
@@ -306,6 +359,19 @@ app.use((req, res) => {
   }
 
   return res.sendFile(path.join(rootDir, 'index.html'));
+});
+
+app.use((error, req, res, next) => {
+  if (res.headersSent) {
+    return next(error);
+  }
+
+  if (error.type === 'entity.too.large') {
+    return res.status(413).json({ message: 'Solicitação muito grande.' });
+  }
+
+  console.error(error);
+  return res.status(500).json({ message: 'Erro interno do servidor.' });
 });
 
 app.listen(PORT, () => {

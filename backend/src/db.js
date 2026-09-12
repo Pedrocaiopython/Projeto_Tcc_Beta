@@ -90,14 +90,19 @@ function getLevelSummary(xpTotal) {
 }
 
 function createUser({ name, email, passwordHash }) {
-  const insert = db.prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
-  const result = insert.run(name.trim(), email.trim().toLowerCase(), passwordHash);
+  const create = db.transaction(() => {
+    const insert = db.prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
+    const result = insert.run(name.trim(), email.trim().toLowerCase(), passwordHash);
+    const userId = result.lastInsertRowid;
 
-  db.prepare('INSERT INTO user_profiles (user_id, xp_total, level, points) VALUES (?, 0, 1, 0)').run(result.lastInsertRowid);
-  db.prepare('INSERT INTO user_inventory (user_id, item_id) VALUES (?, (SELECT id FROM shop_items WHERE slug = ?))').run(result.lastInsertRowid, 'avatar-base');
-  db.prepare('UPDATE user_profiles SET equipped_item_id = (SELECT id FROM shop_items WHERE slug = ?) WHERE user_id = ?').run('avatar-base', result.lastInsertRowid);
+    db.prepare('INSERT INTO user_profiles (user_id, xp_total, level, points) VALUES (?, 0, 1, 0)').run(userId);
+    db.prepare('INSERT INTO user_inventory (user_id, item_id) VALUES (?, (SELECT id FROM shop_items WHERE slug = ?))').run(userId, 'avatar-base');
+    db.prepare('UPDATE user_profiles SET equipped_item_id = (SELECT id FROM shop_items WHERE slug = ?) WHERE user_id = ?').run('avatar-base', userId);
 
-  return getUserById(result.lastInsertRowid);
+    return userId;
+  });
+
+  return getUserById(create());
 }
 
 module.exports = {
