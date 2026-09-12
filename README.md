@@ -1,37 +1,136 @@
-# Trabalho-de-Conclus-o-de-Curso-TCC-
-Aqui segue meu projeto de TCC em conjunto de um grupo
-OQ O SITE TEM?
-    -PAGINA INICIAL;
-    -PAGINA COM OS JOGOS;
-    -PAGINA DE COMO SE JOGA E QUAL A EXPLICAÇÃO DE CADA ENSINAMENTO.
+# Projeto TCC Beta
 
-    O ARQUIVO "TrabalhoTCC.html" É A PAGINA INICIAL DO SITE
-        -O que ele tem?
-            1ºEle inicia com o titulo do projeto;
-            2º Botão "init" que é capaz de poder escrever, ode essa informação pode ser salva;
-            3º Botão(Button) salvar que serve para salvar a informação do "init" e seguir para a pagina de jogos;
-            4º Roda-pé: É parte que tem algumas infotmações, um contato do desenvolvedor princial.
-    
-    O ARQUIVO "pagina-jogos.html" É ONDE ESTÃO OS JOGOS.
-        -O que ele tem q ter?
-            1º Titulo do da pagina(tipo: pagina de jogos)
-            2º Uma linha que deverá ter alguns topicos simples:
-                -HOME(MANDA DE VOLTA PARA PAGINA INICIAL);
-                -PLACAR(TERÁ TODAS A INFORMAÇÕES DE PONTUAÇÃO DO JOGADO EM QUESTÃO)
-                -RANKING(TERÁ  UM RANKING ENTRE JOGADORES);
-                -JOGOS: TENDO NO INICIO 12 JOGOS, ONDE 6 SÃO DE EXATAS E O RESTO DE LINGUAGENS.
-            3ºListas de jogos(Tendo 12 jogos, podemos dizer que podera ser dividido em 4 linhas e em 3 colunas)
-    
-    O PRIMEIRO JOGO É UM QUIZ MATEMÁTICO, APELIDADO DE QUAL O RESULTADO, QUE É DETERMINADO PELO ARQUIVO "qual-resultado.html"
-        -O que ele tem? o que faz?
-                -sendo literalmente um jogo de contas, tem como principio sortear 2 números, uma operação matemática e mais 3 valores que confundem e 1 que é a resposta certa
-            1º Titulo(SENDO CHAMATIVO, CARREGA O PESO DE SER A APRESENTAÇÃO DO JOGO)
-            2ºBotôes:
-                -JOGAR: INICIA O JOGO;
-                -respostas;
-                -HOME: LEVA PARA PAGINA DE JOGOS;
-                -TENTAR NOVAMENTE: REINICIA O JOGO.
-            3ºNome e pontuaçã:  fica no canto superior, onde podera levar para o ranking
+Plataforma educacional com autenticação real, XP, pontos, progressos por disciplina, loja e customização. O projeto mantém a base de quizzes existentes, mas evolui para uma aplicação com backend e banco de dados persistente.
 
+## Objetivo
 
+Transformar o quiz estático em uma aplicação funcional para apresentar como TCC e portfólio, mantendo a identidade visual gamer educacional e preservando a base de conteúdo já criada.
 
+## Decisão de arquitetura
+
+O projeto foi estruturado com Node.js + Express no backend e SQLite como banco de dados local. A escolha foi feita porque a base do projeto é um protótipo acadêmico e a execução local precisa ser simples, estável e independente de um servidor externo de banco de dados. O modelo foi desenhado de maneira coerente com uma arquitetura relacional e pode ser migrado para PostgreSQL no futuro sem alterar a lógica principal.
+
+## Funcionalidades implementadas
+
+- Cadastro de usuário com hash de senha
+- Login e logout
+- Sessão autenticada no servidor
+- Perfil dinâmico com nível, XP e pontos
+- Progresso por matéria
+- Registro de quizzes e recompensas
+- Sistema de XP e nível
+- Sistema de pontos persistidos
+- Loja com compra e equipagem de itens
+- Inventário do usuário
+- Fluxo protegido de acesso
+- Páginas de matérias com integração ao backend
+
+## Tecnologias
+
+- HTML5
+- CSS3
+- JavaScript vanilla
+- Node.js
+- Express
+- SQLite
+- bcryptjs
+- express-session
+
+## Estrutura de pastas
+
+- `backend/src/` - servidor Express e camada de dados
+- `database/` - schema e banco SQLite
+- `css/` - estilos do projeto
+- `js/` - scripts front-end e integração com API
+- `*.html` - páginas de conteúdo e menu
+
+## Configuração inicial
+
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
+2. Copie o arquivo `.env.example` para `.env` e defina a chave de sessão:
+   ```bash
+   copy .env.example .env
+   ```
+3. Ajuste as variáveis se necessário.
+
+## Variáveis de ambiente
+
+Arquivo `.env`:
+
+```env
+PORT=3000
+SESSION_SECRET=sua_chave_super_secreta
+```
+
+## Execução
+
+Para iniciar o servidor:
+
+```bash
+npm start
+```
+
+Para desenvolvimento:
+
+```bash
+npm run dev
+```
+
+A aplicação fica disponível em:
+
+- http://localhost:3000
+
+## Autenticação
+
+A autenticação não depende de `localStorage` para guardar os dados do usuário. A sessão fica no backend e é mantida por cookie HTTP com servidor de sessão.
+
+### Endpoints principais
+
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/logout`
+- `GET /api/auth/me`
+- `GET /api/profile`
+- `GET /api/shop`
+- `POST /api/shop/purchase`
+- `POST /api/shop/equip`
+- `POST /api/quizzes/submit`
+
+## Regras de XP e pontos
+
+- Usuário inicia com XP inicial igual a 0 e nível 1
+- Cada quiz gera recompensas definidas pelo backend
+- O nível é calculado com base no XP total acumulado
+- O ponto do usuário é persistido no banco e nunca confiado no frontend
+- A compra de itens decrementa o saldo e valida disponibilidade
+
+## Modelo de dados
+
+O banco possui as tabelas principais:
+
+- `users`
+- `user_profiles`
+- `subjects`
+- `subject_progress`
+- `quiz_attempts`
+- `xp_history`
+- `points_history`
+- `shop_items`
+- `user_inventory`
+- `user_equipment`
+
+## Limitações atuais
+
+- O projeto continua sendo um protótipo educativo e não substitui uma aplicação de produção com múltiplos usuários e alta escala
+- O banco usado é SQLite por simplicidade de execução local
+- Os quizzes são baseados no conteúdo existente e podem ser expandidos futuramente
+
+## Próximos passos
+
+- Adicionar painel administrativa de itens e assuntos
+- Expandir a base de perguntas por disciplina
+- Migrar a estrutura para PostgreSQL em um ambiente de produção
+- Melhorar o design visual com assets próprios e componentes mais refinados

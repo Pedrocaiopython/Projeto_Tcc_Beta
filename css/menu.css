@@ -189,7 +189,7 @@ body {
 
 /* --- CATALOGO MODAL DE ITENS --- */
 .janela-modal-loja {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vw;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(4, 9, 18, 0.9); z-index: 200; display: none; justify-content: center; align-items: center;
 }
 .conteudo-modal-loja { background: #0b1424; border: 1px solid var(--azul-neon); width: 90%; max-width: 500px; border-radius: 8px; padding: 25px; box-shadow: 0 0 40px rgba(0,240,255,0.1); }
@@ -199,11 +199,12 @@ body {
 .aba-item { background: #152238; border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 6px 14px; cursor: pointer; border-radius: 4px; font-size: 0.85rem; }
 .aba-item.ativa { background: var(--azul-neon); color: black; font-weight: bold; border-color: var(--azul-neon); }
 .grade-itens-loja { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; max-height: 250px; overflow-y: auto; }
-.cartao-item-loja { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
-.visual-item-loja { font-size: 1.8rem; }
-.nome-item-loja { font-size: 0.75rem; color: #8a99ad; }
-.btn-comprar-item { background: var(--ouro-principal); border: none; color: black; font-weight: bold; padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
-.btn-comprar-item.equipado { background: #38ef7d; color: white; }
+.item-loja { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
+.icone-item-loja { font-size: 1.8rem; }
+.item-loja h3 { font-size: 0.8rem; }
+.item-loja p { font-size: 0.7rem; color: #8a99ad; }
+.item-loja button { background: var(--ouro-principal); border: none; color: black; font-weight: bold; padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+.empty-state { color: #8a99ad; padding: 12px; text-align: center; }
 
 .efeito-transicao { animation: swapAnimation 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 @keyframes swapAnimation { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.92); } 100% { opacity: 1; transform: scale(1); } }

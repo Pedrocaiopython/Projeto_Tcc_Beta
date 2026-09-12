@@ -8,81 +8,68 @@
     <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-
-    <!-- HUD DA BARRA SUPERIOR MINIMALISTA -->
     <header class="barra-superior-status">
         <div class="perfil-usuario-bloco">
             <div class="moldura-avatar">
-                <span class="iniciais-avatar">P</span>
+                <span class="iniciais-avatar" id="iniciaisAvatar">U</span>
                 <div class="emblema-nivel" id="nivelUsuario">1</div>
             </div>
             <div class="informacoes-perfil">
-                <div class="nome-usuario">Jogador TCC</div>
+                <div class="nome-usuario" id="nomeUsuario">Carregando...</div>
                 <div class="barra-xp-recipiente">
                     <div class="barra-xp-preenchimento" id="preenchimentoBarraXp"></div>
                 </div>
-                <span class="texto-xp" id="textoXp">0 / 100 XP</span>
+                <span class="texto-xp" id="textoXp">0 / 250 XP</span>
             </div>
         </div>
 
         <div class="moedas-container">
-            <span class="icone-moeda">🪙</span>
+            <span class="icone-moeda">P</span>
             <span id="saldoPontos">0</span> <small>Pontos</small>
         </div>
 
         <div class="controles-direita">
-            <button class="botao-abrir-loja" id="btnAbrirLoja">🛒 Customizar Loja</button>
-            <button class="botao-alternar-audio" id="botaoAlternarAudio" title="Alternar som">
-                <span id="iconeAudio">🔊</span> <span id="textoStatusAudio">Música</span>
-            </button>
+            <button class="botao-abrir-loja" id="btnAbrirLoja">Loja</button>
+            <button class="botao-abrir-loja" id="btnLogout">Sair</button>
         </div>
     </header>
 
-    <!-- CARROSSEL DE PORTAIS CONCEITUAIS (INSPIRADO NA IMAGEM 3) -->
     <main class="tela-lobby-premium">
         <div class="carrossel-container-portais">
-            
             <button class="seta-navegacao seta-esquerda" id="botaoAnterior">&#10216;</button>
 
-            <!-- Moldura Circular Principal com Efeito Holográfico de Fundo da Matéria -->
             <div class="recipiente-portal-moldura" id="recipienteMapa">
                 <div class="circulo-portal-interno" id="plataformaMapa">
-                    <!-- Efeitos Temáticos Visuais em Camadas -->
                     <div class="overlay-particulas-materia" id="particulasMateria"></div>
-                    <div class="simbolo-central-materia" id="simboloMateria">⚛️</div>
+                    <div class="simbolo-central-materia" id="simboloMateria">M</div>
                 </div>
             </div>
 
             <button class="seta-navegacao seta-direita" id="botaoProximo">&#10217;</button>
         </div>
 
-        <!-- Painel de Controle e Chamada para o Jogo -->
         <div class="painel-selecao-inferior">
             <div class="distintivo-materia" id="distintivoMateria">MÓDULO</div>
             <h1 class="titulo-materia-ativa" id="tituloMateria">Carregando...</h1>
-            <button class="botao-jogar-rank" id="botaoJogarRank">INICIAR
-            
-            </button>
+            <button class="botao-jogar-rank" id="botaoJogarRank">INICIAR</button>
         </div>
     </main>
 
-    <!-- POPUP DO CATÁLOGO DE CUSTOMIZAÇÃO -->
     <div class="janela-modal-loja" id="modalLoja">
         <div class="conteudo-modal-loja">
             <div class="cabecalho-loja">
-                <h2>Customização e Temas</h2>
+                <h2>Loja e customização</h2>
                 <button class="fechar-loja-btn" id="btnFecharLoja">&times;</button>
             </div>
             <div class="abas-loja-categorias">
-                <button class="aba-item ativa" onclick="mudarCategoriaLoja('corpo')">Avatares</button>
-                <button class="aba-item" onclick="mudarCategoriaLoja('cabeca')">Acessórios</button>
+                <button class="aba-item ativa" type="button" data-category="avatar">Avatares</button>
+                <button class="aba-item" type="button" data-category="acessorio">Acessórios</button>
             </div>
             <div class="grade-itens-loja" id="gradeItensLoja"></div>
         </div>
     </div>
 
-    <!-- Música Oficial do TCC -->
-    <audio id="musicaFundo" loop src="https://soundhelix.com"></audio>
+    <script src="js/api.js"></script>
     <script src="js/menu.js"></script>
 </body>
 </html>
