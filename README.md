@@ -33,6 +33,7 @@ O projeto foi estruturado com Node.js + Express no backend e SQLite como banco d
 - Node.js
 - Express
 - SQLite
+- `node:sqlite` (nativo do Node.js 22.5+)
 - bcryptjs
 - express-session
 
@@ -50,6 +51,9 @@ O projeto foi estruturado com Node.js + Express no backend e SQLite como banco d
    ```bash
    npm install
    ```
+   O projeto requer Node.js 22.5 ou superior. O acesso ao SQLite usa o módulo
+   nativo `node:sqlite`, evitando `better-sqlite3`, `node-gyp`, Python e
+   compilação de addon nativo no Windows.
 2. Copie o arquivo `.env.example` para `.env` e defina a chave de sessão:
    ```bash
    copy .env.example .env
@@ -82,6 +86,11 @@ npm run dev
 A aplicação fica disponível em:
 
 - http://localhost:3000
+
+Abra o site pelo endereço acima, e não usando `file://`. A camada de API
+também reconhece `localhost` e `127.0.0.1` quando o frontend estiver sendo
+servido pelo Live Server em outra porta e direciona as chamadas para a API
+em `localhost:3000`.
 
 ## Autenticação
 
@@ -126,6 +135,7 @@ O banco possui as tabelas principais:
 
 - O projeto continua sendo um protótipo educativo e não substitui uma aplicação de produção com múltiplos usuários e alta escala
 - O banco usado é SQLite por simplicidade de execução local
+- O Node.js precisa ser 22.5 ou superior por causa do módulo nativo `node:sqlite`
 - Os quizzes são baseados no conteúdo existente e podem ser expandidos futuramente
 
 ## Próximos passos

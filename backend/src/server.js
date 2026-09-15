@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
-const { db, getUserByEmail, getUserById, getProfile, getLevelSummary, createUser } = require('./db');
+const { db, getUserByEmail, getUserById, getProfile, getLevelSummary, runTransaction, createUser } = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +18,26 @@ if (isProduction && !sessionSecret) {
 app.disable('x-powered-by');
 app.use(express.json({ limit: '16kb' }));
 app.use(express.urlencoded({ extended: false, limit: '16kb' }));
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const isLocalOrigin = !origin
+    || origin === 'null'
+    || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+
+  if (origin && isLocalOrigin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.setHeader('Vary', 'Origin');
+  }
+
+  if (req.method === 'OPTIONS' && isLocalOrigin) {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
 app.use(
   session({
     secret: sessionSecret || 'tcc-dev-secret-local',
@@ -228,13 +248,11 @@ app.post('/api/shop/purchase', requireAuth, (req, res) => {
     return res.status(400).json({ message: 'Você não possui pontos suficientes para este item.' });
   }
 
-  const purchase = db.transaction(() => {
+  runTransaction(() => {
     db.prepare('UPDATE user_profiles SET points = points - ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?').run(item.price, userId);
     db.prepare('INSERT INTO user_inventory (user_id, item_id) VALUES (?, ?)').run(userId, item.id);
     db.prepare('INSERT INTO points_history (user_id, source, amount) VALUES (?, ?, ?)').run(userId, `compra:${item.slug}`, -item.price);
   });
-
-  purchase();
 
   return res.json({ message: `Item ${item.name} comprado com sucesso.`, profile: getProfile(userId) });
 });
@@ -299,7 +317,7 @@ app.post('/api/quizzes/submit', requireAuth, (req, res) => {
   const pointsAward = Math.max(10, Math.round((correct / total) * 60) + 8);
 
   const profile = getProfile(userId);
-  const updateTransaction = db.transaction(() => {
+  runTransaction(() => {
     const previousXp = Number(profile.xp_total || 0);
     const updatedXp = previousXp + xpAward;
     const updatedPoints = Number(profile.points || 0) + pointsAward;
@@ -332,8 +350,6 @@ app.post('/api/quizzes/submit', requireAuth, (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?)
     `).run(userId, subjectId, correct, total, xpAward, pointsAward);
   });
-
-  updateTransaction();
 
   const updatedProfile = getProfile(userId);
   res.json({

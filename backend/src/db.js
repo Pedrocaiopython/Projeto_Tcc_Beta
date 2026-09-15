@@ -1,14 +1,15 @@
 const fs = require('fs');
 const path = require('path');
-const Database = require('better-sqlite3');
+const { DatabaseSync } = require('node:sqlite');
 
 const dbDir = path.join(__dirname, '../../database');
 const dbPath = path.join(dbDir, 'educa_app.db');
 const schemaPath = path.join(dbDir, 'schema.sql');
 
-const db = new Database(dbPath);
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
+// node:sqlite is built into Node.js 22.5+ and keeps SQLite persistent without
+// downloading or compiling a native addon during npm install.
+const db = new DatabaseSync(dbPath);
+db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
 
 const schemaSql = fs.readFileSync(schemaPath, 'utf8');
 db.exec(schemaSql);
@@ -89,20 +90,32 @@ function getLevelSummary(xpTotal) {
   };
 }
 
+function runTransaction(callback) {
+  db.exec('BEGIN');
+  try {
+    const result = callback();
+    db.exec('COMMIT');
+    return result;
+  } catch (error) {
+    db.exec('ROLLBACK');
+    throw error;
+  }
+}
+
 function createUser({ name, email, passwordHash }) {
-  const create = db.transaction(() => {
+  const userId = runTransaction(() => {
     const insert = db.prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
     const result = insert.run(name.trim(), email.trim().toLowerCase(), passwordHash);
-    const userId = result.lastInsertRowid;
+    const createdUserId = result.lastInsertRowid;
 
-    db.prepare('INSERT INTO user_profiles (user_id, xp_total, level, points) VALUES (?, 0, 1, 0)').run(userId);
-    db.prepare('INSERT INTO user_inventory (user_id, item_id) VALUES (?, (SELECT id FROM shop_items WHERE slug = ?))').run(userId, 'avatar-base');
-    db.prepare('UPDATE user_profiles SET equipped_item_id = (SELECT id FROM shop_items WHERE slug = ?) WHERE user_id = ?').run('avatar-base', userId);
+    db.prepare('INSERT INTO user_profiles (user_id, xp_total, level, points) VALUES (?, 0, 1, 0)').run(createdUserId);
+    db.prepare('INSERT INTO user_inventory (user_id, item_id) VALUES (?, (SELECT id FROM shop_items WHERE slug = ?))').run(createdUserId, 'avatar-base');
+    db.prepare('UPDATE user_profiles SET equipped_item_id = (SELECT id FROM shop_items WHERE slug = ?) WHERE user_id = ?').run('avatar-base', createdUserId);
 
-    return userId;
+    return createdUserId;
   });
 
-  return getUserById(create());
+  return getUserById(userId);
 }
 
 module.exports = {
@@ -111,5 +124,6 @@ module.exports = {
   getUserById,
   getProfile,
   getLevelSummary,
+  runTransaction,
   createUser
 };

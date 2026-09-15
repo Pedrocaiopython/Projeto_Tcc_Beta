@@ -1,3 +1,16 @@
+function resolveApiBaseUrl() {
+  const { protocol, hostname, port } = window.location;
+  const isLocalHost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]';
+
+  if (protocol === 'file:' || (isLocalHost && port && port !== '3000')) {
+    return 'http://localhost:3000';
+  }
+
+  return '';
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
+
 async function requestJson(url, options = {}) {
   const method = options.method || 'GET';
   const body = options.body;
@@ -7,11 +20,11 @@ async function requestJson(url, options = {}) {
     headers['Content-Type'] = 'application/json';
   }
 
-  const response = await fetch(url, {
+  const response = await fetch(`${API_BASE_URL}${url}`, {
     method,
     body,
     headers,
-    credentials: 'same-origin'
+    credentials: API_BASE_URL ? 'include' : 'same-origin'
   });
 
   let payload = null;

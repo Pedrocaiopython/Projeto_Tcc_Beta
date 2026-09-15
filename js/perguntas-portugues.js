@@ -1,374 +1,57 @@
-const perguntasPortugues = {
-    "7ano": [
-        {
-            texto: "Qual palavra está escrita corretamente?",
-            alternativas: ["Caminhao", "Caminhão", "Caminhaõ", "Caminhãon"],
-            respostaCorreta: 1,
-            explicacao: "A forma correta é 'Caminhão', com til no 'ã'."
-        },
-        {
-            texto: "Qual palavra é um substantivo comum?",
-            alternativas: ["Brasil", "Maria", "Mesa", "São Paulo"],
-            respostaCorreta: 2,
-            explicacao: "Mesa é um substantivo comum, porque nomeia uma coisa em geral."
-        },
-        {
-            texto: "Qual frase está escrita corretamente?",
-            alternativas: ["Eu fui ao escola.", "Eu fui à escola.", "Eu fui no escola.", "Eu fui em escola."],
-            respostaCorreta: 1,
-            explicacao: "A forma correta é 'Eu fui à escola.'"
-        },
-        {
-            texto: "Qual palavra é um verbo?",
-            alternativas: ["Livro", "Correr", "Mesa", "Azul"],
-            respostaCorreta: 1,
-            explicacao: "Correr é um verbo, pois indica ação."
-        },
-        {
-            texto: "Qual é o sinônimo de 'rápido'?",
-            alternativas: ["Devagar", "Lento", "Ágil", "Pesado"],
-            respostaCorreta: 2,
-            explicacao: "Ágil é sinônimo de rápido."
-        },
-        {
-            texto: "Qual é o antônimo de 'alegre'?",
-            alternativas: ["Triste", "Feliz", "Calmo", "Amigável"],
-            respostaCorreta: 0,
-            explicacao: "Triste é o antônimo de alegre."
-        },
-        {
-            texto: "Qual palavra forma o plural corretamente?",
-            alternativas: ["Lápis", "Pãoes", "Casaes", "Mãos"],
-            respostaCorreta: 0,
-            explicacao: "Lápis permanece 'lápis' no plural."
-        },
-        {
-            texto: "Qual tipo de texto narra fatos reais ou imaginários em sequência?",
-            alternativas: ["Poema", "Texto narrativo", "Texto expositivo", "Receita"],
-            respostaCorreta: 1,
-            explicacao: "O texto narrativo conta uma história em sequência."
-        },
-        {
-            texto: "Qual palavra está no feminino?",
-            alternativas: ["Professor", "Professora", "Ensinar", "Leitura"],
-            respostaCorreta: 1,
-            explicacao: "Professora é a forma no feminino."
-        },
-        {
-            texto: "Qual frase está com a pontuação correta?",
-            alternativas: ["Vamos estudar hoje!", "Vamos estudar hoje", "Vamos estudar hoje?", "Vamos, estudar hoje!"],
-            respostaCorreta: 0,
-            explicacao: "A frase com pontuação correta para uma exclamção é 'Vamos estudar hoje!'."
-        }
-    ],
-    "8ano": [
-        {
-            texto: "Qual palavra está escrita corretamente?",
-            alternativas: ["Exercicio", "Exercício", "Execício", "Exercisio"],
-            respostaCorreta: 1,
-            explicacao: "A forma correta é 'Exercício', com acento no 'í'."
-        },
-        {
-            texto: "Qual frase apresenta sujeito e predicado corretamente organizados?",
-            alternativas: ["Os alunos estudaram muito hoje.", "Muito hoje os alunos estudaram.", "Estudaram muito os alunos hoje.", "Hoje muito alunos estudaram."],
-            respostaCorreta: 0,
-            explicacao: "A frase mais clara e adequada é 'Os alunos estudaram muito hoje.'"
-        },
-        {
-            texto: "Qual palavra é um adjetivo?",
-            alternativas: ["Correr", "Lindo", "Mesa", "Livro"],
-            respostaCorreta: 1,
-            explicacao: "Lindo é um adjetivo, porque descreve uma característica."
-        },
-        {
-            texto: "Qual é o antônimo de 'difícil'?",
-            alternativas: ["Trabalhoso", "Fácil", "Complexo", "Pesaroso"],
-            respostaCorreta: 1,
-            explicacao: "Fácil é o antônimo de difícil."
-        },
-        {
-            texto: "Qual frase está com pontuação correta?",
-            alternativas: ["Não, vou não!", "Não vou, não!", "Não vou não.", "Não vou, não"],
-            respostaCorreta: 1,
-            explicacao: "A forma adequada é 'Não vou, não!' para dar ênfase."
-        },
-        {
-            texto: "Qual destas palavras é um verbo no infinitivo?",
-            alternativas: ["Cantar", "Canção", "Cantor", "Cantava"],
-            respostaCorreta: 0,
-            explicacao: "Cantar está no infinitivo, forma base do verbo."
-        },
-        {
-            texto: "Qual é a função do pronome 'ele' na frase: 'Ele chegou cedo.'?",
-            alternativas: ["Sujeito", "Objeto", "Adjunto", "Predicado"],
-            respostaCorreta: 0,
-            explicacao: "'Ele' funciona como sujeito da frase."
-        },
-        {
-            texto: "Qual texto tem a finalidade de convencer o leitor?",
-            alternativas: ["Narrativo", "Expositivo", "Argumentativo", "Informativo"],
-            respostaCorreta: 2,
-            explicacao: "O texto argumentativo procura convencer ou persuadir o leitor."
-        },
-        {
-            texto: "Qual palavra está no plural corretamente?",
-            alternativas: ["Pés", "Péz", "Pês", "Peis"],
-            respostaCorreta: 0,
-            explicacao: "O plural correto de 'pé' é 'pés'."
-        },
-        {
-            texto: "Qual palavra é sinônimo de 'feliz'?",
-            alternativas: ["Triste", "Alegre", "Severo", "Calmo"],
-            respostaCorreta: 1,
-            explicacao: "Alegre é sinônimo de feliz."
-        }
-    ],
-    "9ano": [
-        {
-            texto: "Qual é a classe gramatical da palavra 'rapidamente' na frase 'Ele respondeu rapidamente'?",
-            alternativas: ["Substantivo", "Advérbio", "Adjetivo", "Pronome"],
-            respostaCorreta: 1,
-            explicacao: "Rapidamente é um advérbio, porque modifica um verbo."
-        },
-        {
-            texto: "Qual frase está escrita de forma correta?",
-            alternativas: ["Havia muitas pessoas na praça.", "Haviam muitas pessoas na praça.", "Havia muitas pessoas na praças.", "Haviam pessoas na praça."],
-            respostaCorreta: 0,
-            explicacao: "A forma correta é 'Havia muitas pessoas na praça.'"
-        },
-        {
-            texto: "Qual tipo de texto apresenta uma ideia principal seguida de explicações?",
-            alternativas: ["Narrativo", "Expositivo", "Poético", "Descritivo"],
-            respostaCorreta: 1,
-            explicacao: "O texto expositivo explica um tema com clareza e organização."
-        },
-        {
-            texto: "Qual palavra é formada por um prefixo e um radical?",
-            alternativas: ["Mesa", "Desfazer", "Livro", "Caderno"],
-            respostaCorreta: 1,
-            explicacao: "Desfazer é formada por prefixo 'des-' e radical 'fazer'."
-        },
-        {
-            texto: "Qual frase apresenta crase corretamente?",
-            alternativas: ["Vou à escola.", "Vou a escola.", "Vou a a escola.", "Vou às escola."],
-            respostaCorreta: 0,
-            explicacao: "A forma correta é 'Vou à escola.'"
-        },
-        {
-            texto: "Qual palavra é um substantivo coletivo?",
-            alternativas: ["Árvore", "Bosque", "Livro", "Mesa"],
-            respostaCorreta: 1,
-            explicacao: "Bosque é um substantivo coletivo, porque representa um conjunto de árvores."
-        },
-        {
-            texto: "Qual frase está no modo imperativo?",
-            alternativas: ["Leia o texto.", "Eu li o texto.", "Lerei o texto.", "Leitura do texto."],
-            respostaCorreta: 0,
-            explicacao: "Leia é uma forma do modo imperativo."
-        },
-        {
-            texto: "Qual palavra é um sinônimo de 'concluir'?",
-            alternativas: ["Começar", "Encerrar", "Abrir", "Viajar"],
-            respostaCorreta: 1,
-            explicacao: "Encerrar é sinônimo de concluir."
-        },
-        {
-            texto: "Qual é a função da vírgula na frase 'Pedro, venha aqui'?",
-            alternativas: ["Separar sujeito do verbo", "Isolar o vocativo", "Marcar final de frase", "Indicar pergunta"],
-            respostaCorreta: 1,
-            explicacao: "A vírgula separa o vocativo 'Pedro' do restante da frase."
-        },
-        {
-            texto: "Qual palavra se classifica como pronome pessoal do caso reto?",
-            alternativas: ["Me", "Te", "Eu", "Lhe"],
-            respostaCorreta: 2,
-            explicacao: "'Eu' é um pronome pessoal do caso reto."
-        }
-    ],
-    "1medio": [
-        {
-            texto: "Qual é a oração principal da frase 'Quando cheguei, ela já saiu'?",
-            alternativas: ["Quando cheguei", "Ela já saiu", "Cheguei", "Quando"],
-            respostaCorreta: 1,
-            explicacao: "A oração principal é 'ela já saiu'."
-        },
-        {
-            texto: "Qual é o sujeito da frase 'As crianças brincam no parque'?",
-            alternativas: ["No parque", "Brincam", "As crianças", "Parque"],
-            respostaCorreta: 2,
-            explicacao: "As crianças é o sujeito da frase."
-        },
-        {
-            texto: "Qual frase está correta quanto ao uso da crase?",
-            alternativas: ["Fui à reunião.", "Fui a reunião.", "Fui às reunião.", "Fui a a reunião."],
-            respostaCorreta: 0,
-            explicacao: "O correto é 'Fui à reunião.'"
-        },
-        {
-            texto: "Qual é o verbo de ligação na frase 'Ela está feliz'?",
-            alternativas: ["Ela", "Está", "Feliz", "Está feliz"],
-            respostaCorreta: 1,
-            explicacao: "'Está' é o verbo de ligação."
-        },
-        {
-            texto: "Qual figura de linguagem está presente em 'O mundo é um palco'?",
-            alternativas: ["Metáfora", "Onomatopeia", "Comparação", "Hipérbole"],
-            respostaCorreta: 0,
-            explicacao: "A metáfora compara o mundo ao palco sem usar 'como'."
-        },
-        {
-            texto: "Qual palavra é formada por derivação sufixal?",
-            alternativas: ["Felizmente", "Mesa", "Casa", "Livro"],
-            respostaCorreta: 0,
-            explicacao: "Felizmente possui derivação com o sufixo '-mente'."
-        },
-        {
-            texto: "Qual é a função do travessão em um texto?",
-            alternativas: ["Indicar diálogo", "Marcar pausa final", "Separar sílaba", "Indicar verbo"],
-            respostaCorreta: 0,
-            explicacao: "O travessão é usado para marcar fala ou diálogo."
-        },
-        {
-            texto: "Qual palavra é um pronome oblíquo?",
-            alternativas: ["Eu", "Nós", "Me", "Ele"],
-            respostaCorreta: 2,
-            explicacao: "Me é um pronome oblíquo, usado como objeto."
-        },
-        {
-            texto: "Qual é a função do texto narrativo?",
-            alternativas: ["Descrever ideias", "Contar uma história", "Explicar regras", "Organizar dados"],
-            respostaCorreta: 1,
-            explicacao: "O texto narrativo conta uma história com personagens, tempo e espaço."
-        },
-        {
-            texto: "Qual é a forma correta do plural de 'cidadão'?",
-            alternativas: ["Cidadãos", "Cidadões", "Cidadãoes", "Cidadãos"],
-            respostaCorreta: 0,
-            explicacao: "O plural correto é 'cidadãos'."
-        }
-    ],
-    "2medio": [
-        {
-            texto: "Qual é o tipo de sujeito em 'Choveu muito ontem'?",
-            alternativas: ["Simples", "Composto", "Oculto", "Indeterminado"],
-            respostaCorreta: 3,
-            explicacao: "O sujeito é indeterminado, porque não aparece na oração."
-        },
-        {
-            texto: "Qual é o complemento verbal na frase 'Ela gosta de música'?",
-            alternativas: ["Ela", "Gosta", "De música", "Música"],
-            respostaCorreta: 2,
-            explicacao: "'De música' é o complemento verbal do verbo gostar."
-        },
-        {
-            texto: "Qual é o período composto por coordenação?",
-            alternativas: ["Eu fui e ele veio.", "Quando cheguei, ela saiu.", "Como estudei, passei.", "Ele disse que viria."],
-            respostaCorreta: 0,
-            explicacao: "'Eu fui e ele veio.' é um período composto por coordenação."
-        },
-        {
-            texto: "Qual figura de linguagem está em 'Tenho mil coisas para fazer'?",
-            alternativas: ["Hipérbole", "Metonímia", "Ironia", "Antítese"],
-            respostaCorreta: 0,
-            explicacao: "A hipérbole exagera a ideia para enfatizar a quantidade."
-        },
-        {
-            texto: "Qual é a função do pronome relativo 'que'?",
-            alternativas: ["Substituir o verbo", "Conectar orações e retomar um termo", "Indicar ação", "Formar adjetivos"],
-            respostaCorreta: 1,
-            explicacao: "O pronome relativo 'que' conecta orações e retoma um termo anterior."
-        },
-        {
-            texto: "Qual frase contém um verbo transitivo direto?",
-            alternativas: ["Ela gosta de chocolate.", "Ela comprou um livro.", "Ela chegou cedo.", "Ela é simpática."],
-            respostaCorreta: 1,
-            explicacao: "'Comprou um livro' tem objeto direto, 'um livro'."
-        },
-        {
-            texto: "Qual é o nome da figura que compara duas ideias com 'como'?",
-            alternativas: ["Comparação", "Metáfora", "Catacrese", "Paradoxo"],
-            respostaCorreta: 0,
-            explicacao: "A comparação estabelece semelhança usando 'como'."
-        },
-        {
-            texto: "Qual frase está com a pontuação correta?",
-            alternativas: ["Se quiser, venha cedo.", "Se quiser venha, cedo.", "Se, quiser venha cedo.", "Se quiser venha cedo"],
-            respostaCorreta: 0,
-            explicacao: "A vírgula separa a oração subordinada adverbial de maneira adequada."
-        },
-        {
-            texto: "Qual é o tipo de sujeito em 'Fomos ao cinema' ?",
-            alternativas: ["Sujeito simples", "Sujeito oculto", "Sujeito composto", "Sujeito inexistente"],
-            respostaCorreta: 1,
-            explicacao: "O sujeito é oculto: 'nós'."
-        },
-        {
-            texto: "Qual é a classificação do texto 'Manual de instruções'?",
-            alternativas: ["Narrativo", "Injuntivo", "Lírico", "Argumentativo"],
-            respostaCorreta: 1,
-            explicacao: "Um manual de instruções é predominante injuntivo, orientando ações."
-        }
-    ],
-    "3medio": [
-        {
-            texto: "Qual é a oração subordinada na frase 'Se você estudar, passará'?",
-            alternativas: ["Você estudar", "Passará", "Se você estudar", "Estudar"],
-            respostaCorreta: 2,
-            explicacao: "'Se você estudar' é a oração subordinada adverbial condicional."
-        },
-        {
-            texto: "Qual figura de linguagem está em 'A cidade dormia'?",
-            alternativas: ["Personificação", "Ironia", "Comparação", "Metonímia"],
-            respostaCorreta: 0,
-            explicacao: "A personificação atribui ação humana à cidade."
-        },
-        {
-            texto: "Qual é o agente da passiva em 'O livro foi lido por ela'?",
-            alternativas: ["Livro", "Foi lido", "Ela", "Por"],
-            respostaCorreta: 2,
-            explicacao: "O agente da passiva é 'por ela'."
-        },
-        {
-            texto: "Qual tipo de texto apresenta tese e argumentos?",
-            alternativas: ["Argumentativo", "Descritivo", "Poético", "Expositivo"],
-            respostaCorreta: 0,
-            explicacao: "O texto argumentativo apresenta tese e sustentação com argumentos."
-        },
-        {
-            texto: "Qual palavra funciona como pronome demonstrativo?",
-            alternativas: ["este", "eu", "nós", "me"],
-            respostaCorreta: 0,
-            explicacao: "'Este' é um pronome demonstrativo."
-        },
-        {
-            texto: "Qual frase contém uma oração reduzida?",
-            alternativas: ["Chegando cedo, ele avisou a todos.", "Ele estudou e passou.", "Vamos estudar hoje.", "Ela saiu depois."],
-            respostaCorreta: 0,
-            explicacao: "'Chegando cedo' é uma oração reduzida de gerúndio."
-        },
-        {
-            texto: "Qual é a função do verbo 'ser' na frase 'A verdade é que ele saiu'?",
-            alternativas: ["Verbo transitivo", "Verbo de ligação", "Verbo auxiliar", "Verbo intransitivo"],
-            respostaCorreta: 1,
-            explicacao: "'É' liga o predicativo ao sujeito, funcionando como verbo de ligação."
-        },
-        {
-            texto: "Qual é o conceito de denotação?",
-            alternativas: ["Sentido figurado", "Sentido literal", "Comparação entre ideias", "Uso emocional da linguagem"],
-            respostaCorreta: 1,
-            explicacao: "Denotação é o sentido literal e objetivo da palavra."
-        },
-        {
-            texto: "Qual é o nome da figura de linguagem que apresenta ideias opostas?",
-            alternativas: ["Antítese", "Hipérbole", "Ironia", "Comparação"],
-            respostaCorreta: 0,
-            explicacao: "Antítese reúne termos de sentido oposto."
-        },
-        {
-            texto: "Qual é a classificação da frase 'Estudar é importante'?",
-            alternativas: ["Frase nominal", "Frase verbal", "Frase exclamativa", "Frase imperativa"],
-            respostaCorreta: 1,
-            explicacao: "A frase é verbal, porque possui verbo."
-        }
-    ]
+﻿const perguntasPortugues = {
+  "7ano": [
+    { texto: "Em uma notícia, o título diz: 'Prefeitura anuncia reforço no transporte escolar'. Qual é a função principal do título nesse texto?", alternativas: ["Explicar o conteúdo principal da notícia", "Narrar uma história fictícia", "Convencer o leitor a comprar um produto", "Dar instruções para uma receita"], respostaCorreta: 0, explicacao: "O título sintetiza a ideia principal da notícia e orienta a leitura.", dificuldade: "facil", tipo: "interpretacao" },
+    { texto: "Na frase 'O aluno respondeu com habilidade ao professor', a palavra destacada pode ser classificada como:", alternativas: ["Substantivo", "Advérbio", "Verbo", "Adjetivo"], respostaCorreta: 1, explicacao: "'Com habilidade' modifica o verbo 'respondeu', então 'habilidade' é núcleo de uma expressão adverbial.", dificuldade: "media", tipo: "analise" },
+    { texto: "Leia: 'A professora pediu que os alunos lessem o texto antes da aula.' Qual é a função da expressão destacada?", alternativas: ["Indicar um lugar", "Marcar uma ideia principal", "Introduzir uma oração subordinada", "Substituir o nome da professora"], respostaCorreta: 2, explicacao: "A expressão 'que os alunos lessem o texto antes da aula' introduz uma oração subordinada.", dificuldade: "dificil", tipo: "interpretacao" },
+    { texto: "Qual opção apresenta a ideia principal de uma propaganda?", alternativas: ["Descrever um fenômeno natural", "Convencer o público a consumir ou apoiar algo", "Explicar como funciona uma máquina", "Relatar um fato passado com detalhes"], respostaCorreta: 1, explicacao: "Propagandas normalmente têm objetivo persuasivo e apelam para a vontade de compra ou adesão.", dificuldade: "media", tipo: "contextualizacao" },
+    { texto: "Qual verbo está na forma correta para completar a frase: 'Se eu ___ mais cedo, chegaria a tempo.'?", alternativas: ["saio", "saísse", "sairia", "saí"], respostaCorreta: 1, explicacao: "A estrutura forma uma oração condicional do tipo 'se + pretérito do subjuntivo', seguida de 'condicional'.", dificuldade: "dificil", tipo: "gramatica" },
+    { texto: "Qual é a melhor interpretação da frase 'O silêncio daquele corredor foi mais eloquente que qualquer justificativa'?", alternativas: ["O corredor queria falar mais alto", "O silêncio expressou uma mensagem de forma clara", "O corredor estava sem voz", "A justificativa foi mais curta que o silêncio"], respostaCorreta: 1, explicacao: "A frase sugere que a ausência de palavras transmitiu uma ideia forte, sem necessidade de explicação detalhada.", dificuldade: "dificil", tipo: "inferencia" }
+  ],
+  "8ano": [
+    { texto: "A frase 'A cidade parece adormecida antes da chuva' usa linguagem figurada porque:", alternativas: ["Explica o clima de forma literal", "Compara a cidade a uma pessoa que dorme", "Transmite uma sensação emocional por metáfora", "Dá uma instrução para o leitor"], respostaCorreta: 2, explicacao: "A expressão atribui ao ambiente uma qualidade humana, criando uma imagem metafórica.", dificuldade: "media", tipo: "figuras_de_linguagem" },
+    { texto: "Qual frase está corretamente pontuada?", alternativas: ["Não vou não, disse ela com firmeza.", "Não vou, não disse ela com firmeza.", "Não vou, não disse ela, com firmeza.", "Não vou não disse ela com firmeza."], respostaCorreta: 0, explicacao: "A primeira opção marca corretamente a quebra da frase e a intenção de negação.", dificuldade: "media", tipo: "pontuacao" },
+    { texto: "No trecho 'Ele resolveu o problema com calma, mas a equipe ainda estava nervosa', a conjunção 'mas' expressa:", alternativas: ["adição", "explicação", "oposição", "conclusão"], respostaCorreta: 2, explicacao: "'Mas' introduz contraste entre duas ideias: calma e nervosismo.", dificuldade: "facil", tipo: "coesao" },
+    { texto: "Qual palavra é uma forma verbal no infinitivo?", alternativas: ["cantou", "cantando", "cantar", "cantaria"], respostaCorreta: 2, explicacao: "'Cantar' está na forma do infinitivo, a forma base do verbo.", dificuldade: "facil", tipo: "gramatica" },
+    { texto: "Em um texto argumentativo, a tese é:", alternativas: ["uma opinião defendida com argumentos", "um resumo final do texto", "o cenário em que a história acontece", "um detalhe ilustrativo sem relevância"], respostaCorreta: 0, explicacao: "A tese organiza a defesa de uma ideia, sendo sustentada por argumentos.", dificuldade: "media", tipo: "argumentacao" },
+    { texto: "Leia: 'Quando o relógio marcou meia-noite, a rua ficou vazia.' O termo destacado aponta para:", alternativas: ["uma condição", "um tempo", "um objetivo", "uma comparação"], respostaCorreta: 1, explicacao: "'Quando' introduz uma circunstância temporal.", dificuldade: "media", tipo: "interpretacao" }
+  ],
+  "9ano": [
+    { texto: "Na frase 'O comportamento dos jovens foi analisado criticamente pelo estudo', qual é o núcleo do sujeito?", alternativas: ["jovens", "comportamento", "estudo", "críticamente"], respostaCorreta: 1, explicacao: "O sujeito é 'o comportamento dos jovens'; o núcleo é 'comportamento'.", dificuldade: "media", tipo: "sintaxe" },
+    { texto: "Qual opção apresenta uma crase corretamente empregada?", alternativas: ["Fui à escola cedo.", "Fui a escola cedo.", "Fui as escola cedo.", "Fui às escola cedo."], respostaCorreta: 0, explicacao: "A crase é obrigatória antes de palavra feminina com artigo definido: 'à escola'.", dificuldade: "media", tipo: "gramatica" },
+    { texto: "No trecho 'O discurso do candidato parecia vazio de conteúdo', a expressão destacada sugere que o discurso era:", alternativas: ["muito detalhado", "sem substância", "bem argumentado", "focado em dados"], respostaCorreta: 1, explicacao: "'Vazio de conteúdo' indica ausência de fundamentação ou argumentos relevantes.", dificuldade: "media", tipo: "inferencia" },
+    { texto: "Qual alternativa apresenta a melhor ideia de coesão textual?", alternativas: ["A frase muda de assunto sem ligação com o anterior.", "O texto repete ideias sem estabelecer relação entre elas.", "As ideias se conectam de forma lógica e progressiva.", "Cada trecho do texto fala em ordem aleatória."], respostaCorreta: 2, explicacao: "Coesão textual depende da articulação clara entre as ideias.", dificuldade: "media", tipo: "coesao" },
+    { texto: "Em uma carta formal, a linguagem mais adequada é:", alternativas: ["muito coloquial e direta", "objetiva, respeitosa e clara", "apenas expressiva, sem conteúdo", "reduzida a frases curtas sem estrutura"], respostaCorreta: 1, explicacao: "Uma carta formal deve seguir padronização, cordialidade e clareza.", dificuldade: "media", tipo: "contextualizacao" },
+    { texto: "Leia: 'Seus argumentos eram convincentes, porém insuficientes para mudar a decisão.' A conjunção 'porém' indica:", alternativas: ["causa", "oposição", "tempo", "condição"], respostaCorreta: 1, explicacao: "'Porém' marca contraste entre duas ideias: os argumentos eram bons, mas não suficientes.", dificuldade: "facil", tipo: "coesao" }
+  ],
+  "1medio": [
+    { texto: "Em um texto argumentativo, o uso de dados e exemplos serve para:", alternativas: ["apenas preencher espaço", "conferir credibilidade à tese", "sustituir a introdução", "reduzir a importância do tema"], respostaCorreta: 1, explicacao: "Argumentos concretos fortalecem a posição defendida e tornam a tese mais convincente.", dificuldade: "media", tipo: "argumentacao" },
+    { texto: "Na frase 'A solução mais sensata foi esperar a resposta do grupo', a expressão 'mais sensata' funciona como:", alternativas: ["advérbio", "adjetivo", "substantivo", "pronome"], respostaCorreta: 1, explicacao: "'Sensata' caracteriza o substantivo 'solução', então é um adjetivo.", dificuldade: "media", tipo: "gramatica" },
+    { texto: "O efeito do uso de uma metáfora em um texto literário é:", alternativas: ["transformar o texto em instrução técnica", "criar uma imagem mais expressiva e subjetiva", "facilitar apenas a leitura mecânica", "eliminar a subjetividade"], respostaCorreta: 1, explicacao: "Metáforas ampliam a expressividade do texto e ajudam a criar imagens conceituais.", dificuldade: "dificil", tipo: "figuras_de_linguagem" },
+    { texto: "Qual é a melhor reescrita de 'Os alunos estudaram pouco e, por isso, não conseguiram responder bem' para manter sentido mais claro?", alternativas: ["Os alunos estudaram pouco; por isso, não responderam bem.", "Os alunos estudaram pouco, e por isso responderam bem.", "Os alunos estudaram pouco, mas responderam bem.", "Os alunos estudaram para responder bem."], respostaCorreta: 0, explicacao: "A estrutura com ponto e vírgula enfatiza a relação causal entre estudo insuficiente e desempenho ruim.", dificuldade: "dificil", tipo: "coesao" },
+    { texto: "Leia: 'O rio atravessava a cidade como uma linha de memória.' Esse trecho usa:", alternativas: ["comparação direta", "metáfora", "personificação", "ironía"], respostaCorreta: 1, explicacao: "O rio é associado a uma 'linha de memória', sem comparação marcada por 'como'.", dificuldade: "dificil", tipo: "figuras_de_linguagem" },
+    { texto: "A frase 'Ainda que o projeto estivesse atrasado, a equipe não desistiu.' expressa:", alternativas: ["oposição total", "concessão", "causa e efeito", "conclusão"], respostaCorreta: 1, explicacao: "A ideia de 'ainda que' indica concessão: há dificuldade, mas não houve desistência.", dificuldade: "dificil", tipo: "interpretacao" }
+  ],
+  "2medio": [
+    { texto: "No texto 'A discussão girava em torno da ética digital e da responsabilidade coletiva', a expressão destacada introduz:", alternativas: ["um tema principal", "um lugar específico", "uma ordem cronológica", "uma descrição física"], respostaCorreta: 0, explicacao: "A expressão aponta para o assunto central do discurso.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "Qual frase apresenta a regência verbal correta?", alternativas: ["Ele assistiu o filme ontem.", "Ele assistiu ao filme ontem.", "Ele assistiu em filme ontem.", "Ele assistiu para o filme ontem."], respostaCorreta: 1, explicacao: "O verbo 'assistir' exige preposição 'a' quando significa ver, acompanhar.", dificuldade: "dificil", tipo: "gramatica" },
+    { texto: "Em um texto dissertativo, a introdução deve:", alternativas: ["apenas repetir fatos", "apresentar o tema e a finalidade do texto", "resolver a conclusão antes do argumento", "deixar de lado a tese"], respostaCorreta: 1, explicacao: "A introdução contextualiza o tema e anuncia a direção desenvolvida pelo texto.", dificuldade: "media", tipo: "argumentacao" },
+    { texto: "Qual alternativa melhor explica o efeito de sentido de 'A cidade respirava em silêncio'?", alternativas: ["A cidade estava literalmente sem ar.", "A cidade transmite uma sensação de expectativa e calma profunda.", "A cidade estava parada, sem movimento.", "A cidade queria falar com alguém."], respostaCorreta: 1, explicacao: "A personificação cria uma atmosfera de expectativa e tranquilidade.", dificuldade: "dificil", tipo: "inferencia" },
+    { texto: "Qual palavra é um sinônimo contextual de 'sutil' em uma frase sobre argumento?", alternativas: ["rápido", "delicado", "brusco", "rígido"], respostaCorreta: 1, explicacao: "'Delicado' pode ser empregado para indicar algo sutil, discreto e sem exagero.", dificuldade: "media", tipo: "semantica" },
+    { texto: "O pronome relativo 'que' em 'Os documentos que chegaram ontem serão analisados' refere-se a:", alternativas: ["documentos", "ontem", "analisados", "serão"], respostaCorreta: 0, explicacao: "'Que' retoma o antecedente 'documentos'.", dificuldade: "media", tipo: "sintaxe" }
+  ],
+  "3medio": [
+    { texto: "Em um debate oral, a estratégia mais adequada para sustentar uma tese é:", alternativas: ["apenas repetir a opinião sem provas", "usar argumentos, exemplos e organização lógica", "falar o mais rápido possível", "ignorar a opinião do outro"], respostaCorreta: 1, explicacao: "Uma argumentação eficiente depende de sustentação, organização e exemplos relevantes.", dificuldade: "media", tipo: "argumentacao" },
+    { texto: "Na frase 'O texto não apenas expõe o problema, como indica caminhos para superá-lo', a expressão 'não apenas ... como' indica:", alternativas: ["adição com ênfase", "oposição", "tempo", "causa"], respostaCorreta: 0, explicacao: "A expressão acrescenta uma ideia de reforço e progressão ao argumento inicial.", dificuldade: "dificil", tipo: "coesao" },
+    { texto: "Qual opção melhor explica a função do parágrafo final em um texto dissertativo?", alternativas: ["apresentar o tema de forma nova", "concluir com síntese e fechamento argumentativo", "descrever o ambiente detalhadamente", "iniciar uma narrativa fictícia"], respostaCorreta: 1, explicacao: "O fechamento conclui as ideias, reforça a tese e encerra a argumentação.", dificuldade: "media", tipo: "estrutural" },
+    { texto: "Na frase 'A resposta do professor foi breve, porém reveladora', a conjunção 'porém' revela:", alternativas: ["conclusão", "oposição", "causa", "comparação"], respostaCorreta: 1, explicacao: "'Porém' opõe duas ideias: brevidade e profundidade de conteúdo.", dificuldade: "facil", tipo: "coesao" },
+    { texto: "A expressão 'como se a noite tivesse engolido a rua' caracteriza uma:", alternativas: ["metáfora", "comparação direta", "hipérbole", "personificação"], respostaCorreta: 0, explicacao: "A frase atribui à noite um ato de devorar a rua, o que é uma metáfora de grande carga simbólica.", dificuldade: "dificil", tipo: "figuras_de_linguagem" },
+    { texto: "Qual alternativa possui frase com sentido mais preciso e contextualizado em ambiente acadêmico?", alternativas: ["Os dados foram feitos sem muita ideia.", "Os dados foram analisados de forma crítica e comparada com o referencial teórico.", "Os dados ficaram confusos e ninguém se preocupou.", "Os dados não tinham nada a ver com o problema."], respostaCorreta: 1, explicacao: "A melhor resposta mantém linguagem acadêmica, clara e conectada ao contexto de pesquisa.", dificuldade: "dificil", tipo: "contextualizacao" }
+  ]
 };
+
+// A qualidade das questões foi reforçada com contextos, inferência, argumentação e interpretação,
+// sem mudar a estrutura do objeto do quiz atual. Isso mantém a compatibilidade com o sistema,
+// mas torna cada pergunta mais próxima de uma avaliação real de linguagem e raciocínio.
+if (typeof window !== 'undefined') {
+  window.perguntasPortugues = perguntasPortugues;
+}

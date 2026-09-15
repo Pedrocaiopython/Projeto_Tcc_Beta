@@ -95,3 +95,85 @@ section {
         grid-template-columns: 1fr;
     }
 }
+
+/* Identidade de Geografia: floresta, relevo e mapas. */
+.tema-geografia {
+    background:
+        radial-gradient(circle at 80% 13%, rgba(184, 230, 83, 0.25), transparent 25%),
+        radial-gradient(circle at 12% 85%, rgba(37, 173, 156, 0.30), transparent 33%),
+        linear-gradient(135deg, #062b2a, #0e5a45 52%, #143d24);
+    color: #f4fff5;
+}
+
+.tema-geografia header { border-bottom: 1px solid rgba(169, 234, 169, 0.45); }
+.tema-geografia .niveis button,
+.tema-geografia #alternativas button {
+    background: linear-gradient(135deg, #126351, #378449);
+    color: #f6fff7;
+    border-color: rgba(205, 255, 196, 0.40);
+}
+.tema-geografia #progresso { background: linear-gradient(90deg, #7ddc74, #c1ed67); }
+.tema-geografia .correto { background: rgba(27, 121, 70, 0.92); }
+.tema-geografia .incorreto { background: rgba(146, 49, 43, 0.92); }
+
+.desafio-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(3, 7, 18, 0.82);
+    backdrop-filter: blur(8px);
+    animation: aparecer 0.35s ease both;
+}
+
+.desafio-cartao {
+    position: relative;
+    width: min(620px, 100%);
+    max-height: 92vh;
+    overflow: auto;
+    padding: clamp(26px, 5vw, 46px);
+    text-align: center;
+    color: #f8fbff;
+    border: 1px solid rgba(123, 211, 255, 0.55);
+    border-radius: 28px;
+    background: radial-gradient(circle at top, rgba(53, 141, 218, 0.34), transparent 45%), linear-gradient(145deg, #101d35, #050812);
+    box-shadow: 0 0 45px rgba(57, 181, 255, 0.28), 0 30px 90px rgba(0, 0, 0, 0.6);
+}
+
+.desafio-selo { margin: 0; color: #8cddff; font-weight: 800; letter-spacing: 0.12em; font-size: 0.78rem; }
+.desafio-icone, .trofeu { display: block; font-size: 4.4rem; filter: drop-shadow(0 0 18px #f7c950); }
+.desafio-acoes { display: flex; justify-content: center; gap: 14px; margin-top: 26px; }
+.desafio-acoes button, .concluir, #alternativas-boss button {
+    border: 0; border-radius: 13px; padding: 13px 23px; cursor: pointer; font: inherit; font-weight: 800; color: white;
+    background: linear-gradient(135deg, #1679c7, #7745e6); box-shadow: 0 7px 18px rgba(0, 0, 0, 0.3); transition: transform .2s ease, filter .2s ease;
+}
+.desafio-acoes button:hover, .concluir:hover, #alternativas-boss button:hover { transform: translateY(-2px); filter: brightness(1.18); }
+.recusar, .fugir { background: linear-gradient(135deg, #505764, #242936) !important; }
+
+.tela-perigo { animation: piscar-perigo .65s linear infinite; background: rgba(90, 0, 0, 0.8); }
+.alerta-boss { border-color: #ff4d4d; box-shadow: 0 0 55px rgba(255, 25, 25, .7); }
+.perigo { margin: 0; color: #ff5b5b; font-size: clamp(1.3rem, 5vw, 2.2rem); font-weight: 1000; letter-spacing: .1em; text-shadow: 0 0 15px #ff0000; }
+.cursor-demo { position: absolute; right: 26%; bottom: 66px; font-size: 2.6rem; color: white; transform: rotate(-35deg); animation: apontar 1.25s ease-in-out infinite; filter: drop-shadow(0 0 4px #000); pointer-events: none; }
+
+.arena-boss { padding-top: 25px; border-color: #f45168; background: radial-gradient(circle at 50% 5%, #5b1232, #120611 59%, #05050a); }
+.placa-quebrando { width: 85%; margin: 0 auto -20px; padding: 12px; transform: rotate(-2deg); border: 3px solid #e9bf79; background: #3c2116; color: #ffe3a9; font-weight: 1000; letter-spacing: .12em; animation: quebrar-placa .8s .2s both; }
+.kaiju { display: block; width: min(290px, 75vw); max-height: 225px; margin: -8px auto 4px; object-fit: cover; border-radius: 28% 28% 14% 14%; filter: drop-shadow(0 12px 15px #000); animation: entrada-kaiju 1s .45s both, rugir 2.3s 1.5s ease-in-out infinite; }
+.kaiju.sofrendo-dano { animation: dano .45s ease; filter: brightness(3) sepia(1) hue-rotate(310deg) drop-shadow(0 0 20px #ff2525); }
+.vida-boss { display: grid; gap: 5px; text-align: left; font-size: .74rem; font-weight: 900; letter-spacing: .1em; color: #ffc5ca; }
+.vida-boss > div { height: 13px; overflow: hidden; border: 1px solid #ff8f9c; border-radius: 10px; background: #35101a; }
+.vida-boss i { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, #fd173e, #ff9868); transition: width .45s ease; }
+#contador-boss { margin: 19px 0 5px; color: #ffcad2; font-weight: 800; }
+#pergunta-boss { font-size: clamp(1.15rem, 3vw, 1.55rem); }
+#alternativas-boss { display: grid; gap: 9px; text-align: left; }
+#alternativas-boss button:disabled { cursor: default; opacity: .6; }
+.feedback-boss { min-height: 42px; margin: 15px 0 0; color: #ffe2b8; font-weight: 700; }
+.vitoria-boss { border-color: #f6d16a; background: radial-gradient(circle at top, #6e5520, #17120b 68%); }
+
+@keyframes piscar-perigo { 50% { background: rgba(230, 0, 0, .83); } }
+@keyframes apontar { 50% { transform: translate(-18px, 14px) rotate(-35deg) scale(1.12); } }
+@keyframes quebrar-placa { 55% { transform: rotate(5deg) scale(1.07); } 100% { transform: rotate(-7deg) translateY(-7px); clip-path: polygon(0 0, 46% 0, 50% 21%, 56% 0, 100% 0, 100% 100%, 58% 100%, 51% 78%, 44% 100%, 0 100%); } }
+@keyframes entrada-kaiju { from { opacity: 0; transform: translateY(150px) scale(.5) rotate(-14deg); } to { opacity: 1; transform: translateY(0) scale(1) rotate(0); } }
+@keyframes rugir { 50% { transform: scale(1.035) rotate(-1.5deg); filter: brightness(1.22) drop-shadow(0 12px 16px #f63892); } }
+@keyframes dano { 25%, 75% { transform: translateX(-16px); } 50% { transform: translateX(16px) scale(.94); } }

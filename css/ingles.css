@@ -1,1 +1,18 @@
-background: #4338ca;
+.tema-ingles {
+    background:
+        radial-gradient(circle at 82% 12%, rgba(215, 48, 69, 0.26), transparent 28%),
+        radial-gradient(circle at 12% 82%, rgba(57, 123, 255, 0.28), transparent 34%),
+        linear-gradient(135deg, #091433, #1a2f70 52%, #0c1738);
+    color: #f5f7ff;
+}
+
+.tema-ingles header { border-bottom: 1px solid rgba(157, 188, 255, 0.48); }
+.tema-ingles .niveis button,
+.tema-ingles #alternativas button {
+    background: linear-gradient(135deg, #183f9b, #c62e4b);
+    color: #fff;
+    border-color: rgba(220, 231, 255, 0.42);
+}
+.tema-ingles #progresso { background: linear-gradient(90deg, #4c8cff, #f04c67); }
+.tema-ingles .correto { background: rgba(22, 119, 77, 0.92); }
+.tema-ingles .incorreto { background: rgba(153, 35, 55, 0.92); }

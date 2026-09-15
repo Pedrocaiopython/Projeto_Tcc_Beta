@@ -1,374 +1,56 @@
-const perguntasHistoria = {
-    "7ano": [
-        {
-            texto: "Quem foi o responsável pela descoberta do Brasil em 1500?",
-            alternativas: ["Pedro Álvares Cabral", "Cristóvão Colombo", "Fernão de Magalhães", "Vasco da Gama"],
-            respostaCorreta: 0,
-            explicacao: "Pedro Álvares Cabral comandou a frota portuguesa que chegou ao território brasileiro em 1500."
-        },
-        {
-            texto: "Qual civilização construiu pirâmides no Egito?",
-            alternativas: ["Romanos", "Egípcios", "Gregos", "Babilônios"],
-            respostaCorreta: 1,
-            explicacao: "Os egípcios construíram monumentais pirâmides como parte de sua cultura."
-        },
-        {
-            texto: "Qual era o principal objetivo dos descobrimentos portugueses?",
-            alternativas: ["Expandir o comércio e as rotas marítimas", "Criar novos reinos", "Construir universidades", "Conquistar a China"],
-            respostaCorreta: 0,
-            explicacao: "Os portugueses buscavam ampliar o comércio e abrir novas rotas."
-        },
-        {
-            texto: "Quem foi o primeiro presidente do Brasil?",
-            alternativas: ["Getúlio Vargas", "Deodoro da Fonseca", "Juscelino Kubitschek", "Afonso Pena"],
-            respostaCorreta: 1,
-            explicacao: "Deodoro da Fonseca foi o primeiro presidente do Brasil."
-        },
-        {
-            texto: "Qual período da história é conhecido como Idade Média?",
-            alternativas: ["Entre a Antiguidade e a Idade Moderna", "Durante a Revolução Francesa", "No período colonial dos EUA", "Na era dos dinossauros"],
-            respostaCorreta: 0,
-            explicacao: "A Idade Média ocorreu entre a Antiguidade e a Idade Moderna."
-        },
-        {
-            texto: "Qual evento marcou o início da Revolução Francesa?",
-            alternativas: ["Queda da Bastilha", "Descoberta do Brasil", "Guerra do Paraguai", "Independência dos EUA"],
-            respostaCorreta: 0,
-            explicacao: "A queda da Bastilha, em 1789, marcou o início da Revolução Francesa."
-        },
-        {
-            texto: "Qual foi a principal forma de produção na época feudal?",
-            alternativas: ["Indústria", "Agricultura", "Comércio marítimo", "Mineração"],
-            respostaCorreta: 1,
-            explicacao: "A agricultura era a base da economia feudal."
-        },
-        {
-            texto: "Qual país foi o centro das civilizações antigas da Grécia e Roma?",
-            alternativas: ["Brasil", "Itália", "China", "Japão"],
-            respostaCorreta: 1,
-            explicacao: "A Itália abrigou as civilizações romanas e influenciou a Europa antiga."
-        },
-        {
-            texto: "O que foi a escravidão no Brasil?",
-            alternativas: ["Sistema em que pessoas eram mantidas como propriedade", "Sistema de ensino público", "Forma de troca de alimentos", "Modelo de governo"],
-            respostaCorreta: 0,
-            explicacao: "A escravidão envolvia a exploração e captura de pessoas como mão de obra."
-        },
-        {
-            texto: "Quem liderou a independência do Brasil em 1822?",
-            alternativas: ["D. Pedro I", "Tiradentes", "Dom João VI", "Braz Cubas"],
-            respostaCorreta: 0,
-            explicacao: "D. Pedro I liderou o processo de independência do Brasil."
-        }
-    ],
-    "8ano": [
-        {
-            texto: "Qual civilização antiga se desenvolveu no Mediterrâneo e deixou legados como a democracia?",
-            alternativas: ["Egípcia", "Grega", "Romana", "Babilônica"],
-            respostaCorreta: 1,
-            explicacao: "A civilização grega foi importante para o desenvolvimento da democracia e da filosofia."
-        },
-        {
-            texto: "Qual foi uma das principais características do Império Romano?",
-            alternativas: ["Era baseado apenas na pesca", "Expandiu seu domínio por muitos territórios", "Não tinha lei", "Foi governado por uma monarquia absoluta"],
-            respostaCorreta: 1,
-            explicacao: "O Império Romano se expandiu por vários territórios e deixou grande influência cultural."
-        },
-        {
-            texto: "Qual evento marcou o início da Idade Moderna?",
-            alternativas: ["A queda do Império Romano", "A expansão marítima europeia", "A Revolução Francesa", "A morte de Dom Pedro I"],
-            respostaCorreta: 1,
-            explicacao: "A expansão marítima e as transformações políticas e econômicas marcaram o início da Idade Moderna."
-        },
-        {
-            texto: "Quem foi responsável por liderar a independência do Brasil?",
-            alternativas: ["Dom Pedro I", "Tiradentes", "Getúlio Vargas", "Pedro Álvares Cabral"],
-            respostaCorreta: 0,
-            explicacao: "Dom Pedro I liderou o processo de independência do Brasil em 1822."
-        },
-        {
-            texto: "Qual foi o principal tema da Revolução Francesa?",
-            alternativas: ["Liberdade, igualdade e fraternidade", "Domínio religioso único", "Monarquia absoluta sem mudanças", "Expansão colonial para o Brasil"],
-            respostaCorreta: 0,
-            explicacao: "A Revolução Francesa defendia liberdade, igualdade e fraternidade."
-        },
-        {
-            texto: "Qual civilização construiu pirâmides famosas no Egito?",
-            alternativas: ["Romanos", "Gregos", "Egípcios", "Fenícios"],
-            respostaCorreta: 2,
-            explicacao: "Os egípcios construíram as pirâmides, um dos maiores monumentos da história."
-        },
-        {
-            texto: "Qual foi o principal produto exportado pelo Brasil colonial?",
-            alternativas: ["Cana-de-açúcar", "Petróleo", "Minério de ferro", "Algodão industrial"],
-            respostaCorreta: 0,
-            explicacao: "A cana-de-açúcar foi um dos principais produtos do Brasil colonial."
-        },
-        {
-            texto: "Qual foi a causa principal da expansão marítima europeia?",
-            alternativas: ["Busca por novas rotas comerciais e riquezas", "Falta de alimentos", "Interesse em copiar a arquitetura romana", "Fim da exploração industrial"],
-            respostaCorreta: 0,
-            explicacao: "A expansão marítima europeia foi impulsionada pela busca de novas rotas e riquezas."
-        },
-        {
-            texto: "Qual foi a principal consequência da independência do Brasil?",
-            alternativas: ["A criação de uma monarquia brasileira", "A derrota dos gregos", "A anexação da Europa", "A divisão do Império Romano"],
-            respostaCorreta: 0,
-            explicacao: "A independência levou à criação de um Estado nacional independente e à formação de uma monarquia brasileira."
-        },
-        {
-            texto: "Quem era responsável pela administração da colônia durante o período colonial?",
-            alternativas: ["A coroa portuguesa", "Os demais países europeus", "O presidente brasileiro", "A Igreja Ortodoxa"],
-            respostaCorreta: 0,
-            explicacao: "A coroa portuguesa administrava o território brasileiro durante o período colonial."
-        }
-    ],
-    "9ano": [
-        {
-            texto: "Qual é o nome do evento em que o Brasil passou a ser uma república?",
-            alternativas: ["Proclamação da República", "Guerra da Tríplice Aliança", "Lei Áurea", "Independência de 1822"],
-            respostaCorreta: 0,
-            explicacao: "A Proclamação da República, em 1889, marcou o fim da monarquia no Brasil."
-        },
-        {
-            texto: "Qual foi o principal objetivo da Revolução Industrial?",
-            alternativas: ["Trocar o trabalho manual por máquinas e produção em massa", "Destruir as cidades", "Parar o comércio internacional", "Criar plantações artificiais"],
-            respostaCorreta: 0,
-            explicacao: "A Revolução Industrial modernizou a produção com máquinas e produção em larga escala."
-        },
-        {
-            texto: "Qual foi uma das consequências da Segunda Guerra Mundial?",
-            alternativas: ["A formação da ONU", "O fim da Idade Média", "O surgimento do Egito Antigo", "A independência dos romanos"],
-            respostaCorreta: 0,
-            explicacao: "A Segunda Guerra Mundial deu origem a diversas mudanças políticas e à criação da ONU."
-        },
-        {
-            texto: "Qual gênero histórico foi muito importante para estudar a civilização egípcia?",
-            alternativas: ["A escrita hieroglífica", "A internet", "A máquina a vapor", "A escrita cuneiforme"],
-            respostaCorreta: 0,
-            explicacao: "A escrita hieroglífica foi uma das principais formas de registro dos egípcios."
-        },
-        {
-            texto: "Qual foi o nome do movimento que lutou contra a escravidão no Brasil?",
-            alternativas: ["Abolição", "Revolução Farroupilha", "Guerra dos Canudos", "Inconfidência Mineira"],
-            respostaCorreta: 0,
-            explicacao: "A abolição foi o processo que terminou com a escravidão."
-        },
-        {
-            texto: "Qual foi a principal motivação dos exploradores europeus durante os descobrimentos?",
-            alternativas: ["Enriquecimento e novas rotas comerciais", "Cura de doenças", "Comoção artística", "Substituição da religião"],
-            respostaCorreta: 0,
-            explicacao: "Os europeus buscavam ampliar mercados, rotas e riquezas."
-        },
-        {
-            texto: "Qual foi o nome do documento que aboliu a escravidão no Brasil?",
-            alternativas: ["Lei Áurea", "Constituição de 1824", "Lei de Terras", "Lei do Ventre Livre"],
-            respostaCorreta: 0,
-            explicacao: "A Lei Áurea, em 1888, aboliu a escravidão no Brasil."
-        },
-        {
-            texto: "Qual civilização é conhecida por ter desenvolvido a democracia?",
-            alternativas: ["Greco-romana", "Fenícia", "Egípcia", "Nórdica"],
-            respostaCorreta: 0,
-            explicacao: "A civilização grega é associada ao surgimento da democracia."
-        },
-        {
-            texto: "Qual era o principal objetivo da colonização portuguesa na América?",
-            alternativas: ["Criar uma economia baseada na exploração de recursos", "Formar um Estado socialista", "Promover a educação universal", "Conquistar o Japão"],
-            respostaCorreta: 0,
-            explicacao: "A colonização visava explorar recursos e ampliar o domínio luso."
-        },
-        {
-            texto: "Qual conceito se relaciona às ações humanas na História?",
-            alternativas: ["Tempo histórico", "Energia térmica", "Plano cartesiano", "Circuito elétrico"],
-            respostaCorreta: 0,
-            explicacao: "O tempo histórico organiza os fatos sociais e políticos ao longo dos séculos."
-        }
-    ],
-    "1medio": [
-        {
-            texto: "Qual foi o principal motivo da Guerra da Independência dos EUA?",
-            alternativas: ["Busca por independência da metrópole britânica", "Conflito com os franceses", "Guerra contra o México", "Revolução industrial"],
-            respostaCorreta: 0,
-            explicacao: "Os Estados Unidos buscaram independência da Inglaterra."
-        },
-        {
-            texto: "Qual civilização é conhecida pela construção de pirâmides e pela escrita hieroglífica?",
-            alternativas: ["Romana", "Egípcia", "Greco-romana", "Babilônica"],
-            respostaCorreta: 1,
-            explicacao: "A civilização egípcia é famosa pelas pirâmides e pela escrita hieroglífica."
-        },
-        {
-            texto: "Qual foi uma das consequências da Revolução Industrial?",
-            alternativas: ["Aumento da produção mecanizada", "Fim da urbanização", "Redução do comércio", "Paralisação da indústria"],
-            respostaCorreta: 0,
-            explicacao: "A Revolução Industrial aumentou a produção por meio de máquinas."
-        },
-        {
-            texto: "Qual foi o primeiro periódico?",
-            alternativas: ["A queda da Bastilha", "A descoberta do Brasil", "A guerra civil inglesa", "A formação do Estado do Brasil"],
-            respostaCorreta: 2,
-            explicacao: "A Guerra Civil Inglesa foi um marco importante no contexto de transformações políticas europeias."
-        },
-        {
-            texto: "Qual foi a principal característica do feudalismo?",
-            alternativas: ["Poder descentralizado e relações de vassalagem", "Comércio mundial integrado", "Centralização no mercado financeiro", "Desaparecimento da agricultura"],
-            respostaCorreta: 0,
-            explicacao: "No feudalismo, havia uma estrutura de relações de vassalagem e poder descentralizado."
-        },
-        {
-            texto: "Qual evento marcado pela história europeia ocorreu em 1789?",
-            alternativas: ["Queda da Bastilha", "Descoberta do Brasil", "Proclamação da República", "Guerra do Paraguai"],
-            respostaCorreta: 0,
-            explicacao: "A Queda da Bastilha marcou o início da Revolução Francesa."
-        },
-        {
-            texto: "Qual foi uma das principais consequências da expansão marítima?",
-            alternativas: ["Aumento do comércio global", "Fim do comércio europeu", "Isolamento dos continentes", "Desaparecimento dos reinos"],
-            respostaCorreta: 0,
-            explicacao: "A expansão marítima intensificou o comércio global."
-        },
-        {
-            texto: "Qual foi o país que promoveu o processo de colonização em diversas regiões do mundo?",
-            alternativas: ["Portugal", "Japão", "Mongólia", "Egito"],
-            respostaCorreta: 0,
-            explicacao: "Portugal foi uma potência mundial nos períodos de expansão marítima e colonização."
-        },
-        {
-            texto: "O que foi a escravidão no Brasil?",
-            alternativas: ["Sistema de ensino gratuito", "Sistema de trabalho forçado e exploração humana", "Sistema social criado na Idade Média", "Sistema de cultura indígena"],
-            respostaCorreta: 1,
-            explicacao: "A escravidão envolvia trabalho forçado e exploração de pessoas como propriedade."
-        },
-        {
-            texto: "Qual foi o principal legado do Império Romano?",
-            alternativas: ["A linguagem latina e o direito romano", "A escrita hieroglífica", "A invenção da máquina a vapor", "A criação do computador"],
-            respostaCorreta: 0,
-            explicacao: "Roma deixou legados como o direito romano e a influência da língua latina."
-        }
-    ],
-    "2medio": [
-        {
-            texto: "Qual foi uma característica do regime militar no Brasil?",
-            alternativas: ["Abertura democrática total", "Censura e repressão política", "Fim da industrialização", "Desaparecimento das universidades"],
-            respostaCorreta: 1,
-            explicacao: "O regime militar foi marcado por censura, repressão e limitações às liberdades."
-        },
-        {
-            texto: "Qual foi a principal consequência da Primeira Guerra Mundial?",
-            alternativas: ["A criação de estados nacionais e tensões políticas", "A explosão da Revolução Francesa", "O fim da Idade Média", "A descoberta do Brasil"],
-            respostaCorreta: 0,
-            explicacao: "A Primeira Guerra Mundial gerou mudanças geopolíticas e fortes impactos sociais."
-        },
-        {
-            texto: "Qual foi um marco do movimento feminista?",
-            alternativas: ["Conquista de direitos e maior participação feminina", "Extinção das mulheres na política", "Fim da educação básica", "Desaparecimento do trabalho doméstico"],
-            respostaCorreta: 0,
-            explicacao: "O feminismo ampliou o debate sobre direitos e participação política das mulheres."
-        },
-        {
-            texto: "Qual foi a principal causa da Segunda Guerra Mundial?",
-            alternativas: ["A expansão do nazismo e a agressão militar", "A melhoria das relações internacionais", "A invenção da energia nuclear", "O fim da colonização"],
-            respostaCorreta: 0,
-            explicacao: "A expansão do nazismo e a agressão militar foram causas centrais da Segunda Guerra Mundial."
-        },
-        {
-            texto: "Em que contexto o Estado Novo foi criado no Brasil?",
-            alternativas: ["Durante a Ditadura de Vargas", "Durante a Independência", "Durante a Revolução Francesa", "Durante a Monarquia"],
-            respostaCorreta: 0,
-            explicacao: "O Estado Novo foi criado com Getúlio Vargas, em um contexto de centralização política."
-        },
-        {
-            texto: "Qual é uma característica do período contemporâneo?",
-            alternativas: ["A expansão tecnológica e a globalização", "A ausência de comunicação", "A parada do comércio mundial", "A volta ao feudalismo"],
-            respostaCorreta: 0,
-            explicacao: "O período contemporâneo é marcado pela tecnologia, globalização e grandes mudanças sociais."
-        },
-        {
-            texto: "Qual foi o nome do movimento que trouxe maiores avanços na luta pelos direitos civis no Brasil?",
-            alternativas: ["Movimento de resistência democrata", "Movimento dos direitos civis e social", "Movimento das máquinas", "Movimento de colonização"],
-            respostaCorreta: 1,
-            explicacao: "As lutas por direitos civis e sociais marcaram o Brasil moderno."
-        },
-        {
-            texto: "Qual foi o papel dos meios de comunicação no século XX?",
-            alternativas: ["Não tiveram impacto", "Amplificaram notícias, propagandas e mudanças culturais", "Só serviram para educação formal", "Eliminaram a cultura popular"],
-            respostaCorreta: 1,
-            explicacao: "Os meios de comunicação ajudaram a disseminar ideias e influenciar a vida social."
-        },
-        {
-            texto: "Qual foi a consequência da Guerra Fria?",
-            alternativas: ["Confronto político e militar entre blocos rivais", "Fim da Europa", "Transição sem conflitos", "Expansão do feudalismo"],
-            respostaCorreta: 0,
-            explicacao: "A Guerra Fria gerou tensões políticas e militares entre blocos rivais."
-        },
-        {
-            texto: "Qual foi uma tônica do processo de redemocratização no Brasil?",
-            alternativas: ["A retomada das eleições e da participação política", "A suspensão das eleições", "A volta da ditadura", "A criação do Estado Novo"],
-            respostaCorreta: 0,
-            explicacao: "A redemocratização trouxe de volta o processo eleitoral e as liberdades políticas."
-        }
-    ],
-    "3medio": [
-        {
-            texto: "Qual foi um dos principais impactos da globalização?",
-            alternativas: ["Aumento da integração econômica e cultural entre países", "Redução do comércio internacional", "Fim do transporte aéreo", "Eliminação dos meios digitais"],
-            respostaCorreta: 0,
-            explicacao: "A globalização aproximou países por meio de comércio, tecnologia e cultura."
-        },
-        {
-            texto: "Qual foi uma consequência da Guerra Fria para o mundo?",
-            alternativas: ["Divisão entre blocos ideológicos e corrida armamentista", "Fim da aviação", "Destruição da tecnologia", "Abolição de fronteiras"],
-            respostaCorreta: 0,
-            explicacao: "A Guerra Fria gerou grande tensão e corrida armamentista entre Estados Unidos e União Soviética."
-        },
-        {
-            texto: "Qual foi a importância da ONU?",
-            alternativas: ["Promover paz e cooperação internacional", "Controlar apenas o Brasil", "Eliminar o comércio global", "Substituir todos os governos"],
-            respostaCorreta: 0,
-            explicacao: "A ONU tem como objetivo promover paz, cooperação e diálogo internacional."
-        },
-        {
-            texto: "Qual foi o nome do período em que o Brasil teve grande urbanização e industrialização?",
-            alternativas: ["Período contemporâneo", "Idade Média", "Período colonial", "Idade Antiga"],
-            respostaCorreta: 0,
-            explicacao: "O período contemporâneo é marcado por industrialização, urbanização e globalização."
-        },
-        {
-            texto: "Qual foi um dos principais desafios do Brasil contemporâneo?",
-            alternativas: ["A desigualdade social e a questão ambiental", "A volta ao feudalismo", "A ausência de tecnologia", "A falta de comunicação"],
-            respostaCorreta: 0,
-            explicacao: "Desigualdade social e questões ambientais são temas centrais do Brasil contemporâneo."
-        },
-        {
-            texto: "Qual é a importância dos museus e monumentos históricos?",
-            alternativas: ["Ajudam a preservar a memória e o patrimônio da humanidade", "Impedem o estudo da História", "São apenas decoração", "Não têm valor cultural"],
-            respostaCorreta: 0,
-            explicacao: "Museus e monumentos preservam a memória e o patrimônio histórico."
-        },
-        {
-            texto: "Qual foi o papel das mídias na formação de opinião pública?",
-            alternativas: ["Não influenciaram o debate sociedade", "Amplificaram discursos e movimentos sociais", "Serviram apenas para entretenimento", "Impediram o avanço cultural"],
-            respostaCorreta: 1,
-            explicacao: "As mídias influenciam a formação de opinião pública e a circulação de ideias."
-        },
-        {
-            texto: "Qual tema é central nos debates atuais sobre História e sociedade?",
-            alternativas: ["Meio ambiente e direitos humanos", "A desativação do calendário", "A ausência de política", "O fim da cidade"],
-            respostaCorreta: 0,
-            explicacao: "Meio ambiente e direitos humanos são temas centrais das discussões contemporâneas."
-        },
-        {
-            texto: "Qual foi um dos legados da Revolução Francesa para a sociedade moderna?",
-            alternativas: ["A defesa de direitos e cidadania", "A volta da monarquia absoluta", "A eliminação da educação", "O fim do direito"],
-            respostaCorreta: 0,
-            explicacao: "A Revolução Francesa influenciou a ideia de cidadania, direitos e igualdade."
-        },
-        {
-            texto: "Qual é a importância de estudar História?",
-            alternativas: ["Entender o presente e evitar erros do passado", "Só decorar nomes", "Não ter relação com o cotidiano", "Ignorar o patrimônio cultural"],
-            respostaCorreta: 0,
-            explicacao: "O estudo da História ajuda a compreender o presente e os processos sociais."
-        }
-    ]
+﻿const perguntasHistoria = {
+  "7ano": [
+    { texto: "A expansão comercial europeia no século XV foi estimulada principalmente por:", alternativas: ["A busca por novas rotas comerciais e produtos de luxo", "A construção de fábricas urbanas", "A proibição do trabalho agrícola", "A criação de universidades voltadas à navegação"], respostaCorreta: 0, explicacao: "Os europeus buscavam rotas mais rápidas para o Oriente e maior acesso a especiarias e produtos valiosos.", dificuldade: "media", tipo: "causa_e_consequencia" },
+    { texto: "Qual foi uma consequência importante da expansão marítima europeia?", alternativas: ["O fim da produção agrícola", "O contato entre Europa, África e América", "A diminuição das viagens comerciais", "A igualdade econômica entre continentes"], respostaCorreta: 1, explicacao: "As navegações ampliaram contatos entre continentes e intensificaram trocas comerciais e conflitos.", dificuldade: "media", tipo: "contextualizacao" },
+    { texto: "A escravidão africana na América colonial se relaciona diretamente com:", alternativas: ["A necessidade de mão de obra para grandes plantações", "O fim da urbanização no Brasil", "A criação de universidades no período colonial", "A expansão da arte renascentista"], respostaCorreta: 0, explicacao: "O sistema colonial demandava muita mão de obra, especialmente para a produção agrícola e exploração econômica.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "Qual evento foi determinante para a transição do feudalismo para a formação dos Estados modernos?", alternativas: ["A queda do Império Romano", "A Revolução Francesa", "A expansão marítima portuguesa", "A crise do sistema feudal e o fortalecimento dos reis"], respostaCorreta: 3, explicacao: "A centralização do poder e a crise do feudalismo ajudaram a formar monarquias mais fortes na Europa.", dificuldade: "dificil", tipo: "comparacao" },
+    { texto: "A principal função dos mapas históricos é:", alternativas: ["Mostrar apenas informações econômicas atuais", "Representar espaços e eventos de um determinado período", "Explicar fórmulas matemáticas", "Substituir livros didáticos completos"], respostaCorreta: 1, explicacao: "Mapas históricos ajudam a entender territórios, deslocamentos e contextos de épocas distintas.", dificuldade: "facil", tipo: "interpretacao" },
+    { texto: "Por que o estudo do passado é importante para compreender o presente?", alternativas: ["Porque o presente não depende do passado", "Porque acontecimentos passados moldaram instituições, conflitos e relações sociais", "Porque o passado é sempre igual ao presente", "Porque a História não influencia a sociedade"], respostaCorreta: 1, explicacao: "As decisões e estruturas do passado continuam influenciando o mundo contemporâneo.", dificuldade: "media", tipo: "contextualizacao" }
+  ],
+  "8ano": [
+    { texto: "A Revolução Industrial mudou a produção porque:", alternativas: ["Aumentou o trabalho manual em pequenas oficinas", "Substituiu o trabalho artesanal por máquinas e fábricas", "Eliminou o uso de carvão e ferro", "Reduziu as cidades industriais"], respostaCorreta: 1, explicacao: "A mecanização da produção e a organização fabril foram marcas centrais da Revolução Industrial.", dificuldade: "media", tipo: "causa_e_consequencia" },
+    { texto: "Qual foi uma consequência social da industrialização para a população urbana?", alternativas: ["Queda imediata da população nas cidades", "Crescimento de bairros operários e condições precárias de moradia", "Extinção do trabalho infantil", "Abolição da mão de obra feminina"], respostaCorreta: 1, explicacao: "A urbanização acelerada levou a dificuldades de moradia, trabalho e saneamento.", dificuldade: "dificil", tipo: "consequencia" },
+    { texto: "A independência das colônias americanas pode ser associada a:", alternativas: ["A defesa de ideias iluministas e oposição ao domínio colonial", "A manutenção do absolutismo monárquico", "A criação de novas monarquias em toda a Europa", "A extinção das colônias europeias"], respostaCorreta: 0, explicacao: "Ideias iluministas e insatisfação com o domínio metropolitano contribuíram para as independências.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "A partir de uma fonte histórica, a análise mais importante deve considerar:", alternativas: ["Somente a data da fonte", "O contexto em que ela foi produzida e seu autor", "A quantidade de palavras da fonte", "A preferência do professor pela fonte"], respostaCorreta: 1, explicacao: "O contexto e o autor ajudam a entender a intenção e os limites da fonte histórica.", dificuldade: "media", tipo: "analise_de_fonte" },
+    { texto: "Qual aspecto foi central na formação das grandes nações europeias na modernidade?", alternativas: ["A ausência de guerras", "A centralização do poder e a consolidação estatal", "A volta ao feudalismo", "A eliminação de impostos"], respostaCorreta: 1, explicacao: "Monarcas fortaleceram o poder central para organizar territórios e sujeitos.", dificuldade: "media", tipo: "comparacao" },
+    { texto: "A ideia de cidadania foi ampliada em períodos revolucionários porque:", alternativas: ["Os grupos sociais passaram a buscar direitos e participação política", "Os reis eliminaram todas as leis", "As cidades pararam de crescer", "As mulheres deixaram de participar da vida pública"], respostaCorreta: 0, explicacao: "Movimentos revolucionários estimularam debates sobre direitos, participação e igualdade política.", dificuldade: "dificil", tipo: "contextualizacao" }
+  ],
+  "9ano": [
+    { texto: "A colonização do Brasil foi influenciada por fatores econômicos, políticos e religiosos. Qual argumento melhor explica essa relação?", alternativas: ["A coroa portuguesa queria apenas formar universidades no litoral", "A colonização buscava garantir riqueza, poder e expansão religiosa", "A mineração era a única meta da colonização", "O povo indígena decidiu colonizar o território"], respostaCorreta: 1, explicacao: "A colonização esteve ligada ao controle territorial, à exploração econômica e à expansão da fé católica.", dificuldade: "media", tipo: "causa_e_consequencia" },
+    { texto: "Durante o período colonial, a principal atividade econômica da região mineradora foi:", alternativas: ["Agricultura de subsistência", "Extração de ouro e prata", "Pecuária extensiva", "Comércio de escravos na Europa"], respostaCorreta: 1, explicacao: "A descoberta de metais preciosos transformou a economia e as rotas do território colonial.", dificuldade: "media", tipo: "contextualizacao" },
+    { texto: "A abolição da escravatura no Brasil foi resultado de um processo que envolveu:", alternativas: ["Apenas leis sem conflito social", "Pressões políticas, movimentos abolicionistas e mudanças econômicas", "A ida dos senhores para a Europa", "A inexistência de produção agrícola"], respostaCorreta: 1, explicacao: "A abolição foi influenciada por debates, mobilizações populares e transformações do sistema econômico.", dificuldade: "media", tipo: "causa_e_consequencia" },
+    { texto: "Uma revolução é diferente de uma rebelião porque:", alternativas: ["Não há mudança política em revoluções", "Revoluções alteram estruturas profundas do poder e da sociedade", "Revoluções acontecem apenas em guerras externas", "Rebeliões sempre são legais"], respostaCorreta: 1, explicacao: "Revoluções envolvem transformações profundas e duradouras nas estruturas sociais e políticas.", dificuldade: "dificil", tipo: "comparacao" },
+    { texto: "Qual foi um efeito da política do café no Brasil do século XIX?", alternativas: ["Declínio da monocultura", "Aumento da importância do café na economia e expansão do território", "Fim das ferrovias", "Abolição imediata de todas as desigualdades"], respostaCorreta: 1, explicacao: "O café se tornou eixo econômico e teve impacto na ocupação do território e nas relações sociais.", dificuldade: "media", tipo: "consequencia" },
+    { texto: "Ao comparar a monarquia e a república no Brasil, o principal ponto de mudança foi:", alternativas: ["A ausência de leis", "A forma de exercício do poder e a ideia de cidadania", "A igualdade entre todos os grupos sociais", "A substituição de cidades por vilas"], respostaCorreta: 1, explicacao: "A República trouxe mudanças na organização do Estado e na concepção de participação política.", dificuldade: "dificil", tipo: "comparacao" }
+  ],
+  "1medio": [
+    { texto: "A Primeira Guerra Mundial foi influenciada por rivalidades entre potências porque:", alternativas: ["Não havia conflitos políticos na Europa", "Hábitos culturais impediram guerras", "Competição imperialista e alianças aumentaram a tensão", "A Europa já estava unificada sem rivalidades"], respostaCorreta: 2, explicacao: "As rivalidades entre nações e os sistemas de alianças agravaram a crise europeia.", dificuldade: "media", tipo: "causa_e_consequencia" },
+    { texto: "Um dos efeitos da guerra para a sociedade civil foi:", alternativas: ["A eliminação de todas as desigualdades", "A crise econômica e os impactos na rotina das populações", "O fim da presença do Estado", "A igualdade imediata entre classes"], respostaCorreta: 1, explicacao: "A guerra afetou o cotidiano, as economias e as relações sociais de forma profunda.", dificuldade: "media", tipo: "consequencia" },
+    { texto: "A análise de uma fonte documental sobre a guerra deve considerar:", alternativas: ["A cor da capa do documento", "A intenção do autor e o contexto histórico", "Se o documento tem muitos desenhos", "Se o tema foi sorteado aleatoriamente"], respostaCorreta: 1, explicacao: "O contexto do autor e a época ajudam a entender o sentido da fonte.", dificuldade: "media", tipo: "analise_de_fonte" },
+    { texto: "A Revolução Russa de 1917 é importante porque:", alternativas: ["colocou fim à monarquia e inspirou novas ideias políticas e sociais", "reduziu a industrialização da Europa", "foi uma revolta totalmente isolada do restante do mundo", "não alterou a vida política da Rússia"], respostaCorreta: 0, explicacao: "A Revolução Russa deslocou estruturas políticas e teve impacto internacional.", dificuldade: "dificil", tipo: "contextualizacao" },
+    { texto: "Entre as causas da Segunda Guerra Mundial, destaca-se:", alternativas: ["A estabilidade das democracias europeias", "As consequências da Primeira Guerra e a expansão do nazismo", "A ausência de conflitos no mundo", "A união das potências contra o Brasil"], respostaCorreta: 1, explicacao: "Crises econômicas, expansão ultranacionalista e rivalidades internacionais contribuíram para a guerra.", dificuldade: "dificil", tipo: "causa_e_consequencia" },
+    { texto: "A análise comparativa entre a Primeira e a Segunda Guerra Mundial mostra que:", alternativas: ["Não houve diferença entre os conflitos", "Ambas tiveram consequências globais e afetaram a ordem internacional", "A segunda guerra não alterou fronteiras", "A primeira guerra foi menos importante"], respostaCorreta: 1, explicacao: "Ambos os conflitos tiveram impacto geopolítico, econômico e humano de grande escala.", dificuldade: "dificil", tipo: "comparacao" }
+  ],
+  "2medio": [
+    { texto: "No mundo bipolar da Guerra Fria, a disputa entre EUA e URSS envolvia principalmente:", alternativas: ["A luta por novos territórios sem interesse ideológico", "Ideologias e influência geopolítica", "A disputa por esportes apenas", "A igualdade entre mercados e culturas"], respostaCorreta: 1, explicacao: "A Guerra Fria foi marcada por disputa ideológica e influência política mundial.", dificuldade: "media", tipo: "contextualizacao" },
+    { texto: "A corrida espacial entre EUA e URSS teve como objetivo principal:", alternativas: ["Apenas aumentar a produção agrícola", "Demonstrar poder tecnológico e influência internacional", "Cancelar todas as viagens aéreas", "Substituir universidades"], respostaCorreta: 1, explicacao: "A corrida espacial expressava rivalidade tecnológica e diplomática entre as superpotências.", dificuldade: "media", tipo: "causa_e_consequencia" },
+    { texto: "Qual foi uma consequência da Guerra Fria para muitos países do mundo?", alternativas: ["A paz imediata em todas as regiões", "Conflitos indiretos e influência de blocos ideológicos", "A extinção de regimes autoritários", "A ausência de alianças internacionais"], respostaCorreta: 1, explicacao: "Muitas regiões foram afetadas por apoio, confrontos indiretos e disputas ideológicas.", dificuldade: "dificil", tipo: "consequencia" },
+    { texto: "A análise de uma imagem de propaganda durante a Guerra Fria deve considerar:", alternativas: ["A intenção de mobilizar opiniões e valores", "A quantidade de pixels da imagem", "A distância entre as pessoas na foto", "A cor da borda da imagem"], respostaCorreta: 0, explicacao: "Propagandas têm um objetivo político e ideológico, e a análise deve observar esse contexto.", dificuldade: "media", tipo: "analise_de_fonte" },
+    { texto: "Uma comparação entre democracia e totalitarismo mostra que:", alternativas: ["Ambos garantem exatamente os mesmos direitos", "O totalitarismo limita mais a participação política e a liberdade", "A democracia proíbe qualquer crítica", "Totalitarismo é apenas um conceito antigo"], respostaCorreta: 1, explicacao: "Uma característica central do totalitarismo é o controle rigoroso da vida política e social.", dificuldade: "media", tipo: "comparacao" },
+    { texto: "O fim da Guerra Fria teve como aspecto importante:", alternativas: ["A diminuição de conflitos internacionais", "A crise e a reformulação da ordem mundial", "A criação de uma única potência global", "O fim de todas as ideologias"], respostaCorreta: 1, explicacao: "O fim do bipolarismo abriu uma nova etapa de rearranjos geopolíticos.", dificuldade: "dificil", tipo: "contextualizacao" }
+  ],
+  "3medio": [
+    { texto: "A análise do mundo contemporâneo exige atenção a:", alternativas: ["apenas fatos históricos distantes", "questões sociais, políticas, econômicas e ambientais em conjunto", "apenas eventos esportivos", "a ausência de conflitos"], respostaCorreta: 1, explicacao: "A contemporaneidade é marcada por múltiplas relações entre sociedade, economia, política e ambiente.", dificuldade: "media", tipo: "contextualizacao" },
+    { texto: "O estudo de movimentos sociais é importante porque:", alternativas: ["eles só existem em épocas antigas", "eles refletem disputas por direitos, cidadania e transformação social", "eles não afetam a história", "eles são sempre organizados apenas por governos"], respostaCorreta: 1, explicacao: "Movimentos sociais demonstram conflitos e reivindicações que moldam a vida política e social.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "Qual tema pode ser analisado a partir de uma comparação entre diferentes períodos históricos?", alternativas: ["A distância entre cidades", "A evolução das relações de poder e dos direitos sociais", "O tamanho das folhas de um livro", "A formação de uma regra matemática"], respostaCorreta: 1, explicacao: "Comparar períodos ajuda a identificar mudanças e permanências nas estruturas sociais.", dificuldade: "media", tipo: "comparacao" },
+    { texto: "O papel das fontes históricas é:", alternativas: ["provar que tudo é verdadeiro sem questionamento", "oferecer indícios para interpretação crítica do passado", "substituir a necessidade de leitura", "eliminar qualquer dúvida sobre um acontecimento"], respostaCorreta: 1, explicacao: "Fontes históricas são documentos de análise, e não verdades absolutas sem interpretação.", dificuldade: "dificil", tipo: "analise_de_fonte" },
+    { texto: "A globalização pode ser compreendida como:", alternativas: ["um processo apenas econômico sem efeitos sociais", "a intensificação de conexões entre países em diferentes áreas", "a eliminação de todas as fronteiras", "um movimento que acabou com a cultura"], respostaCorreta: 1, explicacao: "A globalização envolve integração econômica, cultural, política e tecnológica.", dificuldade: "dificil", tipo: "contextualizacao" },
+    { texto: "Qual é a melhor forma de relacionar passado e presente em uma análise histórica?", alternativas: ["trazer apenas lembranças pessoais", "comparar permanências e mudanças nas estruturas sociais e políticas", "ignorar a dimensão temporal", "usar apenas datas sem contexto"], respostaCorreta: 1, explicacao: "A história ganha sentido quando se observa continuidade e transformação entre épocas diferentes.", dificuldade: "dificil", tipo: "comparacao" }
+  ]
 };
+
+// A estrutura foi melhor organizada com foco em causalidade, comparação e análise de fontes,
+// mantendo a compatibilidade com o sistema atual de quiz e com a lógica de progresso do jogador.
+if (typeof window !== 'undefined') {
+  window.perguntasHistoria = perguntasHistoria;
+}

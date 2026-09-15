@@ -1,374 +1,56 @@
-const perguntasIngles = {
-    "7ano": [
-        {
-            texto: "Qual é a tradução de 'Apple'?",
-            alternativas: ["Maçã", "Banana", "Laranja", "Uva"],
-            respostaCorreta: 0,
-            explicacao: "Apple significa Maçã."
-        },
-        {
-            texto: "Como se diz 'Bom dia' em inglês?",
-            alternativas: ["Good Night", "Good Morning", "Good Evening", "Good Bye"],
-            respostaCorreta: 1,
-            explicacao: "Good Morning significa Bom dia."
-        },
-        {
-            texto: "Qual é a tradução de 'School'?",
-            alternativas: ["Casa", "Escola", "Mercado", "Hospital"],
-            respostaCorreta: 1,
-            explicacao: "School significa Escola."
-        },
-        {
-            texto: "Como se diz 'Cadeira' em inglês?",
-            alternativas: ["Chair", "Table", "Book", "Door"],
-            respostaCorreta: 0,
-            explicacao: "Chair é a palavra correta para Cadeira."
-        },
-        {
-            texto: "Qual é a tradução de 'Water'?",
-            alternativas: ["Fogo", "Água", "Ar", "Terra"],
-            respostaCorreta: 1,
-            explicacao: "Water significa Água."
-        },
-        {
-            texto: "Como se diz 'Obrigado' em inglês?",
-            alternativas: ["Thank you", "Sorry", "Hello", "Please"],
-            respostaCorreta: 0,
-            explicacao: "Thank you significa Obrigado."
-        },
-        {
-            texto: "Qual é a tradução de 'House'?",
-            alternativas: ["Carro", "Casa", "Rua", "Escola"],
-            respostaCorreta: 1,
-            explicacao: "House significa Casa."
-        },
-        {
-            texto: "Como se diz 'Boa noite' em inglês?",
-            alternativas: ["Good evening", "Good morning", "Good luck", "Good night"],
-            respostaCorreta: 0,
-            explicacao: "Good evening é usado para Boa noite em contextos gerais."
-        },
-        {
-            texto: "Qual é a tradução de 'Cat'?",
-            alternativas: ["Cachorro", "Gato", "Pássaro", "Peixe"],
-            respostaCorreta: 1,
-            explicacao: "Cat significa Gato."
-        },
-        {
-            texto: "Como se fala 'Meu nome é' em inglês?",
-            alternativas: ["My name is", "I am old", "What is your name", "Goodbye"],
-            respostaCorreta: 0,
-            explicacao: "My name is é a forma correta para dizer Meu nome é."
-        }
-    ],
-    "8ano": [
-        {
-            texto: "Qual é a tradução de 'Book'?",
-            alternativas: ["Livro", "Mesa", "Porta", "Caneta"],
-            respostaCorreta: 0,
-            explicacao: "Book significa Livro."
-        },
-        {
-            texto: "Como se diz 'Eu tenho' em inglês?",
-            alternativas: ["I am", "I have", "I can", "I go"],
-            respostaCorreta: 1,
-            explicacao: "I have significa Eu tenho."
-        },
-        {
-            texto: "Qual é a tradução de 'Teacher'?",
-            alternativas: ["Aluno", "Professor", "Diretor", "Escola"],
-            respostaCorreta: 1,
-            explicacao: "Teacher significa Professor."
-        },
-        {
-            texto: "Como se diz 'A janela' em inglês?",
-            alternativas: ["Window", "Door", "Chair", "Table"],
-            respostaCorreta: 0,
-            explicacao: "Window significa Janela."
-        },
-        {
-            texto: "Qual é a tradução de 'Friend'?",
-            alternativas: ["Amigo", "Pai", "Mãe", "Irmão"],
-            respostaCorreta: 0,
-            explicacao: "Friend significa Amigo."
-        },
-        {
-            texto: "Como se diz 'Lápis' em inglês?",
-            alternativas: ["Pencil", "Pen", "Book", "Ruler"],
-            respostaCorreta: 0,
-            explicacao: "Pencil significa Lápis."
-        },
-        {
-            texto: "Qual é a tradução de 'Car'?",
-            alternativas: ["Moto", "Carro", "Ônibus", "Bicicleta"],
-            respostaCorreta: 1,
-            explicacao: "Car significa Carro."
-        },
-        {
-            texto: "Como se diz 'Gato' em inglês?",
-            alternativas: ["Cat", "Dog", "Bird", "Fish"],
-            respostaCorreta: 0,
-            explicacao: "Cat significa Gato."
-        },
-        {
-            texto: "Qual é a tradução de 'Sun'?",
-            alternativas: ["Lua", "Sol", "Nuvem", "Chuva"],
-            respostaCorreta: 1,
-            explicacao: "Sun significa Sol."
-        },
-        {
-            texto: "Como se diz 'A escola' em inglês?",
-            alternativas: ["School", "House", "Park", "City"],
-            respostaCorreta: 0,
-            explicacao: "School significa Escola."
-        }
-    ],
-    "9ano": [
-        {
-            texto: "Qual é a tradução de 'Weather'?",
-            alternativas: ["Clima", "Tempo", "Estação", "Vento"],
-            respostaCorreta: 1,
-            explicacao: "Weather significa Tempo (clima)."
-        },
-        {
-            texto: "Como se diz 'Eu estou estudando' em inglês?",
-            alternativas: ["I am studying", "I study", "I studied", "I studyed"],
-            respostaCorreta: 0,
-            explicacao: "I am studying é a forma correta no presente contínuo."
-        },
-        {
-            texto: "Qual é a tradução de 'Tomorrow'?",
-            alternativas: ["Hoje", "Amanhã", "Ontem", "Tarde"],
-            respostaCorreta: 1,
-            explicacao: "Tomorrow significa Amanhã."
-        },
-        {
-            texto: "Como se diz 'Você pode ajudar?' em inglês?",
-            alternativas: ["Can you help me?", "You can help?", "Can you helping?", "You help me?"],
-            respostaCorreta: 0,
-            explicacao: "Can you help me? é a forma correta."
-        },
-        {
-            texto: "Qual é a tradução de 'Homework'?",
-            alternativas: ["Casa", "Tarefa de casa", "Escola", "Biblioteca"],
-            respostaCorreta: 1,
-            explicacao: "Homework significa tarefa de casa."
-        },
-        {
-            texto: "Como se diz 'Ela vai' em inglês?",
-            alternativas: ["She goes", "She go", "She going", "She is go"],
-            respostaCorreta: 0,
-            explicacao: "She goes é a forma correta no presente simples."
-        },
-        {
-            texto: "Qual é a tradução de 'Library'?",
-            alternativas: ["Biblioteca", "Laboratório", "Correio", "Museu"],
-            respostaCorreta: 0,
-            explicacao: "Library significa Biblioteca."
-        },
-        {
-            texto: "Como se diz 'Eu gosto de música' em inglês?",
-            alternativas: ["I like music", "I love school", "I minimize music", "I music"],
-            respostaCorreta: 0,
-            explicacao: "I like music é a forma correta."
-        },
-        {
-            texto: "Qual é a tradução de 'Yesterday'?",
-            alternativas: ["Hoje", "Amanhã", "Ontem", "Noite"],
-            respostaCorreta: 2,
-            explicacao: "Yesterday significa Ontem."
-        },
-        {
-            texto: "Como se diz 'Nós somos amigos' em inglês?",
-            alternativas: ["We are friends", "We am friends", "We is friends", "We friends"],
-            respostaCorreta: 0,
-            explicacao: "We are friends é a forma correta."
-        }
-    ],
-    "1medio": [
-        {
-            texto: "Qual é a tradução de 'Environment'?",
-            alternativas: ["Meio ambiente", "Luz", "Papel", "Aula"],
-            respostaCorreta: 0,
-            explicacao: "Environment significa Meio ambiente."
-        },
-        {
-            texto: "Como se diz 'Se você estudar, passará' em inglês?",
-            alternativas: ["If you study, you will pass", "If you studied, you passed", "Study you, pass", "If you studying, pass"],
-            respostaCorreta: 0,
-            explicacao: "A frase correta usa a estrutura condicional do primeiro tipo."
-        },
-        {
-            texto: "Qual é a tradução de 'Challenge'?",
-            alternativas: ["Desafio", "Refeição", "Caminho", "Música"],
-            respostaCorreta: 0,
-            explicacao: "Challenge significa Desafio."
-        },
-        {
-            texto: "Como se diz 'Eu aprendi inglês' em inglês?",
-            alternativas: ["I learn English", "I learned English", "I learning English", "I am learned English"],
-            respostaCorreta: 1,
-            explicacao: "I learned English está no passado simples."
-        },
-        {
-            texto: "Qual é a tradução de 'Scientist'?",
-            alternativas: ["Cientista", "Professor", "Diretor", "Jogador"],
-            respostaCorreta: 0,
-            explicacao: "Scientist significa Cientista."
-        },
-        {
-            texto: "Como se diz 'Eu preciso de ajuda' em inglês?",
-            alternativas: ["I need help", "I need a help", "I need some helps", "I am help"],
-            respostaCorreta: 0,
-            explicacao: "I need help é a forma natural e correta."
-        },
-        {
-            texto: "Qual é a tradução de 'Culture'?",
-            alternativas: ["Cultura", "Cidade", "Casa", "Trabalho"],
-            respostaCorreta: 0,
-            explicacao: "Culture significa Cultura."
-        },
-        {
-            texto: "Como se diz 'Ela tem medo' em inglês?",
-            alternativas: ["She is afraid", "She afraid", "She is scare", "She scared"],
-            respostaCorreta: 0,
-            explicacao: "She is afraid é a forma apropriada."
-        },
-        {
-            texto: "Qual é a tradução de 'Decision'?",
-            alternativas: ["Decisão", "Evento", "Resposta", "Comentário"],
-            respostaCorreta: 0,
-            explicacao: "Decision significa Decisão."
-        },
-        {
-            texto: "Como se diz 'Nós viajamos no ano passado' em inglês?",
-            alternativas: ["We traveled last year", "We travel last year", "We traveling last year", "We travels last year"],
-            respostaCorreta: 0,
-            explicacao: "We traveled last year está correto no passado simples."
-        }
-    ],
-    "2medio": [
-        {
-            texto: "Qual é a tradução de 'Opportunity'?",
-            alternativas: ["Oportunidade", "Objetivo", "Experiência", "Problema"],
-            respostaCorreta: 0,
-            explicacao: "Opportunity significa Oportunidade."
-        },
-        {
-            texto: "Como se diz 'Se eu tivesse tempo, viajaria' em inglês?",
-            alternativas: ["If I had time, I would travel", "If I have time, I would travel", "If I had time, I will travel", "If I have time, I travel"],
-            respostaCorreta: 0,
-            explicacao: "Essa é a forma correta do segundo condicional."
-        },
-        {
-            texto: "Qual é a tradução de 'Responsibility'?",
-            alternativas: ["Responsabilidade", "Capacidade", "Objetivo", "Tomada de decisão"],
-            respostaCorreta: 0,
-            explicacao: "Responsibility significa Responsabilidade."
-        },
-        {
-            texto: "Como se diz 'Ele já tinha terminado' em inglês?",
-            alternativas: ["He had already finished", "He has already finish", "He had already finish", "He already finished"],
-            respostaCorreta: 0,
-            explicacao: "Had already finished é a forma correta do past perfect."
-        },
-        {
-            texto: "Qual é a tradução de 'Achievement'?",
-            alternativas: ["Realização", "Aula", "Desgastante", "Futuro"],
-            respostaCorreta: 0,
-            explicacao: "Achievement significa Realização."
-        },
-        {
-            texto: "Como se diz 'Quando eu chegar, te aviso' em inglês?",
-            alternativas: ["When I arrive, I will let you know", "When I arrived, I let you know", "When I arrive, I let you know", "When I will arrive, I let you know"],
-            respostaCorreta: 0,
-            explicacao: "A forma correta usa 'when I arrive' no presente com futuro no verbo principal."
-        },
-        {
-            texto: "Qual é a tradução de 'Conversation'?",
-            alternativas: ["Conversa", "Estudo", "Esporte", "Reunião"],
-            respostaCorreta: 0,
-            explicacao: "Conversation significa Conversa."
-        },
-        {
-            texto: "Como se diz 'Ela teria entendido' em inglês?",
-            alternativas: ["She would have understood", "She would understood", "She had understood", "She would understand"],
-            respostaCorreta: 0,
-            explicacao: "Would have understood é a forma correta do conditional perfect."
-        },
-        {
-            texto: "Qual é a tradução de 'Knowledge'?",
-            alternativas: ["Conhecimento", "Habilidade", "Futuro", "Objetivo"],
-            respostaCorreta: 0,
-            explicacao: "Knowledge significa Conhecimento."
-        },
-        {
-            texto: "Como se diz 'Ela disse que viria' em inglês?",
-            alternativas: ["She said she would come", "She said she comes", "She said she came", "She said she will come"],
-            respostaCorreta: 0,
-            explicacao: "She said she would come é a estrutura correta em discurso indireto."
-        }
-    ],
-    "3medio": [
-        {
-            texto: "Qual é a tradução de 'Sustainability'?",
-            alternativas: ["Sustentabilidade", "Economia", "Política", "Tradição"],
-            respostaCorreta: 0,
-            explicacao: "Sustainability significa Sustentabilidade."
-        },
-        {
-            texto: "Como se diz 'Se eu tivesse sabido, teria agido diferente' em inglês?",
-            alternativas: ["If I had known, I would have acted differently", "If I knew, I acted differently", "If I had knew, I would act differently", "If I know, I would have acted differently"],
-            respostaCorreta: 0,
-            explicacao: "Essa estrutura é um terceiro condicional."
-        },
-        {
-            texto: "Qual é a tradução de 'Leadership'?",
-            alternativas: ["Liderança", "Segurança", "Felicidade", "Desafio"],
-            respostaCorreta: 0,
-            explicacao: "Leadership significa Liderança."
-        },
-        {
-            texto: "Como se diz 'A tecnologia tem transformado a educação' em inglês?",
-            alternativas: ["Technology has transformed education", "Technology transformed education", "Technology has transforming education", "Technology is transformed education"],
-            respostaCorreta: 0,
-            explicacao: "A frase usa o present perfect corretamente."
-        },
-        {
-            texto: "Qual é a tradução de 'Perspective'?",
-            alternativas: ["Perspectiva", "Contexto", "Estatística", "Coragem"],
-            respostaCorreta: 0,
-            explicacao: "Perspective significa Perspectiva."
-        },
-        {
-            texto: "Como se diz 'Se nós tivéssemos participado, teríamos aprendido mais' em inglês?",
-            alternativas: ["If we had participated, we would have learned more", "If we participated, we would learn more", "If we had participate, we would learn more", "If we would participate, we learned more"],
-            respostaCorreta: 0,
-            explicacao: "O terceiro condicional é usado para hipótese passada."
-        },
-        {
-            texto: "Qual é a tradução de 'Innovation'?",
-            alternativas: ["Inovação", "Inventário", "Estratégia", "Comportamento"],
-            respostaCorreta: 0,
-            explicacao: "Innovation significa Inovação."
-        },
-        {
-            texto: "Como se diz 'Ela foi a primeira a responder' em inglês?",
-            alternativas: ["She was the first to answer", "She was first answer", "She is the first answer", "She had the first answer"],
-            respostaCorreta: 0,
-            explicacao: "The first to answer é a estrutura adequada."
-        },
-        {
-            texto: "Qual é a tradução de 'Reflection'?",
-            alternativas: ["Reflexão", "Observação", "Leitura", "Atitude"],
-            respostaCorreta: 0,
-            explicacao: "Reflection significa Reflexão."
-        },
-        {
-            texto: "Como se diz 'É importante que você esteja preparado' em inglês?",
-            alternativas: ["It is important that you are prepared", "It is important that you be prepared", "It is important you prepared", "It important that you are prepared"],
-            respostaCorreta: 0,
-            explicacao: "A forma adequada utiliza 'that you are prepared'."
-        }
-    ]
+﻿const perguntasIngles = {
+  "7ano": [
+    { texto: "Read the sentence: 'I usually wake up at 6:30 a.m. and go to school by bus.' What is the main idea of the sentence?", alternativas: ["The student likes going to the beach.", "The student describes his daily routine.", "The student is studying at night.", "The student is traveling to another country."], respostaCorreta: 1, explicacao: "The sentence presents a routine, with time and daily action.", dificuldade: "facil", tipo: "interpretacao" },
+    { texto: "Choose the sentence that is correct:", alternativas: ["She don't like coffee.", "She doesn't likes coffee.", "She doesn't like coffee.", "She not like coffee."], respostaCorreta: 2, explicacao: "'Doesn't' requires the base form of the verb: 'like'.", dificuldade: "facil", tipo: "gramatica" },
+    { texto: "In the sentence 'The book is under the table', the word 'under' indicates:", alternativas: ["time", "place", "reason", "manner"], respostaCorreta: 1, explicacao: "'Under' shows position, so it indicates place.", dificuldade: "media", tipo: "preposicao" },
+    { texto: "Which sentence is in the simple present?", alternativas: ["I was reading a book.", "I read books every day.", "I will read a book tomorrow.", "I have read the book."], respostaCorreta: 1, explicacao: "'I read books every day' expresses a habit in the present.", dificuldade: "media", tipo: "tempo_verbal" },
+    { texto: "A student says: 'I am tired because I studied all night.' The reason is:", alternativas: ["Because he slept well.", "Because he studied all night.", "Because he went to the park.", "Because he woke up early."], respostaCorreta: 1, explicacao: "The sentence gives a clear reason: studying all night made him tired.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "Which is the correct plural of 'child'?", alternativas: ["childs", "children", "childes", "childer"], respostaCorreta: 1, explicacao: "'Child' is irregular; its plural is 'children'.", dificuldade: "media", tipo: "vocabulario" }
+  ],
+  "8ano": [
+    { texto: "Read: 'If it rains tomorrow, we will stay home.' This sentence expresses:", alternativas: ["a past action", "a future possibility", "a habit", "an order"], respostaCorreta: 1, explicacao: "The sentence uses the first conditional, which describes a real future possibility.", dificuldade: "media", tipo: "condicional" },
+    { texto: "Choose the most appropriate answer: 'Can you help me with this exercise?' '_____, of course.'", alternativas: ["No way", "Sure", "Perhaps", "Later"], respostaCorreta: 1, explicacao: "'Sure' is the natural response to accepting help.", dificuldade: "facil", tipo: "dialogo" },
+    { texto: "In the sentence 'The teacher explained the lesson clearly', the adverb is:", alternativas: ["teacher", "lesson", "clearly", "explained"], respostaCorreta: 2, explicacao: "'Clearly' modifies the verb 'explained'.", dificuldade: "facil", tipo: "gramatica" },
+    { texto: "A notice says: 'No smoking inside the building.' The warning means:", alternativas: ["Smoking is allowed in the building.", "Smoking is forbidden inside the building.", "The building is closed today.", "People must smoke outside only."], respostaCorreta: 1, explicacao: "'No smoking' is a prohibition, so smoking is not allowed inside.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "Choose the sentence with the correct comparative form:", alternativas: ["This test is more difficult than the last one.", "This test is difficulter than the last one.", "This test is most difficult than the last one.", "This test is difficulter than the last one."], respostaCorreta: 0, explicacao: "Comparatives with long adjectives use 'more + adjective'.", dificuldade: "media", tipo: "comparacao" },
+    { texto: "The phrase 'at the same time' is used to express:", alternativas: ["cause", "contrast", "simultaneity", "condition"], respostaCorreta: 2, explicacao: "The expression refers to two actions happening at the same moment.", dificuldade: "dificil", tipo: "contextualizacao" }
+  ],
+  "9ano": [
+    { texto: "Read: 'Although the train was delayed, Maria arrived on time for the interview.' What does 'Although' show?", alternativas: ["Cause", "Purpose", "Contrast", "Result"], respostaCorreta: 2, explicacao: "'Although' introduces a contrast between delay and arrival on time.", dificuldade: "media", tipo: "conectores" },
+    { texto: "Which sentence is in the passive voice?", alternativas: ["The teacher explained the topic.", "The topic was explained by the teacher.", "The teacher explains the topic.", "The students discuss the topic."], respostaCorreta: 1, explicacao: "The passive voice focuses on the action received by the subject: 'The topic was explained'.", dificuldade: "media", tipo: "voz_passiva" },
+    { texto: "What is the meaning of the phrasal verb 'give up'?", alternativas: ["continue", "abandon", "repair", "enter"], respostaCorreta: 1, explicacao: "'Give up' means to stop trying or abandon an effort.", dificuldade: "media", tipo: "vocabulario" },
+    { texto: "You receive an email that says: 'We would appreciate your prompt response.' This request is:", alternativas: ["very informal", "polite and urgent", "a joke", "a command without reason"], respostaCorreta: 1, explicacao: "The expression is formal and polite, while also indicating urgency.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "Choose the correct sentence:", alternativas: ["If I was you, I would apologize.", "If I were you, I would apologize.", "If I am you, I would apologize.", "If I was been you, I would apologize."], respostaCorreta: 1, explicacao: "After 'if' in hypothetical situations, the correct form is 'were'.", dificuldade: "dificil", tipo: "condicional" },
+    { texto: "The sentence 'The company has reduced its emissions' suggests that:", alternativas: ["emissions increased", "emissions were lowered", "the company closed", "the company started using more plastic"], respostaCorreta: 1, explicacao: "'Reduced' means that emissions were decreased.", dificuldade: "media", tipo: "vocabulario" }
+  ],
+  "1medio": [
+    { texto: "Read the following notice: 'Please keep your seatbelt fastened during the flight.' The main purpose is to:", alternativas: ["entertain passengers", "warn about safety rules", "describe the plane's speed", "ask passengers to leave the plane"], respostaCorreta: 1, explicacao: "The notice gives a safety instruction to passengers.", dificuldade: "media", tipo: "interpretacao" },
+    { texto: "Which sentence is correct?", alternativas: ["By the time I arrived, they had left.", "By the time I arrived, they leave.", "By the time I arrived, they were leave.", "By the time I arrived, they have left."], respostaCorreta: 0, explicacao: "The past perfect is used to show an action completed before another past action.", dificuldade: "dificil", tipo: "tempo_verbal" },
+    { texto: "The expression 'make an effort' means:", alternativas: ["do nothing", "try hard", "forget the task", "start a fire"], respostaCorreta: 1, explicacao: "'Make an effort' means to try seriously and with intention.", dificuldade: "media", tipo: "vocabulario" },
+    { texto: "A school announcement says: 'The meeting will begin promptly at 8:00 p.m.' This means:", alternativas: ["the meeting will begin late", "the meeting will begin on time", "the meeting is canceled", "students may come at any time"], respostaCorreta: 1, explicacao: "'Promptly' indicates that the meeting begins exactly at the scheduled time.", dificuldade: "media", tipo: "contextualizacao" },
+    { texto: "Choose the option that completes the sentence: 'If we ___ more time, we would finish the project.'", alternativas: ["have", "had", "will have", "are having"], respostaCorreta: 1, explicacao: "This is a second conditional sentence, which uses 'had'.", dificuldade: "dificil", tipo: "condicional" },
+    { texto: "In formal writing, a sentence like 'We appreciate your cooperation' is best described as:", alternativas: ["very informal", "formal and respectful", "a joke", "a command without explanation"], respostaCorreta: 1, explicacao: "The phrase is polite, professional and appropriate for formal communication.", dificuldade: "media", tipo: "contextualizacao" }
+  ],
+  "2medio": [
+    { texto: "Read the statement: 'The rise in online learning has changed how students study.' The best inference is that:", alternativas: ["students no longer need teachers", "education is now more flexible and digital", "online learning is the only option", "students never study at home"], respostaCorreta: 1, explicacao: "The statement suggests that online learning modified the way students learn, making it more digital and flexible.", dificuldade: "media", tipo: "inferencia" },
+    { texto: "Which sentence demonstrates a formal tone?", alternativas: ["Hey, can you send the file?", "Please send the file as soon as possible.", "Send it now!", "Yo, file me!"], respostaCorreta: 1, explicacao: "The second sentence uses a formal and polite tone appropriate for institutional communication.", dificuldade: "media", tipo: "registro" },
+    { texto: "The phrase 'carry out research' means:", alternativas: ["stop studying", "conduct a study", "write a poem", "ignore the results"], respostaCorreta: 1, explicacao: "'Carry out research' means to perform a research activity or investigation.", dificuldade: "media", tipo: "vocabulario" },
+    { texto: "In a report, the sentence 'This issue has become increasingly relevant in recent years' expresses:", alternativas: ["a personal opinion without evidence", "an evaluation of growing importance", "a command", "a simple fact without relevance"], respostaCorreta: 1, explicacao: "The sentence presents a trend and indicates growing importance over time.", dificuldade: "dificil", tipo: "interpretacao" },
+    { texto: "Choose the correct reported speech: 'He said, “I am tired.”'", alternativas: ["He said that he is tired.", "He said that he was tired.", "He said that I was tired.", "He said that I am tired."], respostaCorreta: 1, explicacao: "In reported speech, the verb usually shifts back one tense: 'am' becomes 'was'.", dificuldade: "dificil", tipo: "reported_speech" },
+    { texto: "Which statement best reflects a persuasive text?", alternativas: ["It describes only facts without trying to influence.", "It presents a point of view and tries to convince the reader.", "It is only a list of events.", "It is written only in fragments and without structure."], respostaCorreta: 1, explicacao: "Persuasive texts aim to convince the audience by presenting arguments and opinions.", dificuldade: "media", tipo: "argumentacao" }
+  ],
+  "3medio": [
+    { texto: "Read the excerpt: 'The survey revealed that students who use digital tools regularly tend to organize their work better.' The statement suggests that:", alternativas: ["technology has no impact on study habits", "digital tools can influence organization and planning", "students should never use technology", "digital tools are always distracting"], respostaCorreta: 1, explicacao: "The sentence presents a likely positive relationship between technology use and organization.", dificuldade: "media", tipo: "inferencia" },
+    { texto: "Which phrase is most appropriate in an academic presentation?", alternativas: ["This is super important, guys.", "This issue is highly relevant to the discussion.", "This topic is totally cool.", "It is kind of a big deal."], respostaCorreta: 1, explicacao: "Academic language should be precise, formal and objective.", dificuldade: "media", tipo: "registro" },
+    { texto: "Complete: 'By the time the professor arrived, the students ____ the discussion.'", alternativas: ["have finished", "had finished", "finish", "were finishing"], respostaCorreta: 1, explicacao: "The past perfect 'had finished' shows an action completed before another past action.", dificuldade: "dificil", tipo: "tempo_verbal" },
+    { texto: "Choose the sentence that is most cohesive in an argumentative paragraph:", alternativas: ["The topic is important. The school is big. The teacher is kind.", "The topic is important because it affects students directly and requires practical solutions.", "The students are in class. It is morning.", "The school has many chairs. Chairs are comfortable."], respostaCorreta: 1, explicacao: "The second sentence develops the central idea with relevance and logical connection.", dificuldade: "media", tipo: "coesao" },
+    { texto: "The phrase 'in light of' is closest in meaning to:", alternativas: ["because of", "in spite of", "during", "without"], respostaCorreta: 0, explicacao: "'In light of' means 'considering' or 'because of'.", dificuldade: "dificil", tipo: "vocabulario" },
+    { texto: "A good argumentative text should:", alternativas: ["ignore evidence and rely only on emotion", "present a clear position supported by reasons and examples", "repeat the same idea without development", "avoid any connection to real-life situations"], respostaCorreta: 1, explicacao: "A solid argument uses reasons, examples and clear organization to support a point of view.", dificuldade: "media", tipo: "argumentacao" }
+  ]
 };
+
+// A revisão das perguntas prioriza interpretação de contexto, uso real da língua e raciocínio,
+// mantendo a arquitetura atual do quiz e deixando cada item mais plausível e pedagógico.
+if (typeof window !== 'undefined') {
+  window.perguntasIngles = perguntasIngles;
+}
