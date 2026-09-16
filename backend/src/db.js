@@ -14,6 +14,12 @@ db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
 const schemaSql = fs.readFileSync(schemaPath, 'utf8');
 db.exec(schemaSql);
 
+// Migração leve para bancos criados antes do sistema de títulos.
+const profileColumns = db.prepare('PRAGMA table_info(user_profiles)').all();
+if (!profileColumns.some((column) => column.name === 'equipped_title_slug')) {
+  db.exec('ALTER TABLE user_profiles ADD COLUMN equipped_title_slug TEXT');
+}
+
 function getUserByEmail(email) {
   return db.prepare('SELECT * FROM users WHERE email = ?').get(email.trim().toLowerCase());
 }
@@ -46,6 +52,18 @@ function getProfile(userId) {
     ORDER BY ui.acquired_at DESC
   `).all(userId);
 
+  const achievements = db.prepare(`
+    SELECT ad.*, ua.unlocked_at
+    FROM user_achievements ua
+    JOIN achievement_definitions ad ON ad.slug = ua.achievement_slug
+    WHERE ua.user_id = ?
+    ORDER BY ua.unlocked_at DESC
+  `).all(userId);
+
+  const equippedTitle = profile.equipped_title_slug
+    ? db.prepare('SELECT * FROM achievement_definitions WHERE slug = ?').get(profile.equipped_title_slug)
+    : null;
+
   const progress = db.prepare(`
     SELECT sp.*, s.slug, s.name AS subject_name
     FROM subject_progress sp
@@ -61,6 +79,8 @@ function getProfile(userId) {
     level: levelInfo.level,
     levelInfo,
     equippedItem,
+    equippedTitle,
+    achievements,
     inventory,
     progress,
     currentLevelXp: levelInfo.currentLevelXp,

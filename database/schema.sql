@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
     level INTEGER NOT NULL DEFAULT 1,
     points INTEGER NOT NULL DEFAULT 0,
     equipped_item_id INTEGER,
+    equipped_title_slug TEXT,
     avatar_theme TEXT NOT NULL DEFAULT 'cyber',
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -90,6 +91,21 @@ CREATE TABLE IF NOT EXISTS user_equipment (
     UNIQUE(user_id)
 );
 
+CREATE TABLE IF NOT EXISTS achievement_definitions (
+    slug TEXT PRIMARY KEY,
+    subject_slug TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    rarity TEXT NOT NULL DEFAULT 'raro'
+);
+
+CREATE TABLE IF NOT EXISTS user_achievements (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    achievement_slug TEXT NOT NULL REFERENCES achievement_definitions(slug) ON DELETE CASCADE,
+    unlocked_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, achievement_slug)
+);
+
 INSERT OR IGNORE INTO subjects (slug, name) VALUES
     ('matematica', 'Matemática'),
     ('ciencias', 'Ciências'),
@@ -103,3 +119,11 @@ INSERT OR IGNORE INTO shop_items (slug, name, description, category, price, visu
     ('neon-glow', 'Neon Glow', 'Efeito visual moderno para o avatar.', 'avatar', 120, 'neon', 'active'),
     ('marco-ouro', 'Marco de Ouro', 'Acessório premium para o perfil.', 'acessorio', 180, 'ouro', 'active'),
     ('pulse-azul', 'Pulse Azul', 'Visual com intensidade de energia digital.', 'avatar', 220, 'pulse', 'active');
+
+INSERT OR IGNORE INTO achievement_definitions (slug, subject_slug, name, description, rarity) VALUES
+    ('mestre-da-historia', 'historia', 'Mestre da História', 'Derrote o Boss de História.', 'raro'),
+    ('explorador-do-mundo', 'geografia', 'Explorador do Mundo', 'Derrote o Boss de Geografia.', 'raro'),
+    ('mente-analitica', 'matematica', 'Mente Analítica', 'Derrote o Boss de Matemática.', 'raro'),
+    ('desbravador-da-ciencia', 'ciencias', 'Desbravador da Ciência', 'Derrote o Boss de Ciências.', 'raro'),
+    ('guardiao-das-palavras', 'portugues', 'Guardião das Palavras', 'Derrote o Boss de Português.', 'raro'),
+    ('master-of-english', 'ingles', 'Master of English', 'Derrote o Boss de Inglês.', 'raro');

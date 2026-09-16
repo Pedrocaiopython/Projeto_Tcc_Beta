@@ -290,6 +290,44 @@ app.post('/api/shop/unequip', requireAuth, (req, res) => {
   return res.json({ message: 'Item desequipado com sucesso.', profile: getProfile(userId) });
 });
 
+app.post('/api/achievements/unlock', requireAuth, (req, res) => {
+  const subject = String(req.body?.subject || '').trim().toLowerCase();
+  const achievement = db.prepare('SELECT * FROM achievement_definitions WHERE subject_slug = ?').get(subject);
+  if (!achievement) return res.status(400).json({ message: 'Conquista inválida.' });
+
+  const subjectRow = db.prepare('SELECT id FROM subjects WHERE slug = ?').get(subject);
+  const perfectAttempt = subjectRow && db.prepare(`
+    SELECT 1 FROM quiz_attempts
+    WHERE user_id = ? AND subject_id = ? AND correct_answers = total_questions AND total_questions = 10
+    ORDER BY id DESC LIMIT 1
+  `).get(req.session.userId, subjectRow.id);
+
+  if (!perfectAttempt) {
+    return res.status(403).json({ message: 'Conclua o quiz com 10/10 antes de liberar este título.' });
+  }
+
+  db.prepare('INSERT OR IGNORE INTO user_achievements (user_id, achievement_slug) VALUES (?, ?)')
+    .run(req.session.userId, achievement.slug);
+  return res.json({ message: 'Conquista desbloqueada!', achievement, profile: getProfile(req.session.userId) });
+});
+
+app.post('/api/achievements/equip', requireAuth, (req, res) => {
+  const titleSlug = String(req.body?.titleSlug || '').trim();
+  const owned = db.prepare('SELECT 1 FROM user_achievements WHERE user_id = ? AND achievement_slug = ?')
+    .get(req.session.userId, titleSlug);
+  if (!owned) return res.status(403).json({ message: 'Esse título ainda não foi desbloqueado.' });
+
+  db.prepare('UPDATE user_profiles SET equipped_title_slug = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?')
+    .run(titleSlug, req.session.userId);
+  return res.json({ message: 'Título equipado!', profile: getProfile(req.session.userId) });
+});
+
+app.post('/api/achievements/unequip', requireAuth, (req, res) => {
+  db.prepare('UPDATE user_profiles SET equipped_title_slug = NULL, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?')
+    .run(req.session.userId);
+  return res.json({ message: 'Título desequipado.', profile: getProfile(req.session.userId) });
+});
+
 app.post('/api/quizzes/submit', requireAuth, (req, res) => {
   const userId = req.session.userId;
   const { subject, correctAnswers, totalQuestions } = req.body || {};
