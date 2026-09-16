@@ -152,6 +152,16 @@ body {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.imagem-central-materia {
+    width: 72%;
+    height: 72%;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 2;
+    filter: saturate(1.1) drop-shadow(0 0 20px rgba(0, 240, 255, 0.45));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 .recipiente-portal-moldura:hover {
     transform: scale(1.04);
     border-color: var(--ouro-principal);
@@ -159,6 +169,9 @@ body {
 }
 .recipiente-portal-moldura:hover .simbolo-central-materia {
     transform: scale(1.12) rotate(10deg);
+}
+.recipiente-portal-moldura:hover .imagem-central-materia {
+    transform: scale(1.08) rotate(2deg);
 }
 
 /* --- PAINEL INFERIOR DE SELEÇÃO MINIMALISTA --- */

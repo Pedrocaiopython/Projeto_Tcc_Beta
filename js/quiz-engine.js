@@ -98,14 +98,14 @@ function iniciarJogo(nivel) {
     if (typeof window.adicionarPerguntasComplementares === 'function') {
         window.adicionarPerguntasComplementares(resolveSubjectSlug());
     }
-    const bancoPerguntas = window.perguntas || perguntas;
+    const bancoPerguntas = window.perguntas;
 
     if (!bancoPerguntas || !bancoPerguntas[nivel]) {
         alert("Esse nível ainda não possui perguntas.");
         return;
     }
 
-    perguntasDoNivel = bancoPerguntas[nivel];
+    perguntasDoNivel = prepararTentativa(bancoPerguntas[nivel]);
     numeroDaPergunta = 0;
     quantidadeDeAcertos = 0;
     resultadoEnviado = false;
@@ -160,6 +160,16 @@ function verificarResposta(respostaEscolhida) {
     }
 
     explicacao.textContent = perguntaAtual.explicacao;
+    feedback.querySelector('.fonte-estudo')?.remove();
+    if (perguntaAtual.fonte) {
+        const fonte = document.createElement('a');
+        fonte.className = 'fonte-estudo';
+        fonte.href = perguntaAtual.fonte;
+        fonte.target = '_blank';
+        fonte.rel = 'noopener noreferrer';
+        fonte.textContent = 'Consultar fonte de estudo';
+        feedback.insertBefore(fonte, feedback.querySelector('button'));
+    }
     feedback.classList.remove("escondido");
 }
 
@@ -253,7 +263,7 @@ function mostrarAlertaBoss() {
 
 function iniciarBatalhaBoss() {
     const disciplina = resolveSubjectSlug();
-    const questoes = perguntasBoss[disciplina] || perguntasBoss.matematica;
+    const questoes = prepararTentativa(perguntasBoss[disciplina] || perguntasBoss.matematica);
     let indice = 0;
     let acertos = 0;
     const overlay = criarOverlayDesafio(`

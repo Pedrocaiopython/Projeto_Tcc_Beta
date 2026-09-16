@@ -87,6 +87,37 @@ A aplicação fica disponível em:
 
 - http://localhost:3000
 
+## Testes
+
+Os testes automatizados podem ser executados com:
+
+```bash
+npm test
+```
+
+Eles verificam o embaralhamento sem perder a resposta correta, a disponibilidade
+do banco de Geografia e as validações de submissão e intervalo de tentativas.
+
+## Funcionamento pedagógico do quiz
+
+Cada página publica seu banco em `window.perguntas` antes de carregar o motor
+compartilhado `js/quiz-engine.js`. Ao iniciar uma tentativa, o motor copia e
+embaralha as perguntas e as alternativas com Fisher-Yates, recalculando o índice
+de `respostaCorreta`. O banco original não é alterado e o mesmo processo é usado
+no desafio do boss. As questões incluem uma fonte institucional de estudo,
+quando disponível, exibida no feedback.
+
+Os bancos foram elaborados priorizando interpretação, aplicação, comparação e
+raciocínio. As referências pedagógicas incluem a BNCC/MEC, o IBGE Educa, o
+Arquivo Nacional e o INPE, conforme o assunto.
+
+Como perguntas e respostas ainda são entregues ao navegador, uma pessoa com
+conhecimento técnico pode inspecionar ou manipular esses dados. O backend não
+confia no XP ou nos pontos enviados pelo cliente e aplica limites de quantidade
+e frequência, mas a proteção contra manipulação da resposta não é absoluta.
+Em produção, a correção da tentativa deve ocorrer no backend, com o servidor
+enviando apenas um identificador da atividade e validando as respostas.
+
 Abra o site pelo endereço acima, e não usando `file://`. A camada de API
 também reconhece `localhost` e `127.0.0.1` quando o frontend estiver sendo
 servido pelo Live Server em outra porta e direciona as chamadas para a API

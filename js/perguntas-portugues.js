@@ -53,5 +53,8 @@
 // sem mudar a estrutura do objeto do quiz atual. Isso mantém a compatibilidade com o sistema,
 // mas torna cada pergunta mais próxima de uma avaliação real de linguagem e raciocínio.
 if (typeof window !== 'undefined') {
+  Object.values(perguntasPortugues).flat().forEach((questao) => {
+    questao.fonte = questao.fonte || 'https://basenacionalcomum.mec.gov.br/';
+  });
   window.perguntasPortugues = perguntasPortugues;
 }

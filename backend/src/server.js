@@ -16,6 +16,9 @@ if (isProduction && !sessionSecret) {
 }
 
 app.disable('x-powered-by');
+if (isProduction) {
+  app.set('trust proxy', 1);
+}
 app.use(express.json({ limit: '16kb' }));
 app.use(express.urlencoded({ extended: false, limit: '16kb' }));
 app.use((req, res, next) => {
@@ -346,8 +349,19 @@ app.post('/api/quizzes/submit', requireAuth, (req, res) => {
 
   const correct = Number(correctAnswers);
   const total = Number(totalQuestions);
-  if (!Number.isInteger(correct) || !Number.isInteger(total) || total < 1 || total > 100 || correct < 0 || correct > total) {
-    return res.status(400).json({ message: 'Quantidade de respostas inválida.' });
+  if (!Number.isInteger(correct) || !Number.isInteger(total) || total < 1 || total > 10 || correct < 0 || correct > total) {
+    return res.status(400).json({ message: 'A atividade deve ter entre 1 e 10 perguntas, e os acertos devem estar entre 0 e o total.' });
+  }
+
+  const tentativaRecente = db.prepare(`
+    SELECT id
+    FROM quiz_attempts
+    WHERE user_id = ? AND subject_id = ?
+      AND created_at > datetime('now', '-2 minutes')
+    LIMIT 1
+  `).get(userId, subjectId);
+  if (tentativaRecente) {
+    return res.status(429).json({ message: 'Aguarde dois minutos antes de registrar outra tentativa nesta matéria.' });
   }
 
   const accuracy = Math.round((correct / total) * 100);
@@ -428,6 +442,10 @@ app.use((error, req, res, next) => {
   return res.status(500).json({ message: 'Erro interno do servidor.' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

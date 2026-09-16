@@ -53,5 +53,8 @@
 // texto, alternativas e resposta correta, além de metadados pedagógicos (tipo e dificuldade)
 // para facilitar futuras evoluções do sistema sem quebrar o fluxo atual de XP, pontos e progresso.
 if (typeof window !== 'undefined') {
+  Object.values(perguntasMatematica).flat().forEach((questao) => {
+    questao.fonte = questao.fonte || 'https://basenacionalcomum.mec.gov.br/';
+  });
   window.perguntasMatematica = perguntasMatematica;
 }

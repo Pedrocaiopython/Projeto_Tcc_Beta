@@ -52,5 +52,8 @@
 // A revisão das perguntas prioriza interpretação de contexto, uso real da língua e raciocínio,
 // mantendo a arquitetura atual do quiz e deixando cada item mais plausível e pedagógico.
 if (typeof window !== 'undefined') {
+  Object.values(perguntasIngles).flat().forEach((questao) => {
+    questao.fonte = questao.fonte || 'https://basenacionalcomum.mec.gov.br/';
+  });
   window.perguntasIngles = perguntasIngles;
 }

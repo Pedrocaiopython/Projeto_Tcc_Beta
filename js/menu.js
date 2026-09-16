@@ -1,8 +1,8 @@
 const listaMaterias = [
     { id: 'matematica', name: 'Matemática', badge: 'EXATAS • NÍVEL I', url: 'matematico.html', simbolo: 'M', bg: 'linear-gradient(135deg, #2841ad, #5c7cff)' },
     { id: 'ciencias', name: 'Ciências', badge: 'EXATAS • NÍVEL II', url: 'ciencias.html', simbolo: 'C', bg: 'linear-gradient(135deg, #19866d, #4ee0c8)' },
-    { id: 'geografia', name: 'Geografia', badge: 'HUMANAS • NÍVEL I', url: 'geografia.html', simbolo: 'G', bg: 'linear-gradient(135deg, #255f6c, #62c6d8)' },
-    { id: 'historia', name: 'História', badge: 'HUMANAS • NÍVEL II', url: 'historia.html', simbolo: 'H', bg: 'linear-gradient(135deg, #7a4a11, #d8a32d)' },
+    { id: 'geografia', name: 'Geografia', badge: 'HUMANAS • NÍVEL I', url: 'geografia.html', simbolo: 'G', imagem: 'assets/materias/geografia/globo-terrestre.png', bg: 'linear-gradient(135deg, #255f6c, #62c6d8)' },
+    { id: 'historia', name: 'História', badge: 'HUMANAS • NÍVEL II', url: 'historia.html', simbolo: 'H', imagem: 'assets/materias/historia/mapa-antigo.png', bg: 'linear-gradient(135deg, #7a4a11, #d8a32d)' },
     { id: 'portugues', name: 'Português', badge: 'LINGUAGENS • NÍVEL I', url: 'portugues.html', simbolo: 'P', bg: 'linear-gradient(135deg, #184f7a, #6ba8ff)' },
     { id: 'ingles', name: 'Inglês', badge: 'LINGUAGENS • NÍVEL II', url: 'ingles.html', simbolo: 'I', bg: 'linear-gradient(135deg, #502d87, #9d77ff)' }
 ];
@@ -15,6 +15,7 @@ const distintivoMateria = document.getElementById('distintivoMateria');
 const tituloMateria = document.getElementById('tituloMateria');
 const plataformaMapa = document.getElementById('plataformaMapa');
 const simboloMateria = document.getElementById('simboloMateria');
+const imagemMateria = document.getElementById('imagemMateria');
 const modalLoja = document.getElementById('modalLoja');
 const gradeItensLoja = document.getElementById('gradeItensLoja');
 const nomeUsuario = document.getElementById('nomeUsuario');
@@ -35,6 +36,13 @@ function atualizarMenu(index) {
         tituloMateria.textContent = materia.name;
         distintivoMateria.textContent = materia.badge;
         simboloMateria.textContent = materia.simbolo;
+        imagemMateria.hidden = !materia.imagem;
+        imagemMateria.alt = materia.imagem ? `Símbolo de ${materia.name}` : '';
+        if (materia.imagem) {
+            imagemMateria.src = materia.imagem;
+        } else {
+            imagemMateria.removeAttribute('src');
+        }
         plataformaMapa.style.background = materia.bg;
         moldura.classList.remove('efeito-transicao');
         tituloMateria.classList.remove('efeito-transicao');

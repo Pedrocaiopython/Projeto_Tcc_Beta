@@ -52,5 +52,8 @@
 // A estrutura foi melhor organizada com foco em causalidade, comparação e análise de fontes,
 // mantendo a compatibilidade com o sistema atual de quiz e com a lógica de progresso do jogador.
 if (typeof window !== 'undefined') {
+  Object.values(perguntasHistoria).flat().forEach((questao) => {
+    questao.fonte = questao.fonte || 'https://www.gov.br/arquivonacional/';
+  });
   window.perguntasHistoria = perguntasHistoria;
 }

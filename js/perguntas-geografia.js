@@ -52,5 +52,8 @@
 // A qualidade das questões foi alinhada com interpretações de mapas, dados e contextos geográficos reais,
 // preservando a estrutura atual do quiz e mantendo o funcionamento do sistema de XP e progresso.
 if (typeof window !== 'undefined') {
+  Object.values(perguntasGeografia).flat().forEach((questao) => {
+    questao.fonte = questao.fonte || 'https://educa.ibge.gov.br/';
+  });
   window.perguntasGeografia = perguntasGeografia;
 }

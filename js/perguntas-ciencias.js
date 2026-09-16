@@ -52,5 +52,8 @@
 // A revisão das perguntas prioriza raciocínio, aplicação prática e interpretações do mundo real,
 // mantendo a compatibilidade da estrutura atual com o sistema de quiz, XP e progresso.
 if (typeof window !== 'undefined') {
+  Object.values(perguntasCiencias).flat().forEach((questao) => {
+    questao.fonte = questao.fonte || 'https://basenacionalcomum.mec.gov.br/';
+  });
   window.perguntasCiencias = perguntasCiencias;
 }
