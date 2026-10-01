@@ -22,6 +22,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    
 }
 
 /* --- HUD DA BARRA SUPERIOR --- */
@@ -66,13 +67,20 @@ body {
     padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.85rem;
     transition: filter 0.2s;
 }
-.botao-abrir-loja:hover { filter: brightness(1.1); }
+.botao-abrir-loja:hover { 
+    filter: brightness(1.1);
+    cursor: pointer;
+ }
 .botao-alternar-audio {
     background: rgba(255,255,255,0.03); border: 1px solid rgba(244, 208, 104, 0.4);
     color: var(--ouro-principal); padding: 8px 18px; border-radius: 20px; cursor: pointer;
     font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;
 }
-.botao-alternar-audio:hover { background: rgba(244, 208, 104, 0.1); color: #fff; }
+.botao-alternar-audio:hover { 
+    background: rgba(244, 208, 104, 0.1); 
+    color: #fff; 
+    cursor: pointer;
+}
 
 /* --- CORE INTERFACE REPROPORCIONADA (ESTILO PORTAL CIRCULAR) --- */
 .tela-lobby-premium {
@@ -84,6 +92,7 @@ body {
     width: 100%;
     padding: 20px;
     position: relative;
+    
 }
 
 /* Alinhamento horizontal absoluto para o Carrossel da Imagem 3 */
@@ -95,6 +104,7 @@ body {
     width: 100%;
     max-width: 900px;
     margin-bottom: 20px;
+    
 }
 
 .seta-navegacao {
@@ -103,10 +113,12 @@ body {
     border-radius: 50%; cursor: pointer; display: flex; justify-content: center;
     align-items: center; transition: all 0.3s ease; z-index: 10;
     box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+    
 }
 .seta-navegacao:hover {
     background: var(--azul-neon); color: #000;
     box-shadow: 0 0 25px var(--azul-neon); transform: scale(1.1);
+    cursor: pointer;
 }
 
 /* Moldura Circular Idêntica ao Layout da Terceira Imagem */
@@ -136,7 +148,8 @@ body {
     position: relative; overflow: hidden;
     display: flex; justify-content: center; align-items: center;
     border: 2px solid var(--ouro-principal);
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.9);
+
 }
 
 .overlay-particulas-materia {
@@ -146,17 +159,17 @@ body {
 }
 
 .simbolo-central-materia {
-    font-size: 6.5rem;
-    z-index: 2;
+    font-size: 20.5rem;
+    z-index: -2;
     filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.8));
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .imagem-central-materia {
-    width: 72%;
-    height: 72%;
+    width: 85%;  height: 85%;
     object-fit: cover;
     border-radius: 50%;
+    border: 3px solid rgb(0, 0, 0);
     z-index: 2;
     filter: saturate(1.1) drop-shadow(0 0 20px rgba(0, 240, 255, 0.45));
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -166,9 +179,11 @@ body {
     transform: scale(1.04);
     border-color: var(--ouro-principal);
     box-shadow: 0 0 50px rgba(244, 208, 104, 0.25);
+    cursor: pointer;
 }
 .recipiente-portal-moldura:hover .simbolo-central-materia {
     transform: scale(1.12) rotate(10deg);
+    cursor: pointer;
 }
 .recipiente-portal-moldura:hover .imagem-central-materia {
     transform: scale(1.08) rotate(2deg);
