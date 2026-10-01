@@ -5,75 +5,349 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ciências</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/geografia.css">
+    <link rel="stylesheet" href="css/ciencias.css">
     <style>
+        /* RESET E CENTRALIZAÇÃO TOTAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
-            background:
-                radial-gradient(circle at top, rgba(78, 255, 154, 0.22), transparent 35%),
-                linear-gradient(135deg, #02170a, #07391f 45%, #071d11);
+            background-color: #040e14;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(10, 45, 25, 0.6) 0%, transparent 70%),
+                radial-gradient(circle at 50% 80%, rgba(5, 25, 15, 0.8) 0%, transparent 60%);
             color: #f2fff4;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
-        header {
-            border-bottom: 1px solid rgba(119, 255, 163, 0.5);
+        /* OCULTAR ELEMENTOS INDESEJADOS */
+        .escondido, 
+        button.nav-btn, 
+        .carrossel-btn,
+        .seta-navegacao {
+            display: none !important;
         }
 
-        .hero-gif {
+        .container-principal {
+            width: 100%;
+            max-width: 750px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .titulo-secao, h2 {
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* TELA 1: ESCOLHA DA SÉRIE (CIRCULAR EM VERDE CLARO) */
+        #tela-niveis {
+            width: 100%;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .niveis {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .niveis button {
             width: 130px;
             height: 130px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 12px;
-            filter: drop-shadow(0 0 18px rgba(101, 255, 178, 0.7));
-        }
-
-        .hero-title {
-            text-align: center;
-            font-size: 2.4rem;
-            margin: 0;
-            color: #9effb5;
-            text-shadow: 0 0 12px rgba(121, 255, 171, 0.6);
-        }
-
-        .niveis button,
-        #alternativas button {
-            background: linear-gradient(135deg, #152b18, #1e5731);
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #0d2e1a 0%, #04140b 100%);
+            border: 3px solid #2e8b57; /* Borda externa tom esverdeado */
+            outline: 2px solid #50ffaa; /* Anel neon verde claro interno */
+            outline-offset: -8px;
             color: #eefdf1;
-            border: 1px solid rgba(170, 255, 196, 0.45);
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.2;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.6), 
+                inset 0 0 15px rgba(0, 0, 0, 0.8),
+                0 0 12px rgba(80, 255, 170, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .niveis button:hover {
+            transform: scale(1.08) translateY(-4px);
+            border-color: #50ffaa;
+            outline-color: #ffffff;
+            color: #ffffff;
+            background: radial-gradient(circle at 30% 30%, #144527 0%, #082112 100%);
+            box-shadow: 
+                0 10px 25px rgba(80, 255, 170, 0.35), 
+                inset 0 0 20px rgba(80, 255, 170, 0.3),
+                0 0 20px rgba(80, 255, 170, 0.4);
+        }
+
+        .container-botao-voltar {
+            margin-top: 35px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* BOTÃO VOLTAR / LOBBY */
+        .botao-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 220px;
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: 2px solid #1a422b;
+            color: #92c9a9;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .botao-link:hover {
+            border-color: #50ffaa;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(80, 255, 170, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* TELA 2: QUIZ */
+        #tela-jogo {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        #contador {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #50ffaa;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .barra {
+            width: 100%;
+            height: 10px;
+            background-color: #04140b;
+            border-radius: 20px;
+            border: 1px solid rgba(80, 255, 170, 0.3);
+            overflow: hidden;
+            margin-bottom: 25px;
         }
 
         #progresso {
-            background: linear-gradient(90deg, #47d96d, #79ff9f);
+            height: 100%;
+            width: 25%;
+            background: linear-gradient(90deg, #2e8b57, #50ffaa);
+            box-shadow: 0 0 10px #50ffaa;
+            transition: width 0.4s ease;
         }
 
-        .correto { background: rgba(20, 93, 46, 0.92); }
-        .incorreto { background: rgba(139, 35, 35, 0.92); }
+        #pergunta {
+            width: 100%;
+            background: linear-gradient(145deg, #0a2414, #041209);
+            border: 2px solid #2e8b57;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6), 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        #alternativas {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #alternativas button {
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(145deg, #091f11, #040e08);
+            border: 1.5px solid #1a422b;
+            border-radius: 10px;
+            color: #eefdf1;
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #alternativas button:hover {
+            border-color: #50ffaa;
+            color: #ffffff;
+            background: linear-gradient(145deg, #10331d, #07170e);
+            box-shadow: 0 0 12px rgba(80, 255, 170, 0.25);
+        }
+
+        #feedback {
+            margin-top: 20px;
+            width: 100%;
+            background: #061a0d;
+            border: 1px solid #50ffaa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+
+        #mensagem-feedback {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #50ffaa;
+        }
+
+        #explicacao {
+            font-size: 0.95rem;
+            color: #92c9a9;
+            margin-bottom: 15px;
+        }
+
+        #feedback button {
+            padding: 12px 30px;
+            background: linear-gradient(180deg, #50ffaa, #2e8b57);
+            border: none;
+            border-radius: 25px;
+            color: #040e14;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(80, 255, 170, 0.4);
+        }
+
+        /* TELA 3: RESULTADOS (CÍRCULO EXPANDIDO VERDE CLARO) */
+        #tela-resultado {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .circulo-resultado {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 3px solid #2e8b57;
+            outline: 2px solid #50ffaa;
+            outline-offset: -8px;
+            background: radial-gradient(circle, #0a2614 0%, #041209 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(80, 255, 170, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.8);
+            margin: 10px 0 30px 0;
+            padding: 25px;
+            text-align: center;
+        }
+
+        #resultado {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #50ffaa;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .botoes-finalizacao {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .botoes-finalizacao button {
+            padding: 13px 22px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            background: linear-gradient(180deg, #50ffaa, #2e8b57);
+            border: none;
+            color: #040e14;
+            box-shadow: 0 4px 15px rgba(80, 255, 170, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .botoes-finalizacao button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(80, 255, 170, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <a href="menu_principal.html">← Menu principal</a>
-        <h1 class="hero-title">Ciências</h1>
-    </header>
 
-    <main>
+    <main class="container-principal">
+        <!-- TELA 1: ESCOLHA DA SÉRIE -->
         <section id="tela-niveis">
-            <h2>Escolha sua série</h2>
-
+            <h2 class="titulo-secao">Escolha sua série</h2>
             <div class="niveis">
                 <button onclick="iniciarJogo('7ano')">7º ano</button>
                 <button onclick="iniciarJogo('8ano')">8º ano</button>
                 <button onclick="iniciarJogo('9ano')">9º ano</button>
-                <button onclick="iniciarJogo('1medio')">1º Ensino Médio</button>
-                <button onclick="iniciarJogo('2medio')">2º Ensino Médio</button>
-                <button onclick="iniciarJogo('3medio')">3º Ensino Médio</button>
+                <button onclick="iniciarJogo('1medio')">1º Ensino<br>Médio</button>
+                <button onclick="iniciarJogo('2medio')">2º Ensino<br>Médio</button>
+                <button onclick="iniciarJogo('3medio')">3º Ensino<br>Médio</button>
+            </div>
+
+            <div class="container-botao-voltar">
+                <a href="menu_principal.html" class="botao-link">← Voltar ao Menu</a>
             </div>
         </section>
 
+        <!-- TELA 2: QUIZ DE PERGUNTAS -->
         <section id="tela-jogo" class="escondido">
-            <p id="contador"></p>
+            <p id="contador">PERGUNTA 1 / 4</p>
             <div class="barra"><div id="progresso"></div></div>
-            <h2 id="pergunta"></h2>
+            <h2 id="pergunta">Carregando pergunta...</h2>
             <div id="alternativas"></div>
 
             <div id="feedback" class="escondido">
@@ -83,11 +357,18 @@
             </div>
         </section>
 
+        <!-- TELA 3: RESULTADOS / FINALIZAÇÃO -->
         <section id="tela-resultado" class="escondido">
-            <h2>Atividade concluída!</h2>
-            <p id="resultado"></p>
-            <button onclick="voltarParaNiveis()">Escolher outro nível</button>
-            <a href="menu_principal.html" class="botao-link">Voltar ao menu</a>
+            <h2 class="titulo-secao">Resultados Finais</h2>
+            
+            <div class="circulo-resultado">
+                <div id="resultado"></div>
+            </div>
+
+            <div class="botoes-finalizacao">
+                <button onclick="voltarParaNiveis()">Jogar Novamente</button>
+                <a href="menu_principal.html" class="botao-link">Voltar ao Lobby</a>
+            </div>
         </section>
     </main>
 
