@@ -1,10 +1,10 @@
 const listaMaterias = [
-    { id: 'matematica', name: 'Matemática', badge: 'EXATAS • NÍVEL I', url: 'matematico.html', simbolo: 'M', bg: 'linear-gradient(135deg, #2841ad, #5c7cff)' },
-    { id: 'ciencias', name: 'Ciências', badge: 'EXATAS • NÍVEL II', url: 'ciencias.html', simbolo: 'C', bg: 'linear-gradient(135deg, #19866d, #4ee0c8)' },
-    { id: 'geografia', name: 'Geografia', badge: 'HUMANAS • NÍVEL I', url: 'geografia.html', simbolo: 'G', imagem: 'assets/materias/geografia/globo-terrestre.png', bg: 'linear-gradient(135deg, #255f6c, #62c6d8)' },
-    { id: 'historia', name: 'História', badge: 'HUMANAS • NÍVEL II', url: 'historia.html', simbolo: 'H', imagem: 'assets/materias/historia/mapa-antigo.png', bg: 'linear-gradient(135deg, #7a4a11, #d8a32d)' },
-    { id: 'portugues', name: 'Português', badge: 'LINGUAGENS • NÍVEL I', url: 'portugues.html', simbolo: 'P', bg: 'linear-gradient(135deg, #184f7a, #6ba8ff)' },
-    { id: 'ingles', name: 'Inglês', badge: 'LINGUAGENS • NÍVEL II', url: 'ingles.html', simbolo: 'I', bg: 'linear-gradient(135deg, #502d87, #9d77ff)' }
+    { id: 'matematica', name: 'Matemática', badge: 'EXATAS • NÍVEL I', url: 'matematico.html', imagem: 'assets/materias/matematica/sobre_matematica.png', bg: 'linear-gradient(135deg, #2841ad, #5c7cff)' },
+    { id: 'ciencias', name: 'Ciências', badge: 'EXATAS • NÍVEL II', url: 'ciencias.html',  imagem: 'assets/materias/ciencias/sobre_ciencias.png', bg: 'linear-gradient(135deg, #0f5444ff, #4fffe2ff)' },
+    { id: 'geografia', name: 'Geografia', badge: 'HUMANAS • NÍVEL I', url: 'geografia.html', imagem: 'assets/materias/geografia/sobre_geografia.jpg', bg: 'linear-gradient(135deg, #ff0000ff, #c3322fce)' },
+    { id: 'historia', name: 'História', badge: 'HUMANAS • NÍVEL II', url: 'historia.html', imagem: 'assets/materias/historia/mapa-antigo.png', bg: 'linear-gradient(135deg, #7a4a11, #d8a32d)' },
+    { id: 'portugues', name: 'Português', badge: 'LINGUAGENS • NÍVEL I', url: 'portugues.html', imagem: 'assets/materias/portugues/sobre_portugues.png', bg: 'linear-gradient(135deg, #620076ff, #c118ffff)' },
+    { id: 'ingles', name: 'Inglês', badge: 'LINGUAGENS • NÍVEL II', url: 'ingles.html', imagem: 'assets/materias/ingles/sobre_ingles.png', bg: 'linear-gradient(135deg, #00ffeeff, #3600beff)' }
 ];
 
 let indiceAtual = 0;
@@ -24,6 +24,11 @@ const textoXp = document.getElementById('textoXp');
 const saldoPontos = document.getElementById('saldoPontos');
 const preenchimentoBarraXp = document.getElementById('preenchimentoBarraXp');
 const iniciaisAvatar = document.getElementById('iniciaisAvatar');
+
+/*
+função para que o circulo possa levar ao jogo
+*/
+const iniciarJogar = document.getElementById('iniciar-jogar');
 
 function atualizarMenu(index) {
     const materia = listaMaterias[index];
@@ -60,6 +65,11 @@ document.getElementById('botaoProximo').addEventListener('click', () => {
 });
 
 botaoJogarRank.addEventListener('click', () => {
+    window.location.href = listaMaterias[indiceAtual].url;
+});
+
+/*função para que o circulo possa levar ao jogo*/
+iniciarJogar.addEventListener('click', () => {
     window.location.href = listaMaterias[indiceAtual].url;
 });
 
