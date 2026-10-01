@@ -3,36 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Geografia</title>
-
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/geografia.css">
+
 </head>
-
 <body class="tema-geografia">
-    <header>
-        <a href="menu_principal.html">← Menu principal</a>
 
-        <h1>Geografia</h1>
-    </header>
-
-    <main>
-        <!-- Tela de escolha do nível -->
+    <main class="container-principal">
+        <!-- TELA 1: ESCOLHA DA SÉRIE -->
         <section id="tela-niveis">
-            <h2>Escolha sua série</h2>
+            <h2 class="titulo-secao">Escolha sua série</h2>
 
             <div class="niveis">
                 <button onclick="iniciarJogo('7ano')">7º ano</button>
                 <button onclick="iniciarJogo('8ano')">8º ano</button>
                 <button onclick="iniciarJogo('9ano')">9º ano</button>
-                <button onclick="iniciarJogo('1medio')">1º Ensino Médio</button>
-                <button onclick="iniciarJogo('2medio')">2º Ensino Médio</button>
-                <button onclick="iniciarJogo('3medio')">3º Ensino Médio</button>
+                <button onclick="iniciarJogo('1medio')">1º Ensino<br>Médio</button>
+                <button onclick="iniciarJogo('2medio')">2º Ensino<br>Médio</button>
+                <button onclick="iniciarJogo('3medio')">3º Ensino<br>Médio</button>
+            </div>
+
+            <div class="container-botao-voltar">
+                <a href="menu_principal.html" class="botao-link">← Voltar ao Menu</a>
             </div>
         </section>
 
-        <!-- Tela das perguntas -->
+        <!-- TELA 2: QUIZ DE PERGUNTAS -->
         <section id="tela-jogo" class="escondido">
             <p id="contador"></p>
 
@@ -46,28 +43,23 @@
 
             <div id="feedback" class="escondido">
                 <h3 id="mensagem-feedback"></h3>
-
                 <p id="explicacao"></p>
-
-                <button onclick="proximaPergunta()">
-                    Continuar
-                </button>
+                <button onclick="proximaPergunta()">Continuar</button>
             </div>
         </section>
 
-        <!-- Tela de resultado -->
+        <!-- TELA 3: RESULTADOS / FINALIZAÇÃO -->
         <section id="tela-resultado" class="escondido">
-            <h2>Atividade concluída!</h2>
+            <h2 class="titulo-secao">Atividade concluída!</h2>
 
-            <p id="resultado"></p>
+            <div class="circulo-resultado">
+                <div id="resultado"></div>
+            </div>
 
-            <button onclick="voltarParaNiveis()">
-                Escolher outro nível
-            </button>
-
-            <a href="menu_principal.html" class="botao-link">
-                Voltar ao menu
-            </a>
+            <div class="botoes-finalizacao">
+                <button onclick="voltarParaNiveis()">Escolher outro nível</button>
+                <a href="menu_principal.html" class="botao-link">Voltar ao Menu</a>
+            </div>
         </section>
     </main>
 

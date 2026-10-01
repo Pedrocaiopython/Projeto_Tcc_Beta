@@ -5,57 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Matemático</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/geografia.css">
-    <style>
-        body {
-            background:
-                radial-gradient(circle at top, rgba(178, 51, 93, 0.32), transparent 30%),
-                linear-gradient(135deg, #1b0610, #4a1029 50%, #16040c);
-            color: #fff3f7;
-        }
-
-        header {
-            border-bottom: 1px solid rgba(231, 128, 163, 0.55);
-        }
-
-        .niveis button,
-        #alternativas button {
-            background: linear-gradient(135deg, #5c102c, #982d52);
-            color: #fff;
-            border: 1px solid rgba(244, 176, 200, 0.45);
-        }
-
-        #progresso {
-            background: linear-gradient(90deg, #b83763, #ee9ab5);
-        }
-
-        .correto { background: rgba(15, 197, 31, 0.92); }
-        .incorreto { background: rgba(121, 19, 19, 0.92); }
-    </style>
+    <link rel="stylesheet" href="css/matematica.css">
 </head>
 <body>
-    <header>
-        <a href="menu_principal.html">← Menu principal</a>
-        <h1>Matemática</h1>
-    </header>
 
-    <main>
+    <main class="container-principal">
+        <!-- TELA 1: ESCOLHA DA SÉRIE / ANO -->
         <section id="tela-niveis">
-            <h2>Escolha sua série</h2>
+            <h2 class="titulo-secao">Escolha sua série</h2>
             <div class="niveis">
                 <button onclick="iniciarJogo('7ano')">7º ano</button>
                 <button onclick="iniciarJogo('8ano')">8º ano</button>
                 <button onclick="iniciarJogo('9ano')">9º ano</button>
-                <button onclick="iniciarJogo('1medio')">1º Ensino Médio</button>
-                <button onclick="iniciarJogo('2medio')">2º Ensino Médio</button>
-                <button onclick="iniciarJogo('3medio')">3º Ensino Médio</button>
+                <button onclick="iniciarJogo('1medio')">1º Ensino<br>Médio</button>
+                <button onclick="iniciarJogo('2medio')">2º Ensino<br>Médio</button>
+                <button onclick="iniciarJogo('3medio')">3º Ensino<br>Médio</button>
+            </div>
+
+            <div class="container-botao-voltar">
+                <a href="menu_principal.html" class="botao-link">← Voltar ao Menu</a>
             </div>
         </section>
 
+        <!-- TELA 2: QUIZ DE PERGUNTAS -->
         <section id="tela-jogo" class="escondido">
-            <p id="contador"></p>
+            <p id="contador">PERGUNTA 1 / 4</p>
             <div class="barra"><div id="progresso"></div></div>
-            <h2 id="pergunta"></h2>
+            <h2 id="pergunta">Carregando pergunta...</h2>
             <div id="alternativas"></div>
 
             <div id="feedback" class="escondido">
@@ -65,11 +41,21 @@
             </div>
         </section>
 
+        <!-- TELA 3: RESULTADOS / FINALIZAÇÃO -->
         <section id="tela-resultado" class="escondido">
-            <h2>Atividade concluída!</h2>
-            <p id="resultado"></p>
-            <button onclick="voltarParaNiveis()">Escolher outro nível</button>
-            <a href="menu_principal.html" class="botao-link">Voltar ao menu</a>
+            <h2 class="titulo-secao">Resultados Finais</h2>
+            
+            <!-- Círculo Redimensionado & Texto Ajustado -->
+            <div class="circulo-resultado">
+                <div id="resultado" class="conteudo-resultado">
+                    <!-- O JavaScript injetará os dados aqui dentro de forma limpa -->
+                </div>
+            </div>
+
+            <div class="botoes-finalizacao">
+                <button onclick="voltarParaNiveis()">Jogar Novamente</button>
+                <a href="menu_principal.html" class="botao-link">Voltar ao Lobby</a>
+            </div>
         </section>
     </main>
 
