@@ -6,7 +6,7 @@
     --cor-secundaria-escura: #8c7335;
 }
 
-body.tema-matematica {
+body.tema-matematica { /*Variáveis de cores do corpo*/
     --cor-destaque: #5c7cff;
     --cor-destaque-rgb: 92, 124, 255;
     --cor-secundaria: #2841ad;
