@@ -1,3 +1,4 @@
+/* Define o visual do menu principal, do perfil do jogador e da loja de itens. */
 /* --- TEMA MINIMALISTA E PROFISSIONAL GAMER --- */
 :root {
     --ouro-principal: #f4d068;
@@ -220,9 +221,16 @@ body {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(4, 9, 18, 0.9); z-index: 200; display: none; justify-content: center; align-items: center;
 }
-.conteudo-modal-loja { background: #0b1424; border: 1px solid var(--azul-neon); width: 90%; max-width: 500px; border-radius: 8px; padding: 25px; box-shadow: 0 0 40px rgba(0,240,255,0.1); }
+.conteudo-modal-loja { background: #0b1424; border: 1px solid var(--azul-neon); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; border-radius: 8px; padding: 25px; box-shadow: 0 0 40px rgba(0,240,255,0.1); }
 .cabecalho-loja { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px; }
 .fechar-loja-btn { background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer; }
+.desafio-boss-loja { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; padding: 14px; border: 1px solid rgba(0, 240, 255, 0.28); border-radius: 8px; background: linear-gradient(130deg, rgba(0, 240, 255, 0.1), rgba(21, 34, 56, 0.65)); }
+.desafio-boss-loja h3 { margin-bottom: 5px; color: #fff; font-size: 0.95rem; }
+.desafio-boss-loja p { margin-bottom: 6px; color: #8a99ad; font-size: 0.75rem; }
+.desafio-boss-loja strong { color: var(--ouro-principal); font-size: 0.8rem; }
+.desafio-boss-loja button { flex: 0 0 auto; padding: 9px 12px; border: 0; border-radius: 5px; background: var(--ouro-principal); color: #000; cursor: pointer; font-size: 0.78rem; font-weight: 800; }
+.desafio-boss-loja button:disabled { cursor: wait; opacity: 0.65; }
+.mensagem-loja { min-height: 1.2em; margin-top: 8px; color: #ff9b9b; font-size: 0.78rem; }
 .abas-loja-categorias { display: flex; gap: 8px; margin: 15px 0; }
 .aba-item { background: #152238; border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 6px 14px; cursor: pointer; border-radius: 4px; font-size: 0.85rem; }
 .aba-item.ativa { background: var(--azul-neon); color: black; font-weight: bold; border-color: var(--azul-neon); }
@@ -233,6 +241,10 @@ body {
 .item-loja p { font-size: 0.7rem; color: #8a99ad; }
 .item-loja button { background: var(--ouro-principal); border: none; color: black; font-weight: bold; padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
 .empty-state { color: #8a99ad; padding: 12px; text-align: center; }
+
+@media (max-width: 480px) {
+    .desafio-boss-loja { align-items: flex-start; flex-direction: column; }
+}
 
 .efeito-transicao { animation: swapAnimation 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 @keyframes swapAnimation { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.92); } 100% { opacity: 1; transform: scale(1); } }

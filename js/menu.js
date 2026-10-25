@@ -18,6 +18,8 @@ const simboloMateria = document.getElementById('simboloMateria');
 const imagemMateria = document.getElementById('imagemMateria');
 const modalLoja = document.getElementById('modalLoja');
 const gradeItensLoja = document.getElementById('gradeItensLoja');
+const botaoComprarDesafioBoss = document.getElementById('btnComprarDesafioBoss');
+const mensagemLoja = document.getElementById('mensagemLoja');
 const nomeUsuario = document.getElementById('nomeUsuario');
 const nivelUsuario = document.getElementById('nivelUsuario');
 const textoXp = document.getElementById('textoXp');
@@ -175,6 +177,21 @@ async function equipItem(itemId) {
         alert(error.message || 'Não foi possível equipar o item.');
     }
 }
+
+async function comprarDesafioBoss() {
+    botaoComprarDesafioBoss.disabled = true;
+    mensagemLoja.textContent = '';
+    try {
+        const response = await requestJson('/api/shop/boss/purchase', { method: 'POST' });
+        renderProfile(response.profile);
+        window.location.href = listaMaterias[indiceAtual].url;
+    } catch (error) {
+        mensagemLoja.textContent = error.message || 'Não foi possível iniciar o desafio.';
+        botaoComprarDesafioBoss.disabled = false;
+    }
+}
+
+botaoComprarDesafioBoss.addEventListener('click', comprarDesafioBoss);
 
 document.getElementById('btnAbrirLoja').addEventListener('click', () => {
     modalLoja.style.display = 'flex';

@@ -1,3 +1,4 @@
+/* Reúne os estilos compartilhados pelos quizzes e as cores de cada matéria. */
 :root {
     --cor-destaque: #00f2ff;
     --cor-destaque-rgb: 0, 242, 255;
@@ -378,6 +379,177 @@ h2 {
     color: #ffffff;
 }
 
+.desafio-overlay {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 24px;
+    background: rgba(3, 8, 18, 0.88);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.25s ease;
+}
+
+.desafio-cartao {
+    width: min(100%, 680px);
+    padding: 28px;
+    border: 1px solid rgba(var(--cor-destaque-rgb), 0.65);
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 50% 0, rgba(var(--cor-destaque-rgb), 0.16), transparent 45%),
+        linear-gradient(145deg, #142238, #080e18 72%);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.7), 0 0 28px rgba(var(--cor-destaque-rgb), 0.18);
+    text-align: center;
+    animation: slideUp 0.35s ease;
+}
+
+.desafio-selo {
+    margin-bottom: 10px;
+    color: var(--cor-destaque);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+}
+
+.desafio-cartao h2 {
+    margin: 8px 0 16px;
+    color: #ffffff;
+}
+
+.desafio-cartao p {
+    color: #bdcce0;
+    line-height: 1.55;
+}
+
+.arena-boss .nome-boss {
+    margin-bottom: 12px;
+    color: var(--cor-destaque);
+    font-size: clamp(1.35rem, 4vw, 2rem);
+}
+
+.kaiju {
+    display: block;
+    width: min(52vw, 220px);
+    height: 170px;
+    margin: 0 auto 16px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.65));
+    animation: bossFlutuar 3s ease-in-out infinite;
+}
+
+.kaiju.sofrendo-dano {
+    animation: bossDano 0.45s ease;
+}
+
+.vida-boss {
+    width: min(100%, 420px);
+    margin: 0 auto 18px;
+    color: #e0e6ed;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.vida-boss > div {
+    height: 12px;
+    margin-top: 7px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background: #310f1b;
+}
+
+.vida-boss i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #ff3f58, #ff9b45);
+    transition: width 0.45s ease;
+}
+
+#contador-boss {
+    margin-bottom: 10px;
+    color: var(--cor-destaque);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+#pergunta-boss {
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    text-transform: none;
+}
+
+#alternativas-boss {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+#alternativas-boss button,
+.desafio-cartao .concluir {
+    min-height: 48px;
+    padding: 12px 16px;
+    border: 1px solid rgba(var(--cor-destaque-rgb), 0.4);
+    border-radius: 11px;
+    background: #101d30;
+    color: #e0e6ed;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+#alternativas-boss button:hover:not(:disabled),
+.desafio-cartao .concluir:hover {
+    transform: translateY(-2px);
+    border-color: var(--cor-destaque);
+    background: #1b304b;
+}
+
+#alternativas-boss button:disabled {
+    cursor: default;
+    opacity: 0.65;
+}
+
+.feedback-boss {
+    min-height: 48px;
+    margin-top: 14px;
+}
+
+.vitoria-boss .trofeu {
+    margin-bottom: 10px;
+    font-size: 3rem;
+}
+
+.vitoria-boss .concluir,
+.derrota-boss .concluir {
+    margin-top: 22px;
+}
+
+.desafio-cartao .concluir {
+    min-width: 180px;
+    border: 0;
+    background: linear-gradient(180deg, var(--cor-destaque), var(--cor-secundaria-escura));
+    color: #080e18;
+}
+
+@keyframes bossFlutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes bossDano {
+    0%, 100% { transform: translateX(0); filter: brightness(1); }
+    25% { transform: translateX(-8px); filter: brightness(2); }
+    75% { transform: translateX(8px); filter: brightness(1.5); }
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -406,5 +578,21 @@ h2 {
     .botoes-finalizacao button,
     .botao-link {
         width: 100%;
+    }
+
+    .desafio-overlay {
+        padding: 14px;
+    }
+
+    .desafio-cartao {
+        padding: 22px 16px;
+    }
+
+    #alternativas-boss {
+        grid-template-columns: 1fr;
+    }
+
+    .kaiju {
+        height: 140px;
     }
 }
