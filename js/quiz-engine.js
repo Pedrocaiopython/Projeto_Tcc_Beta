@@ -16,7 +16,17 @@ let perguntasDoNivel = [];
 let numeroDaPergunta = 0;
 let quantidadeDeAcertos = 0;
 let resultadoEnviado = false;
-let desafioAtivo = false;
+let batalhaBossIniciada = false;
+let desafioBossComprado = false;
+let bossSelecionado = null;
+
+const bosses = [
+    { nome: 'Brócolis', imagem: 'backend/src/boses/Brocolis.png' },
+    { nome: 'Caranguejo', imagem: 'backend/src/boses/caranguejo.png' },
+    { nome: 'Gojira', imagem: 'backend/src/boses/gojira.png' },
+    { nome: 'Mamaco', imagem: 'backend/src/boses/mamaco.png' },
+    { nome: 'Tubalão', imagem: 'backend/src/boses/tubal%C3%A3o.png' }
+];
 
 const perguntasBoss = {
     matematica: [
@@ -109,7 +119,9 @@ function iniciarJogo(nivel) {
     numeroDaPergunta = 0;
     quantidadeDeAcertos = 0;
     resultadoEnviado = false;
-    desafioAtivo = false;
+    batalhaBossIniciada = false;
+    desafioBossComprado = false;
+    bossSelecionado = null;
 
     if (feedback) feedback.classList.add("escondido");
     mostrarTela(telaJogo);
@@ -184,8 +196,13 @@ function proximaPergunta() {
 }
 
 async function finalizarJogo() {
-    if (!desafioAtivo && quantidadeDeAcertos === perguntasDoNivel.length && perguntasDoNivel.length === 10) {
-        mostrarConviteDesafio();
+    if (
+        !batalhaBossIniciada &&
+        perguntasDoNivel.length > 0 &&
+        quantidadeDeAcertos === perguntasDoNivel.length
+    ) {
+        bossSelecionado = bosses[Math.floor(Math.random() * bosses.length)];
+        iniciarBatalhaBoss();
         return;
     }
     mostrarTela(telaResultado);
@@ -229,53 +246,59 @@ function criarOverlayDesafio(conteudo, classeExtra = '') {
     return overlay;
 }
 
-function mostrarConviteDesafio() {
-    const overlay = criarOverlayDesafio(`
-        <div class="desafio-cartao convite-desafio">
-            <span class="desafio-icone">✦</span>
-            <p class="desafio-selo">SEQUÊNCIA PERFEITA: 10/10</p>
-            <h2>Desafio encontrado, aceitar?</h2>
-            <p>Uma presença desconhecida está bloqueando seu troféu.</p>
-            <div class="desafio-acoes"><button class="aceitar">Sim</button><button class="recusar">Não</button></div>
-        </div>`);
-    overlay.querySelector('.aceitar').onclick = mostrarAlertaBoss;
-    overlay.querySelector('.recusar').onclick = () => { overlay.remove(); finalizarResultadoPadrao(); };
-}
-
 function finalizarResultadoPadrao() {
     mostrarTela(telaResultado);
     resultado.textContent = `Você acertou ${quantidadeDeAcertos} de ${perguntasDoNivel.length} perguntas.`;
     enviarResultadoServidor();
 }
 
-function mostrarAlertaBoss() {
-    const overlay = criarOverlayDesafio(`
-        <div class="desafio-cartao alerta-boss">
-            <p class="perigo">PERIGO ⚠️</p>
-            <h2>Boss detectado</h2>
-            <p>O Kaiju do Conhecimento chegou. Você tem coragem de enfrentá-lo?</p>
-            <div class="desafio-acoes"><button class="enfrentar">Enfrentar</button><button class="fugir">Fugir</button></div>
-            <span class="cursor-demo" aria-hidden="true">➤</span>
-        </div>`, 'tela-perigo');
-    overlay.querySelector('.enfrentar').onclick = iniciarBatalhaBoss;
-    overlay.querySelector('.fugir').onclick = () => { overlay.remove(); finalizarResultadoPadrao(); };
+async function iniciarDesafioBossComprado() {
+    try {
+        const acesso = await requestJson('/api/shop/boss/consume', { method: 'POST' });
+        if (!acesso.authorized) {
+            return;
+        }
+
+        desafioBossComprado = true;
+        bossSelecionado = bosses[Math.floor(Math.random() * bosses.length)];
+        iniciarBatalhaBoss(true);
+    } catch (error) {
+        alert(error.message || 'Não foi possível validar a compra do desafio.');
+        window.location.href = 'menu_principal.html';
+    }
 }
 
-function iniciarBatalhaBoss() {
+function iniciarBatalhaBoss(iniciadoComCompra = false) {
+    if (
+        !bossSelecionado ||
+        (!iniciadoComCompra && (perguntasDoNivel.length === 0 || quantidadeDeAcertos !== perguntasDoNivel.length)) ||
+        batalhaBossIniciada
+    ) {
+        return;
+    }
+
+    batalhaBossIniciada = true;
     const disciplina = resolveSubjectSlug();
     const questoes = prepararTentativa(perguntasBoss[disciplina] || perguntasBoss.matematica);
     let indice = 0;
     let acertos = 0;
+    const totalAtaques = questoes.length;
     const overlay = criarOverlayDesafio(`
         <div class="desafio-cartao arena-boss">
-            <div class="placa-quebrando"><span>DESAFIO DO BOSS</span></div>
-            <img class="kaiju" src="assets/kaiju-boss.png" alt="Kaiju, o chefe do desafio" />
-            <div class="vida-boss"><span>VIDA DO KAIJU</span><div><i id="vida-kaiju"></i></div></div>
+            <p class="desafio-selo">BOSS ALEATÓRIO</p>
+            <h2 class="nome-boss"></h2>
+            <img class="kaiju" alt="" />
+            <div class="vida-boss"><span>VIDA DO BOSS</span><div><i id="vida-kaiju"></i></div></div>
             <p id="contador-boss"></p><h2 id="pergunta-boss"></h2><div id="alternativas-boss"></div><p id="feedback-boss" class="feedback-boss"></p>
         </div>`);
+    const imagemBoss = overlay.querySelector('.kaiju');
+    overlay.querySelector('.nome-boss').textContent = bossSelecionado.nome;
+    imagemBoss.src = bossSelecionado.imagem;
+    imagemBoss.alt = bossSelecionado.nome;
+
     const exibirQuestao = () => {
         const atual = questoes[indice];
-        overlay.querySelector('#contador-boss').textContent = `Ataque ${indice + 1} de 3`;
+        overlay.querySelector('#contador-boss').textContent = `Ataque ${indice + 1} de ${totalAtaques}`;
         overlay.querySelector('#pergunta-boss').textContent = atual.texto;
         const opcoes = overlay.querySelector('#alternativas-boss');
         opcoes.innerHTML = '';
@@ -289,19 +312,31 @@ function iniciarBatalhaBoss() {
         opcoes.querySelectorAll('button').forEach((botao) => botao.disabled = true);
         const acertou = resposta === atual.respostaCorreta;
         const feedbackBoss = overlay.querySelector('#feedback-boss');
-        if (acertou) { acertos++; overlay.querySelector('.kaiju').classList.add('sofrendo-dano'); setTimeout(() => overlay.querySelector('.kaiju')?.classList.remove('sofrendo-dano'), 450); }
-        overlay.querySelector('#vida-kaiju').style.width = `${100 - (acertos / 3) * 100}%`;
-        feedbackBoss.textContent = `${acertou ? 'Acerto! O Kaiju sofreu dano.' : 'Errou! O Kaiju resistiu.'} ${atual.explicacao}`;
-        setTimeout(() => { indice++; if (indice < 3) exibirQuestao(); else encerrarBatalha(overlay, acertos); }, 1500);
+        if (acertou) { acertos++; imagemBoss.classList.add('sofrendo-dano'); setTimeout(() => imagemBoss.classList.remove('sofrendo-dano'), 450); }
+        overlay.querySelector('#vida-kaiju').style.width = `${100 - (acertos / totalAtaques) * 100}%`;
+        feedbackBoss.textContent = `${acertou ? `Acerto! ${bossSelecionado.nome} sofreu dano.` : `${bossSelecionado.nome} resistiu.`} ${atual.explicacao}`;
+        setTimeout(() => { indice++; if (indice < totalAtaques) exibirQuestao(); else encerrarBatalha(overlay, acertos, totalAtaques); }, 1500);
     };
     exibirQuestao();
 }
 
-function encerrarBatalha(overlay, acertos) {
-    if (acertos === 3) {
-        overlay.innerHTML = `<div class="desafio-cartao vitoria-boss"><div class="trofeu">🏆</div><p class="desafio-selo">KAIJU DERROTADO</p><h2>Parabéns!</h2><p>Você acertou as 3 perguntas e conquistou o troféu.</p><button class="concluir">Ver resultado</button></div>`;
+function encerrarBatalha(overlay, acertos, totalAtaques) {
+    const textoBotao = desafioBossComprado ? 'Voltar ao lobby' : 'Ver resultado';
+    if (acertos === totalAtaques) {
+        overlay.innerHTML = `<div class="desafio-cartao vitoria-boss"><div class="trofeu">🏆</div><p class="desafio-selo">BOSS DERROTADO</p><h2>Parabéns!</h2><p>Você derrotou ${bossSelecionado.nome} e conquistou o troféu.</p><button class="concluir">${textoBotao}</button></div>`;
     } else {
-        overlay.innerHTML = `<div class="desafio-cartao derrota-boss"><p class="perigo">BATALHA ENCERRADA</p><h2>O Kaiju resistiu</h2><p>Você acertou ${acertos} de 3 ataques. Para derrotá-lo, é preciso acertar as três perguntas.</p><button class="concluir">Ver resultado</button></div>`;
+        overlay.innerHTML = `<div class="desafio-cartao derrota-boss"><p class="perigo">BATALHA ENCERRADA</p><h2>${bossSelecionado.nome} resistiu</h2><p>Você acertou ${acertos} de ${totalAtaques} ataques. Para derrotar o boss, é preciso acertar todos.</p><button class="concluir">${textoBotao}</button></div>`;
     }
-    overlay.querySelector('.concluir').onclick = () => { overlay.remove(); desafioAtivo = true; finalizarResultadoPadrao(); };
+    overlay.querySelector('.concluir').onclick = () => {
+        overlay.remove();
+        if (desafioBossComprado) {
+            window.location.href = 'menu_principal.html';
+        } else {
+            finalizarResultadoPadrao();
+        }
+    };
+}
+
+if (typeof requestJson === 'function') {
+    iniciarDesafioBossComprado();
 }

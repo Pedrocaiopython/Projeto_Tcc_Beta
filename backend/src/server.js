@@ -260,6 +260,53 @@ app.post('/api/shop/purchase', requireAuth, (req, res) => {
   return res.json({ message: `Item ${item.name} comprado com sucesso.`, profile: getProfile(userId) });
 });
 
+app.post('/api/shop/boss/purchase', requireAuth, (req, res) => {
+  const userId = req.session.userId;
+  const bossChallengePrice = 100;
+
+  if (req.session.bossChallengePending) {
+    return res.status(409).json({ message: 'Você já tem um desafio de boss aguardando para iniciar.' });
+  }
+
+  const profile = getProfile(userId);
+  if (!profile) {
+    return res.status(404).json({ message: 'Perfil não encontrado.' });
+  }
+  if (profile.points < bossChallengePrice) {
+    return res.status(400).json({ message: 'Você precisa de 100 pontos para iniciar o desafio do boss.' });
+  }
+
+  const debit = db.prepare(`
+    UPDATE user_profiles
+    SET points = points - ?, updated_at = CURRENT_TIMESTAMP
+    WHERE user_id = ? AND points >= ?
+  `);
+  const result = runTransaction(() => {
+    const update = debit.run(bossChallengePrice, userId, bossChallengePrice);
+    if (Number(update.changes) !== 1) {
+      return false;
+    }
+    db.prepare('INSERT INTO points_history (user_id, source, amount) VALUES (?, ?, ?)').run(userId, 'compra:desafio-boss', -bossChallengePrice);
+    return true;
+  });
+
+  if (!result) {
+    return res.status(400).json({ message: 'Você precisa de 100 pontos para iniciar o desafio do boss.' });
+  }
+
+  req.session.bossChallengePending = true;
+  return res.json({ message: 'Desafio comprado. Boa batalha!', profile: getProfile(userId) });
+});
+
+app.post('/api/shop/boss/consume', requireAuth, (req, res) => {
+  if (!req.session.bossChallengePending) {
+    return res.json({ authorized: false });
+  }
+
+  req.session.bossChallengePending = false;
+  return res.json({ authorized: true });
+});
+
 app.post('/api/shop/equip', requireAuth, (req, res) => {
   const { itemId } = req.body || {};
   const userId = req.session.userId;
