@@ -1,3 +1,4 @@
+/* Posiciona o canvas de fundo em toda a tela, sem bloquear os elementos da página. */
 #fundo-canvas {
     position: fixed;
     inset: 0;
