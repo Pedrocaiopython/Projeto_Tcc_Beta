@@ -1,10 +1,10 @@
 const listaMaterias = [
-    { id: 'matematica', name: 'Matemática', badge: 'EXATAS • NÍVEL I', url: 'matematico.html', imagem: 'assets/materias/matematica/sobre_matematica.png', bg: 'linear-gradient(135deg, #2841ad, #5c7cff)' },
-    { id: 'ciencias', name: 'Ciências', badge: 'EXATAS • NÍVEL II', url: 'ciencias.html',  imagem: 'assets/materias/ciencias/sobre_ciencias.png', bg: 'linear-gradient(135deg, #0f5444ff, #4fffe2ff)' },
-    { id: 'geografia', name: 'Geografia', badge: 'HUMANAS • NÍVEL I', url: 'geografia.html', imagem: 'assets/materias/geografia/sobre_geografia.jpg', bg: 'linear-gradient(135deg, #ff0000ff, #c3322fce)' },
-    { id: 'historia', name: 'História', badge: 'HUMANAS • NÍVEL II', url: 'historia.html', imagem: 'assets/materias/historia/mapa-antigo.png', bg: 'linear-gradient(135deg, #7a4a11, #d8a32d)' },
-    { id: 'portugues', name: 'Português', badge: 'LINGUAGENS • NÍVEL I', url: 'portugues.html', imagem: 'assets/materias/portugues/sobre_portugues.png', bg: 'linear-gradient(135deg, #620076ff, #c118ffff)' },
-    { id: 'ingles', name: 'Inglês', badge: 'LINGUAGENS • NÍVEL II', url: 'ingles.html', imagem: 'assets/materias/ingles/sobre_ingles.png', bg: 'linear-gradient(135deg, #00ffeeff, #3600beff)' }
+    { id: 'matematica', name: 'Matemática',url: 'matematico.html', imagem: 'assets/materias/matematica/sobre_matematica.png', bg: 'linear-gradient(135deg, #2841ad, #5c7cff)' },
+    { id: 'ciencias', name: 'Ciências', url: 'ciencias.html',  imagem: 'assets/materias/ciencias/sobre_ciencias.png', bg: 'linear-gradient(135deg, #0f5444ff, #4fffe2ff)' },
+    { id: 'geografia', name: 'Geografia',  url: 'geografia.html', imagem: 'assets/materias/geografia/sobre_geografia.jpg', bg: 'linear-gradient(135deg, #ff0000ff, #c3322fce)' },
+    { id: 'historia', name: 'História',  url: 'historia.html', imagem: 'assets/materias/historia/mapa-antigo.png', bg: 'linear-gradient(135deg, #7a4a11, #d8a32d)' },
+    { id: 'portugues', name: 'Português',  url: 'portugues.html', imagem: 'assets/materias/portugues/sobre_portugues.png', bg: 'linear-gradient(135deg, #620076ff, #c118ffff)' },
+    { id: 'ingles', name: 'Inglês',  url: 'ingles.html', imagem: 'assets/materias/ingles/sobre_ingles.png', bg: 'linear-gradient(135deg, #00ffeeff, #3600beff)' }
 ];
 
 let indiceAtual = 0;
