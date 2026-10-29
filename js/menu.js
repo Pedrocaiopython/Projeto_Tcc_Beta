@@ -84,7 +84,7 @@ function renderProfile(profile) {
     nomeUsuario.textContent = profile?.name || 'Jogador';
     nivelUsuario.textContent = String(level);
     textoXp.textContent = `${xpTotal} / ${xpForNext} XP`;
-    saldoPontos.textContent = String(profile?.points || 0);
+    saldoPontos.textContent = String(profile?.points || 1000);
     preenchimentoBarraXp.style.width = `${percentage}%`;
     iniciaisAvatar.textContent = (profile?.name || 'J').charAt(0).toUpperCase();
 }
