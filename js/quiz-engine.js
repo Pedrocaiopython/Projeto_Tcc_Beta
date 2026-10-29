@@ -25,7 +25,12 @@ const bosses = [
     { nome: 'Caranguejo', imagem: 'backend/src/boses/caranguejo.png' },
     { nome: 'Gojira', imagem: 'backend/src/boses/gojira.png' },
     { nome: 'Mamaco', imagem: 'backend/src/boses/mamaco.png' },
-    { nome: 'Tubalão', imagem: 'backend/src/boses/tubal%C3%A3o.png' }
+    { nome: 'Tubalão', imagem: 'backend/src/boses/tubal%C3%A3o.png' },
+    { nome: 'Treem', imagem: 'backend/src/boses/treim.png' },
+    { nome: 'Barata', imagem: 'backend/src/boses/barata.png'},
+    { nome: 'Ork', imagem: 'backend/src/boses/ork.png'},
+    { nome: 'Vigor', imagem: 'backend/src/boses/vigor.png'}
+
 ];
 
 const perguntasBoss = {
